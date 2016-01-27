@@ -29,7 +29,7 @@ gem 'jbuilder', '~> 1.2'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
-  gem 'sdoc', require: false
+  gem 'sdoc', require:false
 end
 
 gem 'bootstrap-sass', '~> 3.3.5.1'
@@ -39,7 +39,7 @@ gem 'simple_form'
 
 gem 'devise', '>= 3.2.4'
 
-gem 'rubocop', '~> 0.36.0', require: false
+gem 'rubocop', '~> 0.36.0', require:false
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
 
