@@ -2,11 +2,11 @@ language: ruby
 rvm: 
 - "2.2.4"
 before_install: gem update --remote bundler
-install: 
-- bundle install --retry=3
-script:
-- bundle exec rspec
-- bundle exec rubocop
+# install: 
+# - bundle install --retry=3
+# script: 
+# - bundle exec rspec
+# - bundle exec rubocop
 # deploy:
 # 	provider: heroku
 # 	api_key:
