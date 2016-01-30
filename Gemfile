@@ -32,10 +32,13 @@ group :doc do
   gem 'sdoc', require: false
 end
 
-gem 'rubocop', '~> 0.36.0', require :false
-
 group :development, :test do
 	gem 'rspec-rails', '~> 3.0'
+	gem 'rubocop'
+end
+
+group :test, do
+	gem 'rspec'
 end
 
 gem 'bootstrap-sass', '~> 3.3.5.1'
