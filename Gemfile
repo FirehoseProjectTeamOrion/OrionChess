@@ -36,6 +36,8 @@ group :development, :test do
 	gem 'rspec-rails', '~> 3.0'
 end
 
+gem 'rubocop', '~> 0.36.0', require: false
+
 gem 'bootstrap-sass', '~> 3.3.5.1'
 gem 'sprockets', '2.11.0'
 
