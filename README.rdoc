@@ -1,5 +1,7 @@
 == README
 
+{<img src="https://codeship.com/projects/2978c670-a9c1-0133-3a19-327eac131552/status?branch=master" alt="Status?branch=master" />}[https://codeship.com/projects/130946]
+
 This README would normally document whatever steps are necessary to get the
 application up and running.
 
