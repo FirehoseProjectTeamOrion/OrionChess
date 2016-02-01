@@ -6,13 +6,12 @@ class CreatePieces < ActiveRecord::Migration
       t.integer :column
       t.boolean :in_game
       t.integer :player_id
-      t.integer :game_id      
+      t.integer :game_id
 
       t.timestamps
     end
-    
+
     add_index :pieces, :game_id
     add_index :pieces, :player_id
-    
   end
 end
