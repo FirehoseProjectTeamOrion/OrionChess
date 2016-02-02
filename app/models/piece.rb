@@ -3,9 +3,9 @@ class Piece < ActiveRecord::Base
     belongs_to :game
 end
 
-class Pawn < Piece; end
-class Knight < Piece; end
-class Bishop < Piece; end
-class Rook < Piece; end
-class Queen < Piece; end
-class King < Piece; end
+scope :pawns, -> { where(race: 'Pawn') }
+scope :knights, -> { where(race: 'Knight') }
+scope :bishops, -> { where(race: 'Bishop') }
+scope :rooks, -> { where(race: 'Rook') }
+scope :queens, -> { where(race: 'Queen') }
+scope :kings, -> { where(race: 'King') }
