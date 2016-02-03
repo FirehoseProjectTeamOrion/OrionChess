@@ -32,13 +32,17 @@ group :doc do
   gem 'sdoc', require: false
 end
 
+group :development, :test do
+  gem 'rspec-rails', '~> 3.0'
+  gem 'factory_girl_rails', '~> 4.0'
+end
+
 gem 'bootstrap-sass', '~> 3.3.5.1'
 gem 'sprockets', '2.11.0'
 
 gem 'simple_form'
 
 gem 'devise', '>= 3.2.4'
-gem 'rspec-rails', '~> 3.0'
 gem 'rubocop', '~> 0.36.0', require: false
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
