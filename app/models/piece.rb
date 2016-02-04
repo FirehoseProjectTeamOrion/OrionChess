@@ -17,7 +17,7 @@ class Piece < ActiveRecord::Base
     elsif moving_diagonally?(row, column)
       is_diagonal_obstructed?(row, column)
     else
-      raise "Input is invalid!"
+      fail 'Input is invalid!'
     end
   end
 
@@ -41,40 +41,52 @@ class Piece < ActiveRecord::Base
     (self.row - row).abs == (self.column - column).abs
   end
 
+  def moving_up_and_to_the_right?(row, column)
+    self.row < row && self.column < column
+  end
+
+  def moving_up_and_to_the_left?(row, column)
+    self.row < row && self.column > column
+  end
+
+  def moving_down_and_to_the_right?(row, column)
+    self.row > row && self.column < column
+  end
+
   def is_horizontal_obstructed?(column)
     if self.column < column
-      check_path(0, 1, column-self.column)
+      check_path(NONE, RIGHT, column - self.column)
     else
-      check_path(0, -1, self.column - column)
+      check_path(NONE, LEFT, self.column - column)
     end
   end
 
   def is_vertical_obstructed?(row)
     if self.row < row
-      check_path(1, 0, row-self.row)
+      check_path(UP, NONE, row - self.row)
     else
-      check_path(-1, 0, self.row-row)
+      check_path(DOWN, NONE, self.row - row)
     end
   end
 
   def is_diagonal_obstructed?(row, column)
-    if self.row < row && self.column < column
-      check_path(1, 1, row-self.row)
-    elsif self.row < row && self.column > column
-      check_path(1, -1, row-self.row)
-    elsif self.row > row && self.column < column
-      check_path(-1, 1, self.row-row)
+    if moving_up_and_to_the_right?(row, column)
+      check_path(UP, RIGHT, row - self.row)
+    elsif moving_up_and_to_the_left?(row, column)
+      check_path(UP, LEFT, row - self.row)
+    elsif moving_down_and_to_the_right?(row, column)
+      check_path(DOWN, RIGHT, self.row - row)
     else
-      check_path(-1, -1, self.row-row)
+      check_path(DOWN, LEFT, self.row - row)
     end
   end
 
   def check_path(row_dir, col_dir, dist)
     obstructed = false
-    cur_row = self.row
-    cur_column = self.column
+    cur_row = row
+    cur_column = column
 
-    (1...dist).each do |i|
+    (1...dist).each do |_i|
       cur_row += row_dir
       cur_column += col_dir
 
