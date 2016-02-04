@@ -1,8 +1,8 @@
 FactoryGirl.define do
   factory :piece do
-    type "pawn"
-    row 1
-    column 0
+    type "queen"
+    row 0
+    column 3
     in_game true
     association :player
     association :game
