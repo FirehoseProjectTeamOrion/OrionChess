@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :piece do
-    type "queen"
+    type "Queen"
     row 0
     column 3
     in_game true
