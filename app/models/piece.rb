@@ -36,53 +36,43 @@ class Piece < ActiveRecord::Base
   end
 
   def is_horizontal_obstructed?(column)
-    obstructed = false
     if self.column < column
-      (self.column+1...column).each do |x_pos|
-        obstructed |= game.pieces.find_by(row: self.row, column: x_pos).present?
-      end
+      check_path(0, 1, column-self.column)
     else
-      (column+1...self.column).each do |x_pos|
-        obstructed |= game.pieces.find_by(row: self.row, column: x_pos).present?
-      end
+      check_path(0, -1, self.column - column)
     end
-
-    obstructed
   end
 
   def is_vertical_obstructed?(row)
-    obstructed = false
     if self.row < row
-      (self.row+1...row).each do |y_pos|
-        obstructed |= game.pieces.find_by(row: y_pos, column: self.column).present?
-      end
+      check_path(1, 0, row-self.row)
     else
-      (row+1...self.row).each do |y_pos|
-        obstructed |= game.pieces.find_by(row: y_pos, column: self.column).present?
-      end
+      check_path(-1, 0, self.row-row)
     end
-
-    obstructed
   end
 
   def is_diagonal_obstructed?(row, column)
-    obstructed = false
     if self.row < row && self.column < column
-      (1...row-self.row).each do |n|
-        obstructed |= game.pieces.find_by(row: self.row+n, column: self.column+n).present?
-      end
+      check_path(1, 1, row-self.row)
     elsif self.row < row && self.column > column
-      (1...row-self.row).each do |n|
-        obstructed |= game.pieces.find_by(row: self.row+n, column: self.column-n).present?
-      end
+      check_path(1, -1, row-self.row)
     elsif self.row > row && self.column < column
-      (1...self.row-row).each do |n|
-        obstructed |= game.pieces.find_by(row: self.row-n, column: self.column+n).present?
-      end
+      check_path(-1, 1, self.row-row)
     else
-      (1...self.row-row).each do |n|
-        obstructed |= game.pieces.find_by(row: self.row-n, column: self.column-n).present?
-      end
+      check_path(-1, -1, self.row-row)
+    end
+  end
+
+  def check_path(row_dir, col_dir, dist)
+    obstructed = false
+    cur_row = self.row
+    cur_column = self.column
+
+    (1...dist).each do |i|
+      cur_row += row_dir
+      cur_column += col_dir
+
+      obstructed |= game.pieces.find_by(row: cur_row, column: cur_column).present?
     end
 
     obstructed
