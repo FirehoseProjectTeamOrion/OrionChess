@@ -23,6 +23,12 @@ class Piece < ActiveRecord::Base
 
   private
 
+  NONE = 0
+  UP = 1
+  DOWN = -1
+  RIGHT = 1
+  LEFT = -1
+
   def moving_horizontally?(row)
     self.row == row
   end
