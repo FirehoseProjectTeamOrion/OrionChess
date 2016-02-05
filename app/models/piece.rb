@@ -9,16 +9,12 @@ class Piece < ActiveRecord::Base
   scope :queens, -> { where(type: 'Queen') }
   scope :kings, -> { where(type: 'King') }
 
-  def is_obstructed?(row, column)
-    if moving_horizontally?(row)
-      is_horizontal_obstructed?(column)
-    elsif moving_vertically?(column)
-      is_vertical_obstructed?(row)
-    elsif moving_diagonally?(row, column)
-      is_diagonal_obstructed?(row, column)
-    else
-      fail 'Input is invalid!'
-    end
+  def obstructed?(destination_row, destination_column)
+    return horizontal_obstructed?(destination_column) if moving_horizontally?(destination_row)
+    return vertical_obstructed?(destination_row) if moving_vertically?(destination_column)
+    return diagonal_obstructed?(destination_row, destination_column) if moving_diagonally?(destination_row, destination_column)
+
+    fail 'Input is invalid!'
   end
 
   private
@@ -29,70 +25,63 @@ class Piece < ActiveRecord::Base
   RIGHT = 1
   LEFT = -1
 
-  def moving_horizontally?(row)
-    self.row == row
+  def moving_horizontally?(destination_row)
+    row == destination_row
   end
 
-  def moving_vertically?(column)
-    self.column == column
+  def moving_vertically?(destination_column)
+    column == destination_column
   end
 
-  def moving_diagonally?(row, column)
-    (self.row - row).abs == (self.column - column).abs
+  def moving_diagonally?(destination_row, destination_column)
+    (row - destination_row).abs == (column - destination_column).abs
   end
 
-  def moving_up_and_to_the_right?(row, column)
-    self.row < row && self.column < column
+  def moving_up_and_to_the_right?(destination_row, destination_column)
+    row < destination_row && column < destination_column
   end
 
-  def moving_up_and_to_the_left?(row, column)
-    self.row < row && self.column > column
+  def moving_up_and_to_the_left?(destination_row, destination_column)
+    row < destination_row && column > destination_column
   end
 
-  def moving_down_and_to_the_right?(row, column)
-    self.row > row && self.column < column
+  def moving_down_and_to_the_right?(destination_row, destination_column)
+    row > destination_row && column < destination_column
   end
 
-  def is_horizontal_obstructed?(column)
-    if self.column < column
-      check_path(NONE, RIGHT, column - self.column)
-    else
-      check_path(NONE, LEFT, self.column - column)
-    end
+  def horizontal_obstructed?(destination_column)
+    return check_path(NONE, RIGHT, destination_column - column) if column < destination_column
+
+    check_path(NONE, LEFT, column - destination_column)
   end
 
-  def is_vertical_obstructed?(row)
-    if self.row < row
-      check_path(UP, NONE, row - self.row)
-    else
-      check_path(DOWN, NONE, self.row - row)
-    end
+  def vertical_obstructed?(destination_row)
+    return check_path(UP, NONE, destination_row - row) if row < destination_row
+
+    check_path(DOWN, NONE, row - destination_row)
   end
 
-  def is_diagonal_obstructed?(row, column)
-    if moving_up_and_to_the_right?(row, column)
-      check_path(UP, RIGHT, row - self.row)
-    elsif moving_up_and_to_the_left?(row, column)
-      check_path(UP, LEFT, row - self.row)
-    elsif moving_down_and_to_the_right?(row, column)
-      check_path(DOWN, RIGHT, self.row - row)
-    else
-      check_path(DOWN, LEFT, self.row - row)
-    end
+  def diagonal_obstructed?(destination_row, destination_column)
+    return check_path(UP, RIGHT, destination_row - row) if moving_up_and_to_the_right?(destination_row, destination_column)
+
+    return check_path(UP, LEFT, destination_row - row) if moving_up_and_to_the_left?(destination_row, destination_column)
+
+    return check_path(DOWN, RIGHT, row - destination_row) if moving_down_and_to_the_right?(destination_row, destination_column)
+
+    check_path(DOWN, LEFT, row - destination_row)
   end
 
-  def check_path(row_dir, col_dir, dist)
-    obstructed = false
-    cur_row = row
-    cur_column = column
+  def check_path(row_direction, col_direction, distance)
+    current_row = row
+    current_column = column
 
-    (1...dist).each do |_i|
-      cur_row += row_dir
-      cur_column += col_dir
+    (1...distance).each do |_i|
+      current_row += row_direction
+      current_column += col_direction
 
-      obstructed |= game.pieces.find_by(row: cur_row, column: cur_column).present?
+      return true if game.pieces.find_by(row: current_row, column: current_column).present?
     end
 
-    obstructed
+    false
   end
 end
