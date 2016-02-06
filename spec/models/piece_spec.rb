@@ -1,6 +1,7 @@
 require 'rails_helper'
-Game.skip_callback(:create, :after, :populate_board!)
+
 RSpec.describe Piece, type: :model do
+  
   describe '#obstructed?' do
     it 'returns false for no horizontal obstructions moving to the right' do
       piece = FactoryGirl.create(:piece, row: 0, column: 3)
@@ -122,4 +123,3 @@ RSpec.describe Piece, type: :model do
     end
   end
 end
-Game.set_callback(:create, :after, :populate_board!)
