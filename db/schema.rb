@@ -17,10 +17,14 @@ ActiveRecord::Schema.define(version: 20160129204711) do
   enable_extension "plpgsql"
 
   create_table "games", force: true do |t|
-    t.string   "name"
+    t.integer  "game_id"
+    t.integer  "white_player"
+    t.integer  "black_player"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "games", ["game_id"], name: "index_games_on_game_id", using: :btree
 
   create_table "pieces", force: true do |t|
     t.string   "type"
