@@ -10,11 +10,11 @@ class Game < ActiveRecord::Base
     
     order_of_back_row = ["Rook", "Knight", "Bishop", "King", "Queen", "Bishop", "Knight", "Rook"]
     order_of_back_row.each_with_index do |type, column|
-      Piece.create(:type => type, :game => self, :color => "black", :row => 0, :column => column )
-      Piece.create(:type => type, :game => self, :color => "white", :row => 7, :column => column )
+      Piece.create(:type => type,  :color => "black", :row => 0, :column => column )
+      Piece.create(:type => type,  :color => "white", :row => 7, :column => column )
       
-      Piece.create(:type => "Pawn", :game => self, :color => "black", :row => 1, :column => column )
-      Piece.create(:type => "Pawn", :game => self, :color => "white", :row => 6, :column => column )      
+      Piece.create(:type => "Pawn", :color => "black", :row => 1, :column => column )
+      Piece.create(:type => "Pawn", :color => "white", :row => 6, :column => column )      
     end
   end
   
