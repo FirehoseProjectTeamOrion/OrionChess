@@ -6,5 +6,7 @@ FactoryGirl.define do
     in_game true
     association :player
     association :game
+    after(:build) { |piece| piece.class.skip_callback(:create, :after, :populate_board!) }
   end
+  
 end
