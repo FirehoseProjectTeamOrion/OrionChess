@@ -8,5 +8,4 @@ FactoryGirl.define do
     association :game
     after(:build) { |piece| piece.class.skip_callback(:create, :after, :populate_board!) }
   end
-  
 end

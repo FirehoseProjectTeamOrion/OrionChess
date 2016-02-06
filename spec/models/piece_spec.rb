@@ -1,12 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe Piece, type: :model do
-
   before do
     # Note: We want the board to be emptry for this test.
     allow_any_instance_of(Game).to receive(:populate_board!).and_return true
-  end  
-  
+  end
+
   describe '#obstructed?' do
     it 'returns false for no horizontal obstructions moving to the right' do
       piece = FactoryGirl.create(:piece, row: 0, column: 3)
