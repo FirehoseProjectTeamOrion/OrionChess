@@ -41,7 +41,7 @@ class GamesController < ApplicationController
   # PATCH/PUT /games/1.json
   def update
     @game = Game.find(params[:id])
-    current_game.update_attributes(:black_player_id => current_user.id)
+    current_game.update_attributes(:black_player_id, current_user.id)
     redirect_to games_path
     # respond_to do |format|
     #   if @game.update(game_params)
