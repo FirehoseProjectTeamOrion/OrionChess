@@ -40,8 +40,8 @@ class GamesController < ApplicationController
   # PATCH/PUT /games/1
   # PATCH/PUT /games/1.json
   def update
-    @game.black_player_id = current_user
-    @game.save
+    @game = Game.find(params[:id])
+    current_game.update_attributes(:black_player_id => current_user.id)
     redirect_to games_path
     # respond_to do |format|
     #   if @game.update(game_params)
@@ -73,6 +73,10 @@ class GamesController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def game_params
-    params.require(:game).permit(:name)
+    params.require(:game).permit(:black_player_id)
+  end
+
+  def current_game
+    @current_game ||= Game.find(params[:id])
   end
 end
