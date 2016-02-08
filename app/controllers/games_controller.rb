@@ -40,15 +40,18 @@ class GamesController < ApplicationController
   # PATCH/PUT /games/1
   # PATCH/PUT /games/1.json
   def update
-    respond_to do |format|
-      if @game.update(game_params)
-        format.html { redirect_to @game, notice: 'Game was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: 'edit' }
-        format.json { render json: @game.errors, status: :unprocessable_entity }
-      end
-    end
+    @game = Game.find(params[:id])
+    current_game.update_attributes(game_params)
+    redirect_to games_path
+    # respond_to do |format|
+    #   if @game.update(game_params)
+    #     format.html { redirect_to @game, notice: 'Game was successfully updated.' }
+    #     format.json { head :no_content }
+    #   else
+    #     format.html { render action: 'edit' }
+    #     format.json { render json: @game.errors, status: :unprocessable_entity }
+    #   end
+    # end
   end
 
   # DELETE /games/1
@@ -70,6 +73,10 @@ class GamesController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def game_params
-    params.require(:game).permit(:name)
+    params.require(:game).permit(:black_player_id)
+  end
+
+  def current_game
+    @current_game ||= Game.find(params[:id])
   end
 end
