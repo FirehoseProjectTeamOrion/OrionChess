@@ -3,7 +3,6 @@ class Piece < ActiveRecord::Base
   belongs_to :game
   self.inheritance_column = :type
 
-
   scope :pawns, -> { where(type: 'Pawn') }
   scope :knights, -> { where(type: 'Knight') }
   scope :bishops, -> { where(type: 'Bishop') }
@@ -14,7 +13,6 @@ class Piece < ActiveRecord::Base
   def self.types
     %w(Pawn Knight Bishop Rook Queen King)
   end
-
 
   def obstructed?(destination_row, destination_column)
     return horizontal_obstructed?(destination_column) if moving_horizontally?(destination_row)
