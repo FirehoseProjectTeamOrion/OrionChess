@@ -17,6 +17,16 @@ class Piece < ActiveRecord::Base
     fail 'Input is invalid!'
   end
 
+  protected
+
+  def white?
+    color == "white"
+  end
+
+  def black?
+    color == "black"
+  end
+
   private
 
   NONE = 0
