@@ -11,8 +11,8 @@ require 'rails_helper'
 #   end
 # end
 RSpec.describe GamesHelper, type: :helper do
-  describe "#draw_piece" do
-    it "returns nil when there is no piece at the given location" do
+  describe '#draw_piece' do
+    it 'returns nil when there is no piece at the given location' do
       game = FactoryGirl.create(:game)
 
       expect(helper.draw_piece(game, 4, 4)).to eq(nil)

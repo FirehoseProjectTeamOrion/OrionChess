@@ -20,11 +20,11 @@ class Piece < ActiveRecord::Base
   protected
 
   def white?
-    color == "white"
+    color == 'white'
   end
 
   def black?
-    color == "black"
+    color == 'black'
   end
 
   private
