@@ -1,27 +1,19 @@
 class King < Piece
 
   def valid_move?(destination_row, destination_col)
-    if "is move one of those valid moves (kings_move)"
-      if obstructed?(destination_row,destination_col)
-        "not valid move"
+    if destination_direction(destination_row, destination_col) > kings_step
+      return false
+      if kings_direction.include(direction)
+        return true
       else
-        "valid move"
+        return false
       end
     else
-      "not valid move"
+      return false
     end
   end
 
 private
-
-  # UP = [1,0]
-  # DOWN = [-1,0]
-  # LEFT = [0,-1]
-  # RIGHT = [0,1]
-  # UP_LEFT = [1,-1]
-  # UP_RIGHT = [1,1]
-  # DONW_LEFT = [-1,-1]
-  # DOWN_RIGHT = [-1, 1]
 
   #which direction is valid for king
   kings_direction = [
@@ -38,6 +30,12 @@ private
   #how many step can it make in each move
   kings_step = 1
 
+  def destination_direction(destination_row, destination_col)
+    direction = []
+    direction_row = (destination_row - row)
+    direction_column = (destination_column - column)
+    direction = [direction_row,direction_column]
+  end
 
 
 end
