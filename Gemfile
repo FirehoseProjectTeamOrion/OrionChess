@@ -35,6 +35,7 @@ end
 group :development, :test do
   gem 'rspec-rails', '~> 3.0'
   gem 'factory_girl_rails', '~> 4.0'
+  gem 'rspec-html-matchers'
 end
 
 gem 'bootstrap-sass', '~> 3.3.5.1'
