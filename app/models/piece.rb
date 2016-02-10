@@ -1,7 +1,6 @@
 class Piece < ActiveRecord::Base
   belongs_to :player
   belongs_to :game
-  self.inheritance_column = :type
 
   scope :pawns, -> { where(type: 'Pawn') }
   scope :knights, -> { where(type: 'Knight') }
