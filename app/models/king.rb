@@ -14,4 +14,12 @@ class King < Piece
     return true if kings_direction.include?(direction)
     false
   end
+
+  def chess_font_character
+    if white?
+      'k'
+    else
+      'l'
+    end
+  end
 end
