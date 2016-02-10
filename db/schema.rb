@@ -11,20 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160206224408) do
+ActiveRecord::Schema.define(version: 20160209013148) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "games", force: true do |t|
-    t.integer  "game_id"
     t.integer  "white_player_id"
     t.integer  "black_player_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "games", ["game_id"], name: "index_games_on_game_id", using: :btree
+  add_index "games", ["black_player_id"], name: "index_games_on_black_player_id", using: :btree
+  add_index "games", ["white_player_id"], name: "index_games_on_white_player_id", using: :btree
 
   create_table "pieces", force: true do |t|
     t.string   "type"
@@ -42,15 +42,12 @@ ActiveRecord::Schema.define(version: 20160206224408) do
   add_index "pieces", ["player_id"], name: "index_pieces_on_player_id", using: :btree
 
   create_table "players", force: true do |t|
-    t.integer  "player_id"
     t.string   "name"
     t.integer  "wins"
     t.integer  "losses"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  add_index "players", ["player_id"], name: "index_players_on_player_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
