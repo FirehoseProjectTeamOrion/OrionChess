@@ -5,8 +5,8 @@ RSpec.describe 'games/show.html.erb', type: :view do
     assign(:game, FactoryGirl.create(:game))
     render
 
-    expect(rendered).to have_tag('div', :with => { :class => 'chessboard' }) do
-      with_tag 'div', :text => 'p', :count => 8
+    expect(rendered).to have_tag('div', with: { class: 'chessboard' }) do
+      with_tag 'div', text: 'p', count: 8
     end
   end
 
@@ -14,8 +14,8 @@ RSpec.describe 'games/show.html.erb', type: :view do
     assign(:game, FactoryGirl.create(:game))
     render
 
-    expect(rendered).to have_tag('div', :with => { :class => 'chessboard' }) do
-      with_tag 'div', :text => 'o', :count => 8
+    expect(rendered).to have_tag('div', with: { class: 'chessboard' }) do
+      with_tag 'div', text: 'o', count: 8
     end
   end
 
@@ -23,8 +23,8 @@ RSpec.describe 'games/show.html.erb', type: :view do
     assign(:game, FactoryGirl.create(:game))
     render
 
-    expect(rendered).to have_tag('div', :with => { :class => 'chessboard' }) do
-      with_tag 'div', :text => 'n', :count => 2
+    expect(rendered).to have_tag('div', with: { class: 'chessboard' }) do
+      with_tag 'div', text: 'n', count: 2
     end
   end
 
@@ -32,8 +32,8 @@ RSpec.describe 'games/show.html.erb', type: :view do
     assign(:game, FactoryGirl.create(:game))
     render
 
-    expect(rendered).to have_tag('div', :with => { :class => 'chessboard' }) do
-      with_tag 'div', :text => 'm', :count => 2
+    expect(rendered).to have_tag('div', with: { class: 'chessboard' }) do
+      with_tag 'div', text: 'm', count: 2
     end
   end
 
@@ -41,8 +41,8 @@ RSpec.describe 'games/show.html.erb', type: :view do
     assign(:game, FactoryGirl.create(:game))
     render
 
-    expect(rendered).to have_tag('div', :with => { :class => 'chessboard' }) do
-      with_tag 'div', :text => 'b', :count => 2
+    expect(rendered).to have_tag('div', with: { class: 'chessboard' }) do
+      with_tag 'div', text: 'b', count: 2
     end
   end
 
@@ -50,8 +50,8 @@ RSpec.describe 'games/show.html.erb', type: :view do
     assign(:game, FactoryGirl.create(:game))
     render
 
-    expect(rendered).to have_tag('div', :with => { :class => 'chessboard' }) do
-      with_tag 'div', :text => 'v', :count => 2
+    expect(rendered).to have_tag('div', with: { class: 'chessboard' }) do
+      with_tag 'div', text: 'v', count: 2
     end
   end
 
@@ -59,8 +59,8 @@ RSpec.describe 'games/show.html.erb', type: :view do
     assign(:game, FactoryGirl.create(:game))
     render
 
-    expect(rendered).to have_tag('div', :with => { :class => 'chessboard' }) do
-      with_tag 'div', :text => 'r', :count => 2
+    expect(rendered).to have_tag('div', with: { class: 'chessboard' }) do
+      with_tag 'div', text: 'r', count: 2
     end
   end
 
@@ -68,8 +68,8 @@ RSpec.describe 'games/show.html.erb', type: :view do
     assign(:game, FactoryGirl.create(:game))
     render
 
-    expect(rendered).to have_tag('div', :with => { :class => 'chessboard' }) do
-      with_tag 'div', :text => 't', :count => 2
+    expect(rendered).to have_tag('div', with: { class: 'chessboard' }) do
+      with_tag 'div', text: 't', count: 2
     end
   end
 
@@ -77,8 +77,8 @@ RSpec.describe 'games/show.html.erb', type: :view do
     assign(:game, FactoryGirl.create(:game))
     render
 
-    expect(rendered).to have_tag('div', :with => { :class => 'chessboard' }) do
-      with_tag 'div', :text => 'q', :count => 1
+    expect(rendered).to have_tag('div', with: { class: 'chessboard' }) do
+      with_tag 'div', text: 'q', count: 1
     end
   end
 
@@ -86,8 +86,8 @@ RSpec.describe 'games/show.html.erb', type: :view do
     assign(:game, FactoryGirl.create(:game))
     render
 
-    expect(rendered).to have_tag('div', :with => { :class => 'chessboard' }) do
-      with_tag 'div', :text => 'w', :count => 1
+    expect(rendered).to have_tag('div', with: { class: 'chessboard' }) do
+      with_tag 'div', text: 'w', count: 1
     end
   end
 
@@ -95,8 +95,8 @@ RSpec.describe 'games/show.html.erb', type: :view do
     assign(:game, FactoryGirl.create(:game))
     render
 
-    expect(rendered).to have_tag('div', :with => { :class => 'chessboard' }) do
-      with_tag 'div', :text => 'k', :count => 1
+    expect(rendered).to have_tag('div', with: { class: 'chessboard' }) do
+      with_tag 'div', text: 'k', count: 1
     end
   end
 
@@ -104,8 +104,8 @@ RSpec.describe 'games/show.html.erb', type: :view do
     assign(:game, FactoryGirl.create(:game))
     render
 
-    expect(rendered).to have_tag('div', :with => { :class => 'chessboard' }) do
-      with_tag 'div', :text => 'l', :count => 1
+    expect(rendered).to have_tag('div', with: { class: 'chessboard' }) do
+      with_tag 'div', text: 'l', count: 1
     end
   end
 end
