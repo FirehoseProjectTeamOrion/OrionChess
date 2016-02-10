@@ -1,5 +1,6 @@
 class King < Piece
-  def valid_move?(_destination_row, _destination_col)
+  def valid_move?(destination_row, destination_col)
+    direction = [destination_row - row, destination_col - column]
     kings_direction = [
       [1, 0],
       [-1, 0],
