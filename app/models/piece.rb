@@ -17,6 +17,10 @@ class Piece < ActiveRecord::Base
     fail 'Input is invalid!'
   end
 
+  def move_to!(destination_row, destination_col)
+  # logic here
+  end
+
   protected
 
   def white?
