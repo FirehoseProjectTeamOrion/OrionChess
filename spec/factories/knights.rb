@@ -1,0 +1,9 @@
+FactoryGirl.define do
+  factory :knight, parent: :piece, class: 'Knight' do
+    row 0
+    column 6
+    in_game true
+    association :player
+    association :game
+  end
+end
