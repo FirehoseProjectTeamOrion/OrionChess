@@ -8,12 +8,4 @@ FactoryGirl.define do
     association :game
   end
 
-  factory :piece do
-    type 'King'
-    row 0
-    column 4
-    in_game true
-    association :player
-    association :game
-  end
 end
