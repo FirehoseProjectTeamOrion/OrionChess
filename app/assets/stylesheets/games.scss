@@ -25,3 +25,9 @@
   height: 80px;
   line-height: 80px;
 }
+
+#chessboard tr:nth-child(even) td:nth-child(even),
+#chessboard tr:nth-child(odd), td:nth-child(odd) {
+  background-color: #666;
+}
+
