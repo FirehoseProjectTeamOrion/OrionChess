@@ -7,5 +7,4 @@ FactoryGirl.define do
     association :player
     association :game
   end
-
 end
