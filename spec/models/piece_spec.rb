@@ -6,6 +6,10 @@ RSpec.describe Piece, type: :model do
     allow_any_instance_of(Game).to receive(:populate_board!).and_return true
   end
 
+  describe '#move_to!' do 
+
+  end
+
   describe '#obstructed?' do
     it 'returns false for no horizontal obstructions moving to the right' do
       piece = FactoryGirl.create(:piece, row: 0, column: 3)
