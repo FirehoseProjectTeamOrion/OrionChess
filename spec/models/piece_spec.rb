@@ -7,6 +7,16 @@ RSpec.describe Piece, type: :model do
   end
 
   describe '#move_to!' do 
+    it 'successfully moved the pieces to destination' do
+      king = FactoryGirl.create(:king)
+      expect(piece.move_to!(1,4)).to eq(true)
+    end
+    
+    it 'failed because our pieces is in that destination' do
+      king = FactoryGirl.create(:king)
+      expect(piece.moveto!(1,3)).to eq(false)
+    end
+      
 
   end
 

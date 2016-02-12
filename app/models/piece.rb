@@ -18,8 +18,28 @@ class Piece < ActiveRecord::Base
   end
 
   def move_to!(destination_row, destination_col)
-  # logic here
+    
+
+   if !(empty_space?(destination_row, destination_column)) 
+     if capturable?(destination_row, destination_column)
+       destination_piece.update_attributes(:row => nil, :column => nil, :in_game => false)
+     end
+   end
+   
   end
+   
+   def empty_space?(d_row, d_column)
+     destination_piece = game.pieces.where(:row => d_row, :column => d_column)
+     return true unless destination_piece.nil?
+   end
+   
+   
+   def capturable?(row, colomn)
+     game.pieces.where(:row => row, :column => column, :in_game => true).where.not(color: color).present?
+   end
+   
+   
+   
 
   protected
 
@@ -38,6 +58,10 @@ class Piece < ActiveRecord::Base
   DOWN = -1
   RIGHT = 1
   LEFT = -1
+
+  def destination_piece
+    destination_
+  end
 
   def moving_horizontally?(destination_row)
     row == destination_row
