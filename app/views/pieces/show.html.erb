@@ -1,2 +1,32 @@
-<h1>Pieces#show</h1>
-<p>Find me in app/views/pieces/show.html.erb</p>
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+</p>
+
+<table id="chessboard">
+  <% (0..7).each do |row| %>
+    <tr>
+      <% (0..7).each do |col| %>
+        <td>
+          <% if @piece.game.pieces.find_by(row: row, column: col).nil? %>
+             <%= link_to "", piece_path(@piece, piece: { row: row, column: col }), method: :put, class: "empty-space" %>
+          <% else %>
+            <% if @piece.game.pieces.find_by(row: row, column: col).id == @piece.id %>
+              <%= link_to piece_path(@piece.game.pieces.find_by(row: row, column: col)), id: "selected" do %>
+                <%= draw_piece(@piece.game, row, col) %>
+              <% end %>
+            <% else %>
+              <%= link_to piece_path(@piece.game.pieces.find_by(row: row, column: col)) do %>
+                <%= draw_piece(@piece.game, row, col) %>
+              <% end %>
+            <% end %>
+          <% end %>
+        </td>
+      <% end %>
+    </tr>
+  <% end %>
+</table>
+
+<%= link_to 'Edit', edit_game_path(@piece.game) %> |
+<%= link_to 'Back', games_path %>

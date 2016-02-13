@@ -1,6 +1,6 @@
 OrionChess::Application.routes.draw do
-  get "pieces/show"
-  get "pieces/update"
+  get 'pieces/show'
+  get 'pieces/update'
   devise_for :users
   resources :games
   resources :pieces, only: [:show, :update]
