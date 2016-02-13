@@ -1,23 +1,31 @@
 require 'rails_helper'
 
 RSpec.describe Piece, type: :model do
-  before do
+  before :each do
     # Note: We want the board to be emptry for this test.
     allow_any_instance_of(Game).to receive(:populate_board!).and_return true
   end
 
-  describe '#move_to!' do 
+  describe '#move_to!' do
+    before :each do
+      @piece_white = FactoryGirl.create(:piece, row: 0, column: 0, color: 'white')
+      @piece_black = FactoryGirl.create(:piece, row: 0, column: 7, color: 'black')
+    end
     it 'successfully moved the pieces to destination' do
-      king = FactoryGirl.create(:king)
-      expect(piece.move_to!(1,4)).to eq(true)
-    end
-    
-    it 'failed because our pieces is in that destination' do
-      king = FactoryGirl.create(:king)
-      expect(piece.moveto!(1,3)).to eq(false)
-    end
-      
+      piece = FactoryGirl.create(:piece, row: 0, column: 3)
+      # byebug
 
+      expect(piece.move_to!(0, 7)).to eq(true)
+    end
+
+    it 'successfully captured a piece' do
+      expect(@piece_white.move_to!(0, 7)).to eq(true)
+    end
+
+    # it 'failed because our pieces is in that destination' do
+    # king = FactoryGirl.create(:king)
+    # expect(piece.moveto!(1,3)).to eq(false)
+    # end
   end
 
   describe '#obstructed?' do

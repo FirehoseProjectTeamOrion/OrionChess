@@ -17,32 +17,34 @@ class Piece < ActiveRecord::Base
     fail 'Input is invalid!'
   end
 
-  def move_to!(destination_row, destination_col)
-    
+  def move_to!(destination_row, destination_column)
+    # byebug
 
-   if oppupied_space?(destination_row, destination_column)
-     opponent = game.pieces.where(:row => destination_row, :column => destination_col)
-     if capturable?(destination_row, destination_column)
-       opponent.update_attributes(:row => nil, :column => nil, :in_game => false)
-     else
-       return false
-     end
-   end
-   
+    if occupied_space?(destination_row, destination_column)
+      opponent = game.pieces.where(row: destination_row, column: destination_column)
+
+      if capturable?(destination_row, destination_column)
+        opponent.update_attributes(row: nil, column: nil, in_game: false)
+        update_attributes(row: destination_row, column: destination_column)
+
+      else
+        return false
+      end
+    else
+
+      update_attributes(row: destination_row, column: destination_column)
+
+    end
   end
-   
-   def occupied_space?(d_row, d_column)
-     return true if game.pieces.where(:row => d_row, :column => d_column).exist?
-     false
-   end
-   
-   
-   def capturable?(row, colomn)
-     game.pieces.where(:row => row, :column => column, :in_game => true).where.not(color: color).present?
-   end
-   
-   
-   
+
+  def occupied_space?(d_row, d_column)
+    return true if game.pieces.where(row: d_row, column: d_column).exists?
+    false
+  end
+
+  def capturable?(row, _colomn)
+    game.pieces.where(row: row, column: column, in_game: true).where.not(color: color).present?
+  end
 
   protected
 
@@ -61,8 +63,6 @@ class Piece < ActiveRecord::Base
   DOWN = -1
   RIGHT = 1
   LEFT = -1
-
-  
 
   def moving_horizontally?(destination_row)
     row == destination_row
