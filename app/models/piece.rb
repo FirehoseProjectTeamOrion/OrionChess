@@ -9,6 +9,10 @@ class Piece < ActiveRecord::Base
   scope :queens, -> { where(type: 'Queen') }
   scope :kings, -> { where(type: 'King') }
 
+  def self.types
+    %w(Pawn Knight Bishop Rook Queen King)
+  end
+
   def obstructed?(destination_row, destination_column)
     return horizontal_obstructed?(destination_column) if moving_horizontally?(destination_row)
     return vertical_obstructed?(destination_row) if moving_vertically?(destination_column)
