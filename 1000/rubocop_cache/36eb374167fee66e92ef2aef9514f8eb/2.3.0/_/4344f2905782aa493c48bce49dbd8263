@@ -1,1 +1,0 @@
-[{"severity":"convention","location":{"begin_pos":967,"end_pos":969},"message":"Use a guard clause instead of wrapping the code inside a conditional expression.","cop_name":"Style/GuardClause","status":"unsupported"}]

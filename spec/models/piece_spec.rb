@@ -21,6 +21,14 @@ RSpec.describe Piece, type: :model do
     it 'successfully captured a piece' do
       expect(@piece_white.move_to!(0, 7)).to eq(true)
     end
+    
+    it 'should return false because piece is our own' do
+      
+      white_piece = FactoryGirl.create(:piece, row: 0, column: 7, color: 'white')
+      
+      expect(@piece_white.move_to!(0, 7)).to eq(false)
+      byebug
+    end    
 
     # it 'failed because our pieces is in that destination' do
     # king = FactoryGirl.create(:king)
