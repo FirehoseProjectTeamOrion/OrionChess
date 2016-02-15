@@ -7,10 +7,8 @@ RSpec.describe Piece, type: :model do
   end
 
   describe '#move_to!' do
-    before :each do
-      @piece_white = FactoryGirl.create(:piece, row: 0, column: 0, color: 'white')
-      @piece_black = FactoryGirl.create(:piece, row: 0, column: 7, color: 'black')
-    end
+   let(:piece_black) { FactoryGirl.create(:piece, row: 0, column: 7, color: 'black') }
+   let(:piece_white) { FactoryGirl.create(:piece, row: 0, column: 7, color: 'white') }
     it 'successfully moved the pieces to destination' do
       piece = FactoryGirl.create(:piece, row: 0, column: 3)
       # byebug

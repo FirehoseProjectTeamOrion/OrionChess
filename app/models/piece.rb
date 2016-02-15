@@ -64,14 +64,14 @@ class Piece < ActiveRecord::Base
 #  end
 
   def occupied_space?(d_row, d_column)
-    return true if game.pieces.where(row: d_row, column: d_column).exists?
-    false
+    game.pieces.where(row: d_row, column: d_column).exists?
+    
   end
 
   def capturable?(row, column)
     
     
-    game.pieces.where(row: row, column: column, in_game: true).where.not(color: color).present?
+    game.pieces.where(row: row, column: column, in_game: true).where.not(color: color).exists?
   end
 
   protected
