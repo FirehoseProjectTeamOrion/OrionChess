@@ -16,3 +16,6 @@ deploy:
     master: orionchess
   on:
     repo: FirehoseProjectTeamOrion/OrionChess
+addons:
+  code_climate:
+    repo_token: #Token Goes Here
