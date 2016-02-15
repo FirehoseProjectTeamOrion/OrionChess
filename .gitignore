@@ -15,4 +15,4 @@
 /log/*.log
 /tmp
 
-1000/rubocop_cache
+/1000/rubocop_cache
