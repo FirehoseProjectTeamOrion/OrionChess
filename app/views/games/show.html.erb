@@ -9,11 +9,7 @@
   <tr>
       <% (0..7).each do |col| %>
       <td>
-        <% unless @game.pieces.find_by(row: row, column: col).nil? %>
-          <%= link_to piece_path(@game.pieces.find_by(row: row, column: col)) do %>
-            <%= draw_piece(@game, row, col) %>
-          <% end %>
-        <% end %>
+        <%= draw_piece(@game, row, col) %>
       </td>
     <% end %>
   </tr>

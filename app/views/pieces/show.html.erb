@@ -9,19 +9,7 @@
     <tr>
       <% (0..7).each do |col| %>
         <td>
-          <% if @piece.game.pieces.find_by(row: row, column: col).nil? %>
-             <%= link_to "", piece_path(@piece, piece: { row: row, column: col }), method: :put, class: "empty-space" %>
-          <% else %>
-            <% if @piece.game.pieces.find_by(row: row, column: col).id == @piece.id %>
-              <%= link_to piece_path(@piece.game.pieces.find_by(row: row, column: col)), id: "selected" do %>
-                <%= draw_piece(@piece.game, row, col) %>
-              <% end %>
-            <% else %>
-              <%= link_to piece_path(@piece.game.pieces.find_by(row: row, column: col)) do %>
-                <%= draw_piece(@piece.game, row, col) %>
-              <% end %>
-            <% end %>
-          <% end %>
+          <%= pieces_draw_piece(@piece, row, col) %>
         </td>
       <% end %>
     </tr>

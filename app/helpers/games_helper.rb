@@ -4,6 +4,8 @@ module GamesHelper
 
     return if piece.nil?
 
-    piece.chess_font_character
+    link_to piece_path(piece) do
+      piece.chess_font_character
+    end
   end
 end
