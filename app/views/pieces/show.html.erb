@@ -6,15 +6,15 @@
 
 <table id="chessboard">
   <% (0..7).each do |row| %>
-  <tr>
+    <tr>
       <% (0..7).each do |col| %>
-      <td>
-        <%= draw_piece(@game, row, col) %>
-      </td>
-    <% end %>
-  </tr>
+        <td>
+          <%= pieces_draw_piece(@piece, row, col) %>
+        </td>
+      <% end %>
+    </tr>
   <% end %>
 </table>
 
-<%= link_to 'Edit', edit_game_path(@game) %> |
+<%= link_to 'Edit', edit_game_path(@piece.game) %> |
 <%= link_to 'Back', games_path %>

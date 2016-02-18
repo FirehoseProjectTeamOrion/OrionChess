@@ -1,6 +1,9 @@
 OrionChess::Application.routes.draw do
+  get 'pieces/show'
+  get 'pieces/update'
   devise_for :users
   resources :games
+  resources :pieces, only: [:show, :update]
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

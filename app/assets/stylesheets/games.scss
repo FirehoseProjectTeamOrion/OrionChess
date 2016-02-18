@@ -1,27 +1,53 @@
 // Place all the styles related to the Games controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-.chessboard {
-  width: 650px;
-  height: 650px;
+table#chessboard {
   border: 5px solid black;
+  border-collapse:separate;
+  border-radius: 10px;
   margin: auto;
-  font-family: 'chess_casesregular';
-  font-size: 60px;
-  text-align: center;
+  
+  td a {
+    font-family: 'chess_casesregular';
+    font-size: 60px;
+    vertical-align: middle;
+    display: block;
+    height: 100%;
+    width: 100%;
+    line-height: 80px;
+  }
+  
+  td a:visited {
+    color: black;
+  }
+  
+  td a:hover {
+    color: yellow;
+    background-color: transparent;
+    text-decoration: none;
+  }
+  
+  td a#selected {
+    color: yellow;
+  }
+  
+  td a.empty-space:hover {
+    background-color: rgba(255, 255, 0, 0.25);
+  }
+  
+  td {
+    width: 80px;
+    height: 80px;
+    text-align: center;
+  }
+  
+  tr:nth-child(even) td:nth-child(even),
+  tr:nth-child(odd) td:nth-child(odd) {
+    background-color: #666;
+  }
 }
 
-.chessboard .black {
-  float: left;
-  width: 80px;
-  height: 80px;
-  background-color: #666;
-  line-height: 80px;
-}
 
-.chessboard .white {
-  float: left;
-  width: 80px;
-  height: 80px;
-  line-height: 80px;
-}
+
+
+
