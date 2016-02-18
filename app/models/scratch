@@ -1,0 +1,44 @@
+1,0
+
+0,3->5,3
+
+new_column - old_column = 0/0 = column
+new_row - old_row = 5/1 = row
+
+2,3->5,3
+
+new_column - old_column = 0; 0/0 = (new_column - old_column)
+new_row - old_row = 3; 3/1 = (new_row - old_row)
+==================
+1,1
+
+2,3->4,5
+new_column - old_column = 2; 2/1 = (new_column - old_column)
+new_row - old_row = 2; 2/1 = (new_row - old_row)
+
+
+2,3->4,4
+new_column - old_column = 1; 1/1 = (new_column - old_column)
+new_row - old_row = 2; 2/1 = (new_row - old_row)
+if 0 then old_column = new_column
+if 1 then
+
+
+
+1/1=1
+1/-1=-1
+-1/-1=1
+-1/1=-1
+0/1=
+
+
+
+
+[1, 0],   = 0
+[-1, 0],  =
+[0, -1],  =
+[0, 1],   =
+[1, -1],  =
+[1, 1],   =
+[-1, -1], =
+[-1, 1]   =
