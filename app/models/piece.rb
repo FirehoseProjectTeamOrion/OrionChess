@@ -63,11 +63,22 @@ class Piece < ActiveRecord::Base
  #  end
 #  end
 
+<<<<<<< HEAD
   def occupied_space?(destination_row, destination_column)
     return true if game.pieces.where(row: destination_row, column: destination_column).exists?
   end
 
   def capturable?(row, column)
+=======
+  def occupied_space?(d_row, d_column)
+    game.pieces.where(row: d_row, column: d_column).exists?
+    
+  end
+
+  def capturable?(row, column)
+    
+    
+>>>>>>> e286a0a79f39542065599e5dea29e6b8d0799b72
     game.pieces.where(row: row, column: column, in_game: true).where.not(color: color).exists?
   end
 
