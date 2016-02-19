@@ -3,21 +3,20 @@ class Queen < Piece
   def valid_move?(destination_row, destination_column)
 
 
-      return !(obstructed?(destination_row, destination_column)) if moving_horizontally?(destination_row) || moving_vertically?(destination_column) || moving_diagonally?(destination_row, destination_column)
-      return  game.pieces.find_by(row: current_row, column: current_column).where.not(color: color).present? if obstructed?(destination_row, destination_column)
-      false
+      # return !(obstructed?(destination_row, destination_column)) if moving_horizontally?(destination_row) || moving_vertically?(destination_column) || moving_diagonally?(destination_row, destination_column)
+      # return  game.pieces.find_by(row: current_row, column: current_column).where.not(color: color).present? if obstructed?(destination_row, destination_column)
+      # false
 
       if moving_horizontally?(destination_row) || moving_vertically?(destination_column) || moving_diagonally?(destination_row, destination_column)
-
-        if !(obstructed?(destination_row, destination_column)) do
-          if game.pieces.find_by(row: destination_row, column: destination_column).present? do
-            if opponent pieces? do
+        if !(obstructed?(destination_row, destination_column))
+          if game.pieces.find_by(row: destination_row, column: destination_column).present?
+            if game.pieces.find_by(row: destination_row, column: destination_column).color != color 
               return true
             else
               return false #opponent pieces?
             end
           else
-            return false # it has pieces?
+            return true # it has pieces?
           end
         else
           return false #!(obstructed?(destination_row, destination_column))
@@ -39,7 +38,7 @@ class Queen < Piece
     # return game.pieces.find_by(row: current_row, column: current_column).where.not(color: color).present?
     # if obstructed?(destination_row, destination_column)
 
-    end
+
   end
 
   def chess_font_character
