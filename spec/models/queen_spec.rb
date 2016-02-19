@@ -15,8 +15,6 @@ RSpec.describe Queen, type: :model do
     it 'return false because destination has our pieces' do
       queen = FactoryGirl.create(:queen)
       expect(queen.valid_move?(2.6)).to eq(false)
-    end|
-
     end
   end
 end
