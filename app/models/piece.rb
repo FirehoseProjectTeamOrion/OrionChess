@@ -20,22 +20,22 @@ class Piece < ActiveRecord::Base
   def move_to!(destination_row, destination_column)
       # byebug
   # practice line begin here
-    
+
     if occupied_space?(destination_row, destination_column) && capturable?(destination_row, destination_column)
       game.pieces.where(row: :destination_row, column: :destination_column).update_attributes(row: nil, column: nil, in_game: false) #not sure whats proper...just woke up hour ago   :)
      #^^^^^ this is opponent pieces ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-     
+
       update_attributes(row: destination_row, column: destination_column) #move our pieces to that new location after removing opponent
       return true
     elsif !(occupied_space?(destination_row, destination_column))
       update_attributes(row: destination_row, column: destination_column)
       return true
-    else 
+    else
       return false
     end
   end
-  
-  
+
+
 
 
 
@@ -63,22 +63,11 @@ class Piece < ActiveRecord::Base
  #  end
 #  end
 
-<<<<<<< HEAD
   def occupied_space?(destination_row, destination_column)
     return true if game.pieces.where(row: destination_row, column: destination_column).exists?
   end
 
   def capturable?(row, column)
-=======
-  def occupied_space?(d_row, d_column)
-    game.pieces.where(row: d_row, column: d_column).exists?
-    
-  end
-
-  def capturable?(row, column)
-    
-    
->>>>>>> e286a0a79f39542065599e5dea29e6b8d0799b72
     game.pieces.where(row: row, column: column, in_game: true).where.not(color: color).exists?
   end
 
