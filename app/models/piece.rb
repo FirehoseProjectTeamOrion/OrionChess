@@ -46,21 +46,21 @@ class Piece < ActiveRecord::Base
 
 
 
-#    if occupied_space?(destination_row, destination_column)
-#      opponent = game.pieces.where(row: destination_row, column: destination_column)
-
+#   if occupied_space?(destination_row, destination_column)
+ #    opponent = game.pieces.where(row: destination_row, column: destination_column)
+#
 #      if capturable?(destination_row, destination_column)
 #        opponent.update_attributes(row: nil, column: nil, in_game: false)
 #        update_attributes(row: destination_row, column: destination_column)
-#      else
-#        return false
-#      end
+#     else
+ #       return false
+ #     end
 
 #    else
+#
+ #     update_attributes(row: destination_row, column: destination_column)
 
-#      update_attributes(row: destination_row, column: destination_column)
-
-#    end
+ #  end
 #  end
 
   def occupied_space?(destination_row, destination_column)
