@@ -6,4 +6,8 @@ class Pawn < Piece
       'o'
     end
   end
+  
+  def valid_move?
+    
+  end
 end
