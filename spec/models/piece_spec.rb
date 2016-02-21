@@ -7,7 +7,6 @@ RSpec.describe Piece, type: :model do
   end
 
   describe '#move_to!' do
-
     before :each do
       @game = FactoryGirl.create(:game)
       @piece_white = FactoryGirl.create(:piece, row: 0, column: 0, color: 'white', in_game: true, game_id: @game.id)
@@ -18,27 +17,19 @@ RSpec.describe Piece, type: :model do
       @piece_white.move_to!(0, 5)
 
       expect(@piece_white.column).to eq(5)
-
-
-
     end
 
     it 'should show captured pieces to be out of game' do
-
       @piece_white.move_to!(0, 7)
       expect(@piece_black.column).to eq(nil)
     end
 
     it 'should return false because piece is our own' do
-
       white_piece = FactoryGirl.create(:piece, row: 4, column: 4, color: 'white', game_id: @game.id)
-      #black_piece = FactoryGirl.create(:piece, row: 3, column: 4, color: 'black')
+      # black_piece = FactoryGirl.create(:piece, row: 3, column: 4, color: 'black')
 
       expect(white_piece.move_to!(@piece_white.row, @piece_white.column)).to eq(false)
-
     end
-
-
   end
 
   describe '#obstructed?' do
