@@ -26,7 +26,7 @@ RSpec.describe Piece, type: :model do
     it 'should show captured pieces to be out of game' do
 
       @piece_white.move_to!(0, 7)
-      expect(@piece_black.in_game).to eq(false)
+      expect(@piece_black.column).to eq(nil)
     end
 
     it 'should return false because piece is our own' do
