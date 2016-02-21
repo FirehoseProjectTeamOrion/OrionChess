@@ -18,11 +18,12 @@ class Piece < ActiveRecord::Base
   end
 
   def move_to!(destination_row, destination_column)
+    opponent = Piece.where(game_id: game.id, row: destination_row, column: destination_column)
       # byebug
   # practice line begin here
 
     if occupied_space?(destination_row, destination_column) && capturable?(destination_row, destination_column)
-      game.pieces.where(row: :destination_row, column: :destination_column).update_attributes(row: nil, column: nil, in_game: false) #not sure whats proper...just woke up hour ago   :)
+      opponent.where(row: destination_row, column: destination_column).update_attributes(row: nil, column: nil, in_game: false) #not sure whats proper...just woke up hour ago   :)
      #^^^^^ this is opponent pieces ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
       update_attributes(row: destination_row, column: destination_column) #move our pieces to that new location after removing opponent
@@ -64,11 +65,13 @@ class Piece < ActiveRecord::Base
 #  end
 
   def occupied_space?(destination_row, destination_column)
-    return true if game.pieces.where(row: destination_row, column: destination_column).exists?
+    opponent = Piece.where(game_id: game.id, row: destination_row, column: destination_column)
+    return true if opponent.where(row: destination_row, column: destination_column).exists?
   end
 
-  def capturable?(row, column)
-    game.pieces.where(row: row, column: column, in_game: true).where.not(color: color).exists?
+  def capturable?(destination_row, destination_column)
+    opponent = Piece.where(game_id: game.id, row: destination_row, column: destination_column)
+    opponent.where(row: row, column: column, in_game: true).where.not(color: color).exists?
   end
 
   protected
