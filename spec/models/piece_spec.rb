@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Piece, type: :model do
   before :each do
-    # Note: We want the board to be emptry for this test.
+     Note: We want the board to be emptry for this test.
     allow_any_instance_of(Game).to receive(:populate_board!).and_return true
   end
 
@@ -20,12 +20,12 @@ RSpec.describe Piece, type: :model do
     end
 
     it 'should show captured pieces to be out of game' do
-      @piece_white.move_to!(0, 7)
-      expect(@piece_black.column).to eq(nil)
+       @piece_white.move_to!(0, 7)
+      expect(@piece_black.in_game).to eq(false)
     end
 
     it 'should return false because piece is our own' do
-      white_piece = FactoryGirl.create(:piece, row: 4, column: 4, color: 'white', game_id: @game.id)
+      white_piece = FactoryGirl.create(:piece, row: 0, column: 4, color: 'white', game_id: @game.id)
       # black_piece = FactoryGirl.create(:piece, row: 3, column: 4, color: 'black')
 
       expect(white_piece.move_to!(@piece_white.row, @piece_white.column)).to eq(false)
