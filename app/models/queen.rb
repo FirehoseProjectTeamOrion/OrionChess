@@ -1,39 +1,22 @@
 class Queen < Piece
   def valid_move?(destination_row, destination_column)
-    # return !(obstructed?(destination_row, destination_column)) if moving_horizontally?(destination_row) || moving_vertically?(destination_column) || moving_diagonally?(destination_row, destination_column)
-    # return  game.pieces.find_by(row: current_row, column: current_column).where.not(color: color).present? if obstructed?(destination_row, destination_column)
-    # false
-
-    if legal_path?(destination_row, destination_column)
-      # return 1
-      if not_obstructed?(destination_row, destination_column)
-        return 3
-        if game.pieces.find_by(row: destination_row, column: destination_column).present?
-          return 5
-          if game.pieces.find_by(row: destination_row, column: destination_column).color != color
-            return 7
-            # return true
-          else
-            return 8
-            # return false # opponent pieces?
-          end
-        else
-          return 6
-          # return true # it has pieces?
-        end
-      else
-        return 4
-        # return false # not_obstructed?(destination_row, destination_column)
-      end
-    else
-      # return 2
-      return false # moving_horizontally etc etc
+    if legal_path?(destination_row, destination_column) && not_obstructed?(destination_row, destination_column)
+      return true if piece_present?(destination_row, destination_column) && opponent_piece?(destination_row, destination_column)
+      return false
     end
+    return false
+  end
+
+  def opponent_piece?(destination_row, destination_column)
+    game.pieces.find_by(row: destination_row, column: destination_column).color != color
+  end
+
+  def piece_present?(destination_row, destination_column)
+    game.pieces.find_by(row: destination_row, column: destination_column).present?
   end
 
   def legal_path?(destination_row, destination_column)
     is_moving_horizontally?(destination_row) || is_moving_vertically?(destination_column) || is_moving_diagonally?(destination_row, destination_column)
-
   end
 
   def not_obstructed?(destination_row, destination_column)
