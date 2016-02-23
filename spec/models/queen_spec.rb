@@ -2,6 +2,10 @@ require 'rails_helper'
 
 RSpec.describe Queen, type: :model do
   describe '#valid_move?' do
+    # before do
+    #   # Note: We want the board to be emptry for this test.
+    #   allow_any_instance_of(Game).to receive(:populate_board!).and_return true
+    # end
 
     it 'return true if pieces is opponent' do
       # this test is validated!2
@@ -15,20 +19,29 @@ RSpec.describe Queen, type: :model do
       # this test needs working
       game = FactoryGirl.create(:game)
       queen = FactoryGirl.create(:queen, game: game )
-      FactoryGirl.create(:piece, row: 2, column: 5,color: "black", game: queen.game)
-      expect(queen.piece_present?(0, 2)).to eq(false)
+      # FactoryGirl.create(:piece, row: 2, column: 5,color: "black", game: queen.game)
+      expect(queen.piece_present?(1, 5)).to eq(true)
     end
 
-    it 'return not_obstructed? false' do
+    it 'return false if pieces is not present' do
+      game = FactoryGirl.create(:game)
+      queen = FactoryGirl.create(:queen, game: game )
+      expect(queen.piece_present?(3, 3)).to eq(false)
+    end
+
+    it 'return false if not not_obstructed?' do
+      game = FactoryGirl.create(:game)
       queen = FactoryGirl.create(:queen, row: 0, column: 3)
-      FactoryGirl.create(:piece, row: 1, column: 4, game: queen.game)
+      # FactoryGirl.create(:piece, row: 1, column: 4, game: queen.game)
       expect(queen.not_obstructed?(0, 6)).to eq(false)
     end
 
     it 'return not_obstructed? true' do
+      game = FactoryGirl.create(:game)
       queen = FactoryGirl.create(:queen, row: 0, column: 3)
-      FactoryGirl.create(:piece, row: 2, column: 4, game: queen.game)
-      expect(queen.not_obstructed?(4, 3)).to eq(true)
+      # FactoryGirl.create(:piece, row: 2, column: 4, game: queen.game)
+      # expect(queen.not_obstructed?(4, 3)).to eq(false)
+      expect(queen.not_obstructed?(4, 3)).to eq(false)
     end
 
     it 'return obstructed? true' do
