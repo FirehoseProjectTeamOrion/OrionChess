@@ -4,7 +4,7 @@ class Queen < Piece
       return true if piece_present?(destination_row, destination_column) && opponent_piece?(destination_row, destination_column)
       return false
     end
-    return false
+    false
   end
 
   def opponent_piece?(destination_row, destination_column)
