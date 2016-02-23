@@ -36,7 +36,7 @@ RSpec.describe Queen, type: :model do
 
     it 'return true if not_obstructed? (path clear) ' do
       game = FactoryGirl.create(:game)
-      queen = FactoryGirl.create(:queen, row: 0, column: 3)
+      queen = FactoryGirl.create(:queen, row: 0, column: 3, game: game)
       expect(queen.not_obstructed?(3, 0)).to eq(true)
     end
 

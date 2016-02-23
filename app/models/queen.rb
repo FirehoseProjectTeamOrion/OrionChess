@@ -16,7 +16,7 @@ class Queen < Piece
   end
 
   def legal_path?(destination_row, destination_column)
-    is_moving_horizontally?(destination_row) || is_moving_vertically?(destination_column) || is_moving_diagonally?(destination_row, destination_column)
+    moving_horizontally?(destination_row) || moving_vertically?(destination_column) || moving_diagonally?(destination_row, destination_column)
   end
 
   def not_obstructed?(destination_row, destination_column)
@@ -34,15 +34,15 @@ class Queen < Piece
 
   private
 
-  def is_moving_horizontally?(destination_row)
+  def moving_horizontally?(destination_row)
     row == destination_row
   end
 
-  def is_moving_vertically?(destination_column)
+  def moving_vertically?(destination_column)
     column == destination_column
   end
 
-  def is_moving_diagonally?(destination_row, destination_column)
+  def moving_diagonally?(destination_row, destination_column)
     (row - destination_row).abs == (column - destination_column).abs
   end
 end
