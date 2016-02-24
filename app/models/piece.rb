@@ -19,43 +19,19 @@ class Piece < ActiveRecord::Base
 
   def move_to!(destination_row, destination_column)
     opponent = Piece.where(game_id: game.id, row: destination_row, column: destination_column, in_game: true)
-    # byebug
-    # practice line begin here
 
     if occupied_space?(destination_row, destination_column) && capturable?(destination_row, destination_column)
-      opponent[0].update_attributes(row: nil, column: nil, in_game: false) # not sure whats proper...just woke up hour ago   :)
-      #opponent[0].update_piece(false)
-      
-      # ^^^^^ this is opponent pieces ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      opponent[0].update_attributes(row: nil, column: nil, in_game: false)
+      update_attributes(row: destination_row, column: destination_column)
 
-      update_attributes(row: destination_row, column: destination_column) # move our pieces to that new location after removing opponent
-      #return true
     elsif !occupied_space?(destination_row, destination_column)
       update_attributes(row: destination_row, column: destination_column)
       return true
     else
+
       return false
     end
   end
-
-  # practice line end here
-
-  #   if occupied_space?(destination_row, destination_column)
-  #    opponent = game.pieces.where(row: destination_row, column: destination_column)
-  #
-  #      if capturable?(destination_row, destination_column)
-  #        opponent.update_attributes(row: nil, column: nil, in_game: false)
-  #        update_attributes(row: destination_row, column: destination_column)
-  #     else
-  #       return false
-  #     end
-
-  #    else
-  #
-  #     update_attributes(row: destination_row, column: destination_column)
-
-  #  end
-  #  end
 
   def occupied_space?(destination_row, destination_column)
     opponent = Piece.where(game_id: game.id, row: destination_row, column: destination_column, in_game: true)
@@ -66,9 +42,9 @@ class Piece < ActiveRecord::Base
     # opponent = Piece.where(game_id: game.id, row: destination_row, column: destination_column, in_game: true)
     Piece.where(game_id: game.id, row: destination_row, column: destination_column, in_game: true).where.not(color: color).exists?
   end
-  
+
   def update_piece(in_game)
-    update_attributes( in_game: in_game)
+    update_attributes(in_game: in_game)
   end
 
   protected
