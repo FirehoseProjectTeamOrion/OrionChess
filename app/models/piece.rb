@@ -18,19 +18,11 @@ class Piece < ActiveRecord::Base
   end
 
   def move_to!(destination_row, destination_column)
+    return false unless capturable?(destination_row, destination_column)
     opponent = Piece.where(game_id: game.id, row: destination_row, column: destination_column, in_game: true)
-
-    if occupied_space?(destination_row, destination_column) && capturable?(destination_row, destination_column)
-      opponent[0].update_attributes(row: nil, column: nil, in_game: false)
-      update_attributes(row: destination_row, column: destination_column)
-
-    elsif !occupied_space?(destination_row, destination_column)
-      update_attributes(row: destination_row, column: destination_column)
-      return true
-    else
-
-      return false
-    end
+    return update_attributes(row: destination_row, column: destination_column) unless occupied_space?(destination_row, destination_column)
+    opponent[0].update_attributes(row: nil, column: nil, in_game: false)
+    update_attributes(row: destination_row, column: destination_column)
   end
 
   def occupied_space?(destination_row, destination_column)
