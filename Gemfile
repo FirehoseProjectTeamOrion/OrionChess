@@ -36,6 +36,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.0'
   gem 'factory_girl_rails', '~> 4.0'
   gem 'rspec-html-matchers'
+  gem 'pry-rails'
 end
 
 gem 'bootstrap-sass', '~> 3.3.5.1'
@@ -45,6 +46,7 @@ gem 'simple_form'
 
 gem 'devise', '>= 3.2.4'
 gem 'rubocop', '~> 0.36.0', require: false
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
 
