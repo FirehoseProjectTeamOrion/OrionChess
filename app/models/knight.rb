@@ -1,5 +1,4 @@
 class Knight < Piece
-<<<<<<< HEAD
   def valid_move?(destination_row, destination_column)
     direction = [destination_row - row, destination_column - column]
     knights_direction = [
@@ -15,14 +14,6 @@ class Knight < Piece
     return true if knights_direction.include?(direction)
     false
   end
-=======
-
-def valid_move?(destination_row, destination_column)
-
-
-end
-
->>>>>>> a41ae60195a7efdb06e45dd16b8a70b256c37e44
 
   def chess_font_character
     if white?
