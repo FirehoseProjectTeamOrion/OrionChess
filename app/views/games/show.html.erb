@@ -1,3 +1,24 @@
+<script>
+  $(function() {
+    $('.piece').draggable({
+      start: function(ev, ui) {
+      }
+    });
+    $('td').droppable({
+      drop: function(ev, ui) {
+        <%= puts "Hello!" %>
+        $(ui.draggable).detach().css({top: 0, left: 0}).appendTo(this);
+        $.ajax({
+          type: 'PUT',
+          url: ui.draggable.data('update-url'),
+          dataType: 'json',
+          data: {piece: {row: $(this).parent().index(), column: $(this).index()}}
+        });
+      }
+    });
+  })
+</script>
+
 <p id="notice"><%= notice %></p>
 
 <p>

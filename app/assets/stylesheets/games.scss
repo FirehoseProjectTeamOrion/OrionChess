@@ -6,48 +6,37 @@ table#chessboard {
   border-collapse:separate;
   border-radius: 10px;
   margin: auto;
-  
-  td a {
+
+  td span {
     font-family: 'chess_casesregular';
     font-size: 60px;
     vertical-align: middle;
-    display: block;
-    height: 100%;
-    width: 100%;
-    line-height: 80px;
+    margin: 0;
   }
-  
-  td a:visited {
-    color: black;
-  }
-  
-  td a:hover {
+
+  td span:hover {
     color: yellow;
     background-color: transparent;
     text-decoration: none;
+    cursor: pointer;
   }
-  
-  td a#selected {
+
+  td span#selected {
     color: yellow;
   }
-  
+
   td a.empty-space:hover {
     background-color: rgba(255, 255, 0, 0.25);
   }
-  
+
   td {
     width: 80px;
     height: 80px;
     text-align: center;
   }
-  
+
   tr:nth-child(even) td:nth-child(even),
   tr:nth-child(odd) td:nth-child(odd) {
     background-color: #666;
   }
 }
-
-
-
-
-
