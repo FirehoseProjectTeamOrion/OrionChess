@@ -2,7 +2,7 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 table#chessboard {
-  border: 5px solid;
+  border: 10px solid;
   border-color: #2C2918;
   border-collapse:separate;
   border-radius: 10px;
@@ -10,20 +10,21 @@ table#chessboard {
 
   td span {
     font-family: 'chess_casesregular';
-    font-size: 60px;
+    font-size: 45px;
     vertical-align: middle;
-    margin: 0;
+    margin:0;
   }
 
   td span:hover {
-    color: yellow;
+    color: #00BFFF;
+    opacity: 0.6;
     background-color: transparent;
     text-decoration: none;
     cursor: pointer;
   }
 
   td span#selected {
-    color: yellow;
+    opacity: 0.6;
   }
 
   td a.empty-space:hover {
@@ -31,8 +32,8 @@ table#chessboard {
   }
 
   td {
-    width: 80px;
-    height: 80px;
+    width: 60px;
+    height: 60px;
     text-align: center;
   }
 
