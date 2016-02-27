@@ -1,12 +1,8 @@
 <script>
   $(function() {
-    $('.piece').draggable({
-      start: function(ev, ui) {
-      }
-    });
+    $('.piece').draggable();
     $('td').droppable({
       drop: function(ev, ui) {
-        <%= puts "Hello!" %>
         $(ui.draggable).detach().css({top: 0, left: 0}).appendTo(this);
         $.ajax({
           type: 'PUT',

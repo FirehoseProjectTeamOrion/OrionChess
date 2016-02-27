@@ -8,7 +8,7 @@ RSpec.describe 'games/show.html.erb', type: :view do
     expect(rendered).to have_tag('table#chessboard') do
       with_tag 'tr' do
         with_tag 'td' do
-          with_tag 'a', text: /\s*p\s*/, count: 8
+          with_tag 'span', text: /\s*p\s*/, count: 8
         end
       end
     end
@@ -21,7 +21,7 @@ RSpec.describe 'games/show.html.erb', type: :view do
     expect(rendered).to have_tag('table#chessboard') do
       with_tag 'tr' do
         with_tag 'td' do
-          with_tag 'a', text: /\s*o\s*/, count: 8
+          with_tag 'span', text: /\s*o\s*/, count: 8
         end
       end
     end
@@ -34,7 +34,7 @@ RSpec.describe 'games/show.html.erb', type: :view do
     expect(rendered).to have_tag('table#chessboard') do
       with_tag 'tr' do
         with_tag 'td' do
-          with_tag 'a', text: /\s*n\s*/, count: 2
+          with_tag 'span', text: /\s*n\s*/, count: 2
         end
       end
     end
@@ -47,7 +47,7 @@ RSpec.describe 'games/show.html.erb', type: :view do
     expect(rendered).to have_tag('table#chessboard') do
       with_tag 'tr' do
         with_tag 'td' do
-          with_tag 'a', text: /\s*m\s*/, count: 2
+          with_tag 'span', text: /\s*m\s*/, count: 2
         end
       end
     end
@@ -60,7 +60,7 @@ RSpec.describe 'games/show.html.erb', type: :view do
     expect(rendered).to have_tag('table#chessboard') do
       with_tag 'tr' do
         with_tag 'td' do
-          with_tag 'a', text: /\s*b\s*/, count: 2
+          with_tag 'span', text: /\s*b\s*/, count: 2
         end
       end
     end
@@ -73,7 +73,7 @@ RSpec.describe 'games/show.html.erb', type: :view do
     expect(rendered).to have_tag('table#chessboard') do
       with_tag 'tr' do
         with_tag 'td' do
-          with_tag 'a', text: /\s*v\s*/, count: 2
+          with_tag 'span', text: /\s*v\s*/, count: 2
         end
       end
     end
@@ -86,7 +86,7 @@ RSpec.describe 'games/show.html.erb', type: :view do
     expect(rendered).to have_tag('table#chessboard') do
       with_tag 'tr' do
         with_tag 'td' do
-          with_tag 'a', text: /\s*r\s*/, count: 2
+          with_tag 'span', text: /\s*r\s*/, count: 2
         end
       end
     end
@@ -99,7 +99,7 @@ RSpec.describe 'games/show.html.erb', type: :view do
     expect(rendered).to have_tag('table#chessboard') do
       with_tag 'tr' do
         with_tag 'td' do
-          with_tag 'a', text: /\s*t\s*/, count: 2
+          with_tag 'span', text: /\s*t\s*/, count: 2
         end
       end
     end
@@ -112,7 +112,7 @@ RSpec.describe 'games/show.html.erb', type: :view do
     expect(rendered).to have_tag('table#chessboard') do
       with_tag 'tr' do
         with_tag 'td' do
-          with_tag 'a', text: /\s*q\s*/, count: 1
+          with_tag 'span', text: /\s*q\s*/, count: 1
         end
       end
     end
@@ -125,7 +125,7 @@ RSpec.describe 'games/show.html.erb', type: :view do
     expect(rendered).to have_tag('table#chessboard') do
       with_tag 'tr' do
         with_tag 'td' do
-          with_tag 'a', text: /\s*w\s*/, count: 1
+          with_tag 'span', text: /\s*w\s*/, count: 1
         end
       end
     end
@@ -138,7 +138,7 @@ RSpec.describe 'games/show.html.erb', type: :view do
     expect(rendered).to have_tag('table#chessboard') do
       with_tag 'tr' do
         with_tag 'td' do
-          with_tag 'a', text: /\s*k\s*/, count: 1
+          with_tag 'span', text: /\s*k\s*/, count: 1
         end
       end
     end
@@ -151,7 +151,7 @@ RSpec.describe 'games/show.html.erb', type: :view do
     expect(rendered).to have_tag('table#chessboard') do
       with_tag 'tr' do
         with_tag 'td' do
-          with_tag 'a', text: /\s*l\s*/, count: 1
+          with_tag 'span', text: /\s*l\s*/, count: 1
         end
       end
     end
