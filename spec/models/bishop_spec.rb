@@ -10,7 +10,7 @@ RSpec.describe Bishop, type: :model do
     before :each do
       @game = FactoryGirl.create(:game)
       @white_bishop = FactoryGirl.create(:white_bishop, game: @game)
-      @black_bishop = FactoryGirl.create(:black_bishop, game: @white_bishop.game)
+      @black_bishop = FactoryGirl.create(:black_bishop, game: @game)
     end
     it 'returns true when bishop moves diagonal three spaces.' do
       expect(@white_bishop.valid_move?(3, 5)).to eq(true)
@@ -25,7 +25,7 @@ RSpec.describe Bishop, type: :model do
     end
 
     it 'returns false when piece is obstructed?' do
-      FactoryGirl.create(:piece, row: 1, column: 3, color: 'white', game: @white_bishop.game)
+      FactoryGirl.create(:piece, row: 1, column: 3, color: 'white', game: @game)
       expect(@white_bishop.valid_move?(1, 3)).to eq(false)
     end
   end
