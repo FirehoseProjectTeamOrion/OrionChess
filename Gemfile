@@ -39,6 +39,7 @@ group :development, :test do
   gem 'capybara'
   gem 'poltergeist'
   gem 'phantomjs', require: 'phantomjs/poltergeist'
+  gem 'database_cleaner'
 end
 
 gem 'bootstrap-sass', '~> 3.3.5.1'
