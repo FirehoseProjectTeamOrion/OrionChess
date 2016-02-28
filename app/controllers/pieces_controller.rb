@@ -1,5 +1,4 @@
 class PiecesController < ApplicationController
-
   def update
     current_piece.update_attributes(pieces_params)
     render text: 'updated!'

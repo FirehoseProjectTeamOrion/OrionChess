@@ -156,4 +156,28 @@ RSpec.describe 'games/show.html.erb', type: :view do
       end
     end
   end
+
+  it 'has draggable pieces' do
+    assign(:game, FactoryGirl.create(:game))
+    render
+
+    expect(rendered).to have_tag('table#chessboard') do
+      with_tag 'tr' do
+        with_tag 'td' do
+          with_tag 'span', class: 'ui-draggable', count: 32
+        end
+      end
+    end
+  end
+
+  it 'has droppable spaces' do
+    assign(:game, FactoryGirl.create(:game))
+    render
+
+    expect(rendered).to have_tag('table#chessboard') do
+      with_tag 'tr' do
+        with_tag 'td', class: 'ui-droppable', count: 64
+      end
+    end
+  end
 end
