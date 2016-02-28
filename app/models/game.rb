@@ -20,9 +20,6 @@ class Game < ActiveRecord::Base
     white_king = pieces.find_by(type: 'King', color: 'white')
     black_king = pieces.find_by(type: 'King', color: 'black')
 
-    return true if white_king.in_check?
-    return true if black_king.in_check?
-
-    false
+    white_king.in_check? || black_king.in_check?
   end
 end
