@@ -21,9 +21,6 @@ class Piece < ActiveRecord::Base
     fail 'Input is invalid!'
   end
 
-  
-
-
   def move_to!(destination_row, destination_column)
     return false unless valid_move?(destination_row, destination_column)
     return update_attributes(row: destination_row, column: destination_column) unless occupied_space?(destination_row, destination_column)
