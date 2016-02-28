@@ -18,29 +18,33 @@ RSpec.describe Game, type: :model do
       allow_any_instance_of(Game).to receive(:populate_board!).and_return true
     end
 
-    let(:game) {FactoryGirl.create(:game)}
+    let(:game) { FactoryGirl.create(:game) }
+    let(:white_king) { FactoryGirl.create(:king, type: 'King', color: 'white', row: 7, column: 3) }
+    let(:black_king) { FactoryGirl.create(:king, type: 'King', color: 'black', row: 0, column: 3) }
 
     it 'returns true if white player is in check' do
-      game.pieces << FactoryGirl.create(:king, color: 'white', row: 5, column: 3)
-      game.pieces << FactoryGirl.create(:queen, color: 'black', row: 2, column: 3)
+      game.pieces << white_king
+      game.pieces << black_king
+      game.pieces << FactoryGirl.create(:queen, type: 'Queen', color: 'black', row: 2, column: 3)
 
       expect(game.check?).to eq(true)
     end
 
     it 'returns true if black player is in check' do
-      game.pieces << FactoryGirl.create(:king, color: 'black')
-      game.pieces << FactoryGirl.create(:knight, color: 'white', row: 2, column: 5)
+      game.pieces << white_king
+      game.pieces << black_king
+      game.pieces << FactoryGirl.create(:knight, type: 'Knight', color: 'white', row: 2, column: 4)
 
       expect(game.check?).to eq(true)
     end
 
     it 'returns false if neither player is in check' do
-      game.pieces << FactoryGirl.create(:king, color: 'black', row: 0, column: 3)
-      game.pieces << FactoryGirl.create(:king, color: 'white', row: 7, column: 3)
-      game.pieces << FactoryGirl.create(:black_pawn, row: 6, column:3)
-      game.pieces << FactoryGirl.create(:queen, color: 'black', row: 5, column: 2)
-      game.pieces << FactoryGirl.create(:knight, color: 'white', row: 1, column: 4)
-      game.pieces << FactoryGirl.create(:queen, color: 'white', row: 2, column: 2)
+      game.pieces << white_king
+      game.pieces << black_king
+      game.pieces << FactoryGirl.create(:black_pawn, type: 'Pawn', row: 6, column: 3)
+      game.pieces << FactoryGirl.create(:queen, type: 'Queen', color: 'black', row: 5, column: 2)
+      game.pieces << FactoryGirl.create(:knight, type: 'Knight', color: 'white', row: 1, column: 4)
+      game.pieces << FactoryGirl.create(:queen, type: 'Queen', color: 'white', row: 2, column: 2)
 
       expect(game.check?).to eq(false)
     end
