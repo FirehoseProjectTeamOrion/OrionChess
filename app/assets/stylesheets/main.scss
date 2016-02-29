@@ -1,5 +1,86 @@
-.navbar {
-    border-radius:0;
-    background-color: #2C2918;
+.navbar-default {
+  padding-left: 100px;
+  padding-right: 100px;
+  border-radius:0;
+  border: none;
+  background-color: #030000;
+  width: 100%;
+  z-index: 999;
 }
 
+.navbar a.navbar-brand {
+  font-family: 'Droid Serif', serif;
+  color: #F7F7F7;
+  float: left;
+}
+
+.navbar a.navbar-brand:hover {
+  color: white;
+  text-shadow: 0 0 5px rgba(255,255,255,1),
+  0 0 10px rgba(255,255,255,1), 
+  0 0 20px rgba(255,255,255,1), 
+  0 0 30px #A19B88, 0 0 40px #A19B88, 
+  0 0 60px #A19B88,
+  0 0 80px #A19B88;
+}
+
+.navbar-default .navbar-nav > li > a {
+  font-family: 'Ubuntu', sans-serif;
+  color: #F7F7F7;
+  font-size: 14px;
+  font-weight:200;
+  vertical-align: middle;
+}
+
+.navbar-default .navbar-nav > li > a:hover {
+  color: white;
+  text-shadow: 0 0 5px rgba(255,255,255,1),
+  0 0 10px rgba(255,255,255,1), 
+  0 0 20px rgba(255,255,255,1), 
+  0 0 30px #A19B88, 0 0 40px #A19B88, 
+  0 0 60px #A19B88,
+  0 0 80px #A19B88;
+}
+
+body {
+  font-family: 'Droid Serif', serif;
+}
+
+
+a.signin, header.navigation a.signout {
+  display: inline;
+  float: left;
+  text-transform: uppercase;
+}
+
+a.signup {
+  text-transform: uppercase;
+  float:right;
+}
+
+.splash {
+  background: url("bg.jpg") no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  min-height: 550px;
+}
+
+.splash h2{
+  color: #F7F7F7;
+  text-align: center;
+  font-size: 40px;
+  line-height: 500px;
+  vertical-align: middle;
+}
+
+.splash p {
+  color: #F7F7F7;
+  text-align: center;
+  font-size: 16px;
+}
+
+h1, h2, h3, h4, h5, h6, .navbar-default {
+	margin: 0;
+}
