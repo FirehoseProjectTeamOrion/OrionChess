@@ -22,6 +22,7 @@ class Piece < ActiveRecord::Base
   end
 
   def move_to!(destination_row, destination_column)
+    return false unless valid_move?(destination_row, destination_column)
     return update_attributes(row: destination_row, column: destination_column) unless occupied_space?(destination_row, destination_column)
     return false unless capturable?(destination_row, destination_column)
     opponent = Piece.where(game_id: game.id, row: destination_row, column: destination_column, in_game: true)

@@ -4,13 +4,14 @@ RSpec.describe Piece, type: :model do
   before :each do
     #  Note: We want the board to be emptry for this test.
     allow_any_instance_of(Game).to receive(:populate_board!).and_return true
+    allow(@piece_white).to receive(:valid_move).and_return true
   end
 
   describe '#move_to!' do
     before :each do
       @game = FactoryGirl.create(:game)
-      @piece_white = FactoryGirl.create(:piece, row: 0, column: 0, color: 'white', in_game: true, game_id: @game.id)
-      @piece_black = FactoryGirl.create(:piece, row: 0, column: 5, color: 'black', in_game: true, game_id: @game.id)
+      @piece_white = FactoryGirl.create(:queen, type: 'Queen', row: 0, column: 0, color: 'white', in_game: true, game_id: @game.id)
+      @piece_black = FactoryGirl.create(:queen, type: 'Queen', row: 0, column: 5, color: 'black', in_game: true, game_id: @game.id)
     end
 
     it 'successfully moved the pieces to destination' do
@@ -23,7 +24,7 @@ RSpec.describe Piece, type: :model do
     end
 
     it 'should return false because piece is our own' do
-      white_piece = FactoryGirl.create(:piece, row: 0, column: 4, color: 'white', game_id: @game.id)
+      white_piece = FactoryGirl.create(:white_pawn, row: 0, column: 4, color: 'white', game_id: @game.id)
       expect(white_piece.move_to!(@piece_white.row, @piece_white.column)).to eq(false)
     end
   end
