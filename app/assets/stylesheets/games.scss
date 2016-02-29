@@ -5,7 +5,7 @@ table#chessboard {
   border: 10px solid;
   border-color: #2C2918;
   border-collapse:separate;
-  border-radius: 10px;
+  border-radius: 3px;
   margin: auto;
 
   td span {
@@ -39,11 +39,11 @@ table#chessboard {
 
   tr:nth-child(even) td:nth-child(even),
   tr:nth-child(odd) td:nth-child(odd) {
-    background-color: #A19B88;
+    background-color: #F7F7F7;
   }
   
   tr:nth-child(odd) td:nth-child(even),
   tr:nth-child(even) td:nth-child(odd) {
-    background-color: #F7F7F7;
+    background-color: #A19B88;
   }
 }
