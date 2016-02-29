@@ -16,6 +16,10 @@ class Game < ActiveRecord::Base
     end
   end
 
+  def stalemate?
+
+  end
+
   def check?
     white_king = pieces.find_by(type: 'King', color: 'white')
     black_king = pieces.find_by(type: 'King', color: 'black')
