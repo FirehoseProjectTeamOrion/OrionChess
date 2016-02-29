@@ -42,6 +42,16 @@
   0 0 80px #A19B88;
 }
 
+.navbar-default .navbar-nav > li > a:active {
+  color: white;
+  text-shadow: 0 0 5px rgba(255,255,255,1),
+  0 0 10px rgba(255,255,255,1), 
+  0 0 20px rgba(255,255,255,1), 
+  0 0 30px #A19B88, 0 0 40px #A19B88, 
+  0 0 60px #A19B88,
+  0 0 80px #A19B88;
+}
+
 body {
   font-family: 'Droid Serif', serif;
 }

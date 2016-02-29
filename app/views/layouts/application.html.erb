@@ -11,6 +11,7 @@
 </head>
 <body>
 <%= render "welcome/signup_modal" %>
+<%= render "welcome/signin_modal" %>
 <% if notice.present? %>
   <p class="alert alert-info"><%= notice %></p>
 <% end %>
@@ -41,8 +42,8 @@
         <% if user_signed_in? %>
           <li><%= link_to 'Sign out', destroy_user_session_path, :method => :delete, class: "signout"%></li>'
         <% else %>
-          <li><%= link_to 'Sign in', new_user_session_path, class: "signin"%></li>
-          <li><%= link_to 'Sign up', "#signup", "data-toggle" => "modal", :class => "signup"%></li>
+          <li><%= link_to 'Sign in', '#signin', "data-toggle" => "modal", :class => "signin"%></li>
+          <li><%= link_to 'Sign up', '#signup', "data-toggle" => "modal", :class => "signup"%></li>
         <% end %>
       </ul>
     </div><!-- /.navbar-collapse -->
