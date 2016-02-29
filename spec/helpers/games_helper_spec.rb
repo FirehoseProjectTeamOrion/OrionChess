@@ -49,23 +49,23 @@ RSpec.describe GamesHelper, type: :helper do
     end
 
     it "returns 'q' when there is a white queen at the given location" do
-      expect(helper.draw_piece(game, 7, 4)).to include('q')
-      expect(helper.draw_piece(game, 7, 4)).to include(piece_path(game.pieces.find_by(row: 7, column: 4)))
-    end
-
-    it "returns 'w' when there is a black queen at the given location" do
-      expect(helper.draw_piece(game, 0, 4)).to include('w')
-      expect(helper.draw_piece(game, 0, 4)).to include(piece_path(game.pieces.find_by(row: 0, column: 4)))
-    end
-
-    it "returns 'k' when there is a white king at the given location" do
-      expect(helper.draw_piece(game, 7, 3)).to include('k')
+      expect(helper.draw_piece(game, 7, 3)).to include('q')
       expect(helper.draw_piece(game, 7, 3)).to include(piece_path(game.pieces.find_by(row: 7, column: 3)))
     end
 
-    it "returns 'l' when there is a black king at the given location" do
-      expect(helper.draw_piece(game, 0, 3)).to include('l')
+    it "returns 'w' when there is a black queen at the given location" do
+      expect(helper.draw_piece(game, 0, 3)).to include('w')
       expect(helper.draw_piece(game, 0, 3)).to include(piece_path(game.pieces.find_by(row: 0, column: 3)))
+    end
+
+    it "returns 'k' when there is a white king at the given location" do
+      expect(helper.draw_piece(game, 7, 4)).to include('k')
+      expect(helper.draw_piece(game, 7, 4)).to include(piece_path(game.pieces.find_by(row: 7, column: 4)))
+    end
+
+    it "returns 'l' when there is a black king at the given location" do
+      expect(helper.draw_piece(game, 0, 4)).to include('l')
+      expect(helper.draw_piece(game, 0, 4)).to include(piece_path(game.pieces.find_by(row: 0, column: 4)))
     end
   end
 end
