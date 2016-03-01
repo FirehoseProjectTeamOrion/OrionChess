@@ -24,7 +24,7 @@ class King < Piece
   end
 
   def in_check?
-    opponent_pieces = game.pieces.where.not(color: color)
+    opponent_pieces = game.pieces.where(color: opposite_color)
 
     opponent_pieces.each do |opponent_piece|
       return true if opponent_piece.valid_move?(row, column)

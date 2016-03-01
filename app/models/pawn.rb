@@ -13,11 +13,11 @@ class Pawn < Piece
     move[0] *= -1 if white?
 
     if move == FORWARD_ONE
-      return space_unoccupied?(destination_row, destination_column)
-    elsif move == FORWARD_TWO && in_starting_row?
-      return space_unoccupied?(destination_row, destination_column)
+      return !occupied_space?(destination_row, destination_column)
+    elsif move == FORWARD_TWO && first_move?
+      return !occupied_space?(destination_row, destination_column)
     elsif CAPTURE_MOVES.include?(move)
-      return can_capture?(destination_row, destination_column)
+      return capturable?(destination_row, destination_column)
     end
 
     false
@@ -29,25 +29,7 @@ class Pawn < Piece
   FORWARD_TWO = [2, 0].freeze
   CAPTURE_MOVES = [[1, 1], [1, -1]].freeze
 
-  def in_starting_row?
-    return row == 6 if white?
-
-    row == 1
-  end
-
-  def opposite_color
-    if white?
-      'black'
-    else
-      'white'
-    end
-  end
-
-  def space_unoccupied?(destination_row, destination_column)
-    !game.pieces.where(row: destination_row, column: destination_column).exists?
-  end
-
-  def can_capture?(destination_row, destination_column)
-    game.pieces.where(row: destination_row, column: destination_column, color: opposite_color).exists?
+  def first_move?
+    created_at == updated_at
   end
 end
