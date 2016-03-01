@@ -5,7 +5,7 @@ RSpec.describe PiecesController, type: :controller do
     allow_any_instance_of(Game).to receive(:populate_board!).and_return true
   end
   let(:game) { FactoryGirl.create(:game) }
-  let(:pawn) { FactoryGirl.create(:black_pawn, type: 'Pawn', game: game)}
+  let(:pawn) { FactoryGirl.create(:black_pawn, type: 'Pawn', game: game) }
 
   describe 'PUT #update' do
     it "updates the piece's row and column for a valid move" do
