@@ -3,13 +3,22 @@
     $('.piece').draggable();
     $('td').droppable({
       drop: function(ev, ui) {
-        $(ui.draggable).detach().css({top: 0, left: 0}).appendTo(this);
+        var valid_move = false;
+
         $.ajax({
           type: 'PUT',
+          async: false,
           url: ui.draggable.data('update-url'),
-          dataType: 'json',
           data: {piece: {row: $(this).parent().index(), column: $(this).index()}}
-        });
+        }).done(function( data ) {
+          valid_move = true;
+        })
+
+        if (valid_move) {
+          $(ui.draggable).detach().css({top: 0, left: 0}).appendTo(this);
+        } else {
+          ui.draggable.draggable('option', 'revert', true);
+        }
       }
     });
   })

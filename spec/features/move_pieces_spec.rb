@@ -1,14 +1,33 @@
 require 'spec_helper'
 
 feature 'Moving pieces', js: true do
-  given(:game) {FactoryGirl.create(:game)}
+  background do
+    allow_any_instance_of(Game).to receive(:populate_board!).and_return true
+  end
 
-  scenario 'Dragging a piece(black king) to a new location' do
+  given(:game) { FactoryGirl.create(:game) }
+
+  scenario 'Dragging a piece(black_pawn) to a valid location' do
+    game.pieces << FactoryGirl.create(:black_pawn, type: 'Pawn')
     visit game_path(game)
-    black_king = page.find('.ui-draggable', text: 'l')
-    destination = page.find('tr:nth-child(3) td:nth-child(4)')
-    black_king.drag_to(destination)
+    black_pawn = page.find('.ui-draggable', text: 'o')
+    destination = page.find('tr:nth-child(3) td:nth-child(5)')
+    black_pawn.drag_to(destination)
+    wait_for_ajax
 
-    expect(page).to have_css('tr:nth-child(3) td:nth-child(4) span', text: 'l')
+    expect(page).to have_css('tr:nth-child(3) td:nth-child(5) span', text: 'o')
+    expect(game.pieces.first.row).to eq(2)
+  end
+
+  scenario 'Dragging a piece(black_pawn) to an invalid location' do
+    game.pieces << FactoryGirl.create(:black_pawn, type: 'Pawn')
+    visit game_path(game)
+    black_pawn = page.find('.ui-draggable', text: 'o')
+    destination = page.find('tr:nth-child(3) td:nth-child(3)')
+    black_pawn.drag_to(destination)
+    wait_for_ajax
+
+    expect(page).to have_css('tr:nth-child(2) td:nth-child(5) span', text: 'o')
+    expect(game.pieces.first.row).to eq(1)
   end
 end
