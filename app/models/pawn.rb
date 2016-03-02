@@ -17,7 +17,7 @@ class Pawn < Piece
     elsif move == FORWARD_TWO && first_move?
       return !occupied_space?(destination_row, destination_column)
     elsif CAPTURE_MOVES.include?(move)
-      return capturable?(destination_row, destination_column)
+      return capturable?(destination_row, destination_column) || en_passant?(destination_column)
     end
 
     false
@@ -31,5 +31,9 @@ class Pawn < Piece
 
   def first_move?
     created_at == updated_at
+  end
+
+  def en_passant?(destination_column)
+    opponent = game.pieces.find_by(type: 'Pawn', color: opposite_color, row: row, column: destination_column)
   end
 end
