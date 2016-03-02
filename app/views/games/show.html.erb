@@ -3,22 +3,16 @@
     $('.piece').draggable();
     $('td').droppable({
       drop: function(ev, ui) {
-        var valid_move = false;
-
+        var drop_space_element = this
         $.ajax({
           type: 'PUT',
-          async: false,
           url: ui.draggable.data('update-url'),
           data: {piece: {row: $(this).parent().index(), column: $(this).index()}}
         }).done(function( data ) {
-          valid_move = true;
-        })
-
-        if (valid_move) {
-          $(ui.draggable).detach().css({top: 0, left: 0}).appendTo(this);
-        } else {
-          ui.draggable.draggable('option', 'revert', true);
-        }
+          $(ui.draggable).detach().css({top: 0, left: 0}).appendTo(drop_space_element);
+        }).fail(function() {
+          ui.draggable.animate({top: '0px', left: '0px'}, 'slow');
+        });
       }
     });
   })

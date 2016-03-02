@@ -5,9 +5,9 @@ class PiecesController < ApplicationController
 
     if current_piece.valid_move?(row, column)
       current_piece.update_attributes(pieces_params)
-      render text: 'updated!'
+      render nothing: true, status: :ok
     else
-      render text: 'invalid', status: :bad_request
+      render nothing: true, status: :bad_request
     end
   end
 
