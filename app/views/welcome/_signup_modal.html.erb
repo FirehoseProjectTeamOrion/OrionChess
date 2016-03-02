@@ -5,6 +5,7 @@
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
           <h4 class="modal-title" id="myModalLabel">Sign Up</h4>
+          <br />
         </div>
       <div class="modal-body">
         <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
@@ -14,6 +15,7 @@
             <%= f.input :password, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length) %>
             <%= f.input :password_confirmation, required: true %>
           </div>
+          <br />
           <div class="form-actions">
           <%= f.button :submit, "Sign up", :class => 'btn btn-small btn-success' %>
         </div>
