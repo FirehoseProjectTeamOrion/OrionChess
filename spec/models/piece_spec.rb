@@ -4,7 +4,6 @@ RSpec.describe Piece, type: :model do
   before :each do
     #  Note: We want the board to be emptry for this test.
     allow_any_instance_of(Game).to receive(:populate_board!).and_return true
-    allow(@piece_white).to receive(:valid_move).and_return true
   end
 
   describe '#move_to!' do

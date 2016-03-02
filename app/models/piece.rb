@@ -36,8 +36,7 @@ class Piece < ActiveRecord::Base
   end
 
   def capturable?(destination_row, destination_column)
-    # opponent = Piece.where(game_id: game.id, row: destination_row, column: destination_column, in_game: true)
-    Piece.where(game_id: game.id, row: destination_row, column: destination_column, in_game: true).where.not(color: color).exists?
+    Piece.where(game_id: game.id, row: destination_row, column: destination_column, in_game: true, color: opposite_color).exists?
   end
 
   def update_piece(in_game)
@@ -52,6 +51,14 @@ class Piece < ActiveRecord::Base
 
   def black?
     color == 'black'
+  end
+
+  def opposite_color
+    if white?
+      'black'
+    else
+      'white'
+    end
   end
 
   private
