@@ -8,7 +8,10 @@ require 'rspec/rails'
 require 'capybara/rspec'
 require 'capybara/poltergeist'
 require 'support/wait_for_ajax'
+require 'codeclimate-test-reporter'
+
 Capybara.javascript_driver = :poltergeist
+CodeClimate::TestReporter.start
 
 # Add additional requires below this line. Rails is not loaded until this point!
 

@@ -15,6 +15,7 @@ RSpec.describe Pawn, type: :model do
 
     it 'returns false if trying to move two spaces forward and it is not the first move' do
       pawn = FactoryGirl.create(:white_pawn, row: 5)
+      pawn.touch
 
       expect(pawn.valid_move?(3, 4)).to eq(false)
     end

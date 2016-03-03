@@ -3,12 +3,9 @@ class PiecesController < ApplicationController
     row = pieces_params[:row].to_i
     column = pieces_params[:column].to_i
 
-    if current_piece.valid_move?(row, column)
-      current_piece.update_attributes(pieces_params)
-      render nothing: true, status: :ok
-    else
-      render nothing: true, status: :bad_request
-    end
+    render(nothing: true, status: :ok) && return if current_piece.move_to!(row, column)
+
+    render nothing: true, status: :bad_request
   end
 
   private
