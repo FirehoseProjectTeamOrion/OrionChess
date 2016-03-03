@@ -15,4 +15,11 @@ class Game < ActiveRecord::Base
       Piece.create(type: 'Pawn', game: self, color: 'white', row: 6, column: column)
     end
   end
+
+  def check?
+    white_king = pieces.find_by(type: 'King', color: 'white')
+    black_king = pieces.find_by(type: 'King', color: 'black')
+
+    white_king.in_check? || black_king.in_check?
+  end
 end

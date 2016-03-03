@@ -40,6 +40,9 @@ group :development, :test do
   gem 'poltergeist'
   gem 'phantomjs', require: 'phantomjs/poltergeist'
   gem 'database_cleaner'
+  gem 'pry-rails'
+  gem 'byebug'
+  gem 'codeclimate-test-reporter', require: nil
 end
 
 gem 'bootstrap-sass', '~> 3.3.5.1'

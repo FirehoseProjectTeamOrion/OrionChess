@@ -3,12 +3,15 @@
     $('.piece').draggable();
     $('td').droppable({
       drop: function(ev, ui) {
-        $(ui.draggable).detach().css({top: 0, left: 0}).appendTo(this);
+        var drop_space_element = this
         $.ajax({
           type: 'PUT',
           url: ui.draggable.data('update-url'),
-          dataType: 'json',
           data: {piece: {row: $(this).parent().index(), column: $(this).index()}}
+        }).done(function( data ) {
+          $(ui.draggable).detach().css({top: 0, left: 0}).appendTo(drop_space_element);
+        }).fail(function() {
+          ui.draggable.animate({top: '0px', left: '0px'}, 'slow');
         });
       }
     });
