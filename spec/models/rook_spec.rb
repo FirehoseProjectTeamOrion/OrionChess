@@ -32,5 +32,10 @@ RSpec.describe Rook, type: :model do
       FactoryGirl.create(:piece, row: 0, column: 3, color: 'white', game: @game)
       expect(@white_rook.valid_move?(0, 5)).to eq(false)
     end
+
+    it 'returns false when trying to capture a piece while path is obstructed' do
+      FactoryGirl.create(:piece, row: 0, column: 3, color: 'white', game: @game)
+      expect(@white_rook.valid_move?(0, 7)).to eq(false)
+    end
   end
 end

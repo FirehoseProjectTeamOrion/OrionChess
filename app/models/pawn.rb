@@ -13,9 +13,9 @@ class Pawn < Piece
     move[0] *= -1 if white?
 
     if move == FORWARD_ONE
-      return !occupied_space?(destination_row, destination_column)
-    elsif move == FORWARD_TWO && first_move?
-      return !occupied_space?(destination_row, destination_column)
+      return unoccupied_space?(destination_row, destination_column)
+    elsif move == FORWARD_TWO
+      return can_move_two?(destination_row, destination_column)
     elsif CAPTURE_MOVES.include?(move)
       return capturable?(destination_row, destination_column)
     end
@@ -31,5 +31,9 @@ class Pawn < Piece
 
   def first_move?
     created_at == updated_at
+  end
+
+  def can_move_two?(destination_row, destination_column)
+    first_move? && unoccupied_space?(destination_row, destination_column) && unobstructed?(destination_row, destination_column)
   end
 end
