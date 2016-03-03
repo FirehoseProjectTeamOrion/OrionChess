@@ -4,8 +4,6 @@ module GamesHelper
 
     return if piece.nil?
 
-    link_to piece_path(piece) do
-      piece.chess_font_character
-    end
+    content_tag(:span, piece.chess_font_character, class: 'piece', data: { update_url: piece_path(piece) })
   end
 end

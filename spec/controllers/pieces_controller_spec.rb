@@ -1,33 +1,38 @@
 require 'rails_helper'
 
 RSpec.describe PiecesController, type: :controller do
-  let(:game) { FactoryGirl.create(:game) }
-
-  describe 'GET #show' do
-    it 'returns http success' do
-      get :show, id: game.pieces.first.id
-      expect(response).to have_http_status(:success)
-    end
-
-    it 'assigns a value to @piece' do
-      get :show, id: game.pieces.first.id
-
-      expect(assigns(:piece)).to eq(game.pieces.first)
-    end
+  before do
+    allow_any_instance_of(Game).to receive(:populate_board!).and_return true
   end
+  let(:game) { FactoryGirl.create(:game) }
+  let(:black_pawn) { FactoryGirl.create(:black_pawn, type: 'Pawn', game: game) }
 
-  describe 'GET #update' do
-    it "updates the piece's row and column" do
-      get :update, id: game.pieces.first.id, piece: { row: 4, column: 4 }
+  describe 'PUT #update' do
+    it "updates the piece's row and column for a valid move" do
+      put :update, id: black_pawn.id, piece: { row: 3, column: 4 }
 
-      expect(game.pieces.first.row).to eq(4)
-      expect(game.pieces.first.column).to eq(4)
+      black_pawn.reload
+      expect(black_pawn.row).to eq(3)
+      expect(black_pawn.column).to eq(4)
     end
 
-    it 'redirects to the game show page' do
-      get :update, id: game.pieces.first.id, piece: { row: 4, column: 4 }
+    it 'updates the pieces row and column and removes oppoent on capture' do
+      white_pawn = FactoryGirl.create(:white_pawn, type: 'Pawn', game: game, row: 2, column: 3)
 
-      expect(game.pieces.first.row).to redirect_to(game_path(game))
+      put :update, id: black_pawn.id, piece: { row: 2, column: 3 }
+
+      black_pawn.reload
+      white_pawn.reload
+
+      expect(black_pawn.row).to eq(2)
+      expect(black_pawn.column).to eq(3)
+      expect(white_pawn.in_game).to eq(false)
+    end
+
+    it 'returns an error for invalid move' do
+      put :update, id: black_pawn.id, piece: { row: 4, column: 4 }
+
+      expect(response).to have_http_status(:bad_request)
     end
   end
 end

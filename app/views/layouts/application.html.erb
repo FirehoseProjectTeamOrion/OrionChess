@@ -5,9 +5,13 @@
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
+  <script type="text/javascript"> $(function ()
+    { $("#myModal").modal({show:false }); 
+  </script>
 </head>
 <body>
-
+<%= render "welcome/signup_modal" %>
+<%= render "welcome/signin_modal" %>
 <% if notice.present? %>
   <p class="alert alert-info"><%= notice %></p>
 <% end %>
@@ -36,10 +40,10 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <% if user_signed_in? %>
-          <li><%= link_to 'Sign out', destroy_user_session_path, :method => :delete %></li>'
+          <li><%= link_to 'sign out', destroy_user_session_path, :method => :delete, class: "signout"%></li>'
         <% else %>
-          <li><%= link_to 'Sign in', new_user_session_path %></li>
-          <li><%= link_to 'Sign up', new_user_registration_path %></li>
+          <li><%= link_to 'Sign in', '#signin', "data-toggle" => "modal", :class => "signin"%></li>
+          <li><%= link_to 'Sign up', '#signup', "data-toggle" => "modal", :class => "signup"%></li>
         <% end %>
       </ul>
     </div><!-- /.navbar-collapse -->
