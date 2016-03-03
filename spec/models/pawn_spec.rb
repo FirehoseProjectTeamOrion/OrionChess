@@ -53,23 +53,34 @@ RSpec.describe Pawn, type: :model do
       expect(pawn.valid_move?(2, 5)).to eq(false)
     end
 
-    it 'returns true for en passant move if opponent pawn moved two spaces for it\'s first move' do
+    it 'returns true for en passant move if opponent pawn moved two spaces for it\'s first move and was the last piece to move' do
       white_pawn = FactoryGirl.create(:white_pawn)
       black_pawn = FactoryGirl.create(:black_pawn, row: 4, column: 5, game: white_pawn.game)
 
-      white_pawn.move_to!(4,4)
+      white_pawn.move_to!(4, 4)
 
-      expect (pawn.valid_move?(5, 4)).to eq(true)
+      expect(black_pawn.valid_move?(5, 4)).to eq(true)
     end
 
     it 'returns false for en passant move if opponent did not move two for it\'s first move' do
       white_pawn = FactoryGirl.create(:white_pawn)
       black_pawn = FactoryGirl.create(:black_pawn, row: 4, column: 5, game: white_pawn.game)
 
-      white_pawn.move_to!(5,4)
-      white_pawn.move_to!(4,4)
+      white_pawn.move_to!(5, 4)
+      white_pawn.move_to!(4, 4)
 
-      expect(black_pawn.valid_move?(5,4)).to eq(false)
+      expect(black_pawn.valid_move?(5, 4)).to eq(false)
+    end
+
+    it 'returns false for en passant move if opponent pawn moved two spaces for it\'s first move but wasn\'t the last piece to move' do
+      white_pawn = FactoryGirl.create(:white_pawn)
+      black_pawn1 = FactoryGirl.create(:black_pawn, row: 4, column: 5, game: white_pawn.game)
+      black_pawn2 = FactoryGirl.create(:black_pawn, game: white_pawn.game)
+
+      white_pawn.move_to!(4, 4)
+      black_pawn2.move_to!(2, 4)
+
+      expect(black_pawn1.valid_move?(5, 4)).to eq(false)
     end
 
     it 'always returns false when pawn tries moving horizontally' do
