@@ -83,6 +83,15 @@ RSpec.describe Pawn, type: :model do
       expect(black_pawn1.valid_move?(5, 4)).to eq(false)
     end
 
+    it 'returns false for en passant move if opponent piece is not a pawn' do
+      white_queen = FactoryGirl.create(:queen, row: 6, column: 4)
+      black_pawn = FactoryGirl.create(:black_pawn, row: 4, column: 5, game: white_queen.game)
+
+      white_queen.move_to!(4, 4)
+
+      expect(black_pawn.valid_move?(5, 4)).to eq(false)
+    end
+
     it 'always returns false when pawn tries moving horizontally' do
       pawn = FactoryGirl.create(:white_pawn)
 
