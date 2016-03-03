@@ -2,52 +2,48 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 table#chessboard {
-  border: 5px solid black;
+  border: 10px solid;
+  border-color: #2C2918;
   border-collapse:separate;
-  border-radius: 10px;
+  border-radius: 3px;
   margin: auto;
-  
-  td a {
+
+  td span {
     font-family: 'chess_casesregular';
-    font-size: 60px;
+    font-size: 45px;
     vertical-align: middle;
-    display: block;
-    height: 100%;
-    width: 100%;
-    line-height: 80px;
+    margin:0;
   }
-  
-  td a:visited {
-    color: black;
-  }
-  
-  td a:hover {
-    color: yellow;
+
+  td span:hover {
+    color: #00BFFF;
+    opacity: 0.6;
     background-color: transparent;
     text-decoration: none;
+    cursor: pointer;
   }
-  
-  td a#selected {
-    color: yellow;
+
+  td span#selected {
+    opacity: 0.6;
   }
-  
+
   td a.empty-space:hover {
     background-color: rgba(255, 255, 0, 0.25);
   }
-  
+
   td {
-    width: 80px;
-    height: 80px;
+    width: 60px;
+    height: 60px;
     text-align: center;
   }
-  
+
   tr:nth-child(even) td:nth-child(even),
   tr:nth-child(odd) td:nth-child(odd) {
-    background-color: #666;
+    background-color: #F7F7F7;
+  }
+  
+  tr:nth-child(odd) td:nth-child(even),
+  tr:nth-child(even) td:nth-child(odd) {
+    background-color: #A19B88;
   }
 }
-
-
-
-
-
