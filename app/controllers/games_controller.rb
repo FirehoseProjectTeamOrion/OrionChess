@@ -64,6 +64,10 @@ class GamesController < ApplicationController
     end
   end
 
+  def forfeit
+    render nothing: true, status: :ok
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
