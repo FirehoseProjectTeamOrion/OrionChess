@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 feature 'Moving pieces', js: true do
-  given(:game) {FactoryGirl.create(:game)}
+  given(:game) { FactoryGirl.create(:game) }
 
   scenario 'Dragging a piece(black king) to a new location' do
     visit game_path(game)
