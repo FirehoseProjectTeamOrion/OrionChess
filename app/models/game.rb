@@ -17,7 +17,15 @@ class Game < ActiveRecord::Base
   end
 
   def stalemate?
-
+    white_king = pieces.find_by(type: 'King', color: 'white')
+    black_king = pieces.find_by(type: 'King', color: 'black')
+    if !(white_king.in_check? || black_king.in_check?)
+      all_piece = pieces.find_by(in_game: true)
+      all_piece.each do |p|
+        for
+        p.
+      end
+    end
   end
 
   def check?
