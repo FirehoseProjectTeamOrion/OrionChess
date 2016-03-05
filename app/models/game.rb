@@ -23,13 +23,14 @@ class Game < ActiveRecord::Base
   def both_king_not_in_check?
     white_king = pieces.find_by(type: 'King', color: 'white')
     black_king = pieces.find_by(type: 'King', color: 'black')
-    return true if !(white_king.in_check? || black_king.in_check?)
+    return true unless white_king.in_check? && black_king.in_check?
+    false
   end
 
   def available_move?
     all_piece = pieces.find_by(in_game: true)
     all_piece.each do |p|
-      return true if p.has_possible_move?
+      return true if p.any_move?
     end
   end
 
