@@ -65,7 +65,9 @@ class GamesController < ApplicationController
   end
 
   def forfeit
-    render nothing: true, status: :ok
+    forfeiting_user = User.find(user_param)
+    current_game.forfeit(forfeiting_user)
+    redirect_to game_path(current_game), alert: 'Forfeit'
   end
 
   private
@@ -78,6 +80,10 @@ class GamesController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def game_params
     params.require(:game).permit(:black_player_id)
+  end
+
+  def user_param
+    params.require(:user_id)
   end
 
   def current_game

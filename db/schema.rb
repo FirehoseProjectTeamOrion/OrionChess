@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160303000104) do
+ActiveRecord::Schema.define(version: 20160305033200) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,33 +21,30 @@ ActiveRecord::Schema.define(version: 20160303000104) do
     t.integer  "black_player_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "winning_player_id"
   end
 
   add_index "games", ["black_player_id"], name: "index_games_on_black_player_id", using: :btree
   add_index "games", ["white_player_id"], name: "index_games_on_white_player_id", using: :btree
+  add_index "games", ["winning_player_id"], name: "index_games_on_winning_player_id", using: :btree
 
   create_table "pieces", force: true do |t|
     t.string   "type"
     t.integer  "row"
     t.integer  "column"
-    t.boolean  "in_game",    default: true
-    t.integer  "player_id"
+    t.boolean  "in_game",         default: true
     t.integer  "game_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "color"
+    t.integer  "previous_row"
+    t.integer  "previous_column"
+    t.boolean  "last_to_move",    default: false
+    t.integer  "user_id"
   end
 
   add_index "pieces", ["game_id"], name: "index_pieces_on_game_id", using: :btree
-  add_index "pieces", ["player_id"], name: "index_pieces_on_player_id", using: :btree
-
-  create_table "players", force: true do |t|
-    t.string   "name"
-    t.integer  "wins"
-    t.integer  "losses"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
+  add_index "pieces", ["user_id"], name: "index_pieces_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -62,6 +59,9 @@ ActiveRecord::Schema.define(version: 20160303000104) do
     t.inet     "last_sign_in_ip"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
+    t.string   "name"
+    t.integer  "wins"
+    t.integer  "losses"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

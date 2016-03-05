@@ -4,7 +4,7 @@ FactoryGirl.define do
     column 4
     in_game true
     color 'black'
-    association :player
+    association :user
     association :game
   end
 
@@ -13,7 +13,7 @@ FactoryGirl.define do
     column 4
     in_game true
     color 'white'
-    association :player
+    association :user
     association :game
   end
 end

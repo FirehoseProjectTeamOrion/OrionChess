@@ -1,7 +1,8 @@
 class Game < ActiveRecord::Base
   has_many :pieces
-  has_one  :white_player, class_name: 'User'
-  has_one  :black_player, class_name: 'User'
+  belongs_to  :white_player, class_name: 'User'
+  belongs_to  :black_player, class_name: 'User'
+  belongs_to  :winning_player, class_name: 'User'
 
   after_create :populate_board!
 
@@ -21,5 +22,13 @@ class Game < ActiveRecord::Base
     black_king = pieces.find_by(type: 'King', color: 'black')
 
     white_king.in_check? || black_king.in_check?
+  end
+
+  def forfeit(forfeiting_user)
+    update_attributes(winning_player_id: other_player(forfeiting_user))
+  end
+
+  def other_player(player)
+    player == white_player ? white_player : black_player
   end
 end

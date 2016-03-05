@@ -41,9 +41,18 @@ table#chessboard {
   tr:nth-child(odd) td:nth-child(odd) {
     background-color: #F7F7F7;
   }
-  
+
   tr:nth-child(odd) td:nth-child(even),
   tr:nth-child(even) td:nth-child(odd) {
     background-color: #A19B88;
+  }
+}
+
+.game-links {
+  text-align: center;
+  margin-top: 20px;
+
+  .btn {
+    margin-right: 10px;
   }
 }

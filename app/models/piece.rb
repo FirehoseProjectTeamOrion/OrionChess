@@ -1,5 +1,5 @@
 class Piece < ActiveRecord::Base
-  belongs_to :player
+  belongs_to :user
   belongs_to :game
 
   scope :pawns, -> { where(type: 'Pawn') }
