@@ -1,17 +1,9 @@
 class Bishop < Piece
   def valid_move?(destination_row, destination_column)
-    if diagonal?(destination_row, destination_column)
-      return true if capturable?(destination_row, destination_column) || (unobstructed?(destination_row, destination_column) && unoccupied_space?(destination_row, destination_column))
+    if moving_diagonally?(destination_row, destination_column)
+      return true if (capturable?(destination_row, destination_column) || unoccupied_space?(destination_row, destination_column)) && unobstructed?(destination_row, destination_column)
     end
     false
-  end
-
-  def unobstructed?(destination_row, destination_column)
-    !obstructed?(destination_row, destination_column)
-  end
-
-  def unoccupied_space?(destination_row, destination_column)
-    !occupied_space?(destination_row, destination_column)
   end
 
   def chess_font_character
@@ -20,11 +12,5 @@ class Bishop < Piece
     else
       'v'
     end
-  end
-
-  private
-
-  def diagonal?(destination_row, destination_column)
-    (row - destination_row).abs == (column - destination_column).abs
   end
 end
