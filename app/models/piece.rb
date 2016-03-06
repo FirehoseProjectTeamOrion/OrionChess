@@ -46,7 +46,7 @@ class Piece < ActiveRecord::Base
   def any_move?
     8.times do |r|
       8.times do |c|
-        return true if unoccupied_space?(r, c) && uvalid_move?(r, c)
+        return true if unoccupied_space?(r, c) && valid_move?(r, c)
       end
     end
     false

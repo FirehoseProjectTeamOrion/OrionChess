@@ -29,9 +29,10 @@ class Game < ActiveRecord::Base
 
   def available_move?
     all_piece = pieces.find_by(in_game: true)
-    all_piece.each do |p|
-      return true if p.any_move?
+    all_piece.each do |piece|
+      return true if piece.any_move?
     end
+    false
   end
 
   def check?
