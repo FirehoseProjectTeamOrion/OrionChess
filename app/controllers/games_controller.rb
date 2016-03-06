@@ -10,6 +10,10 @@ class GamesController < ApplicationController
   # GET /games/1
   # GET /games/1.json
   def show
+    if current_game.stalemate?
+      current_game.update_attributes(game_over: true)
+      flash[:error] = "You are in Stalemate. Game's over."
+    end
   end
 
   # GET /games/new

@@ -43,6 +43,15 @@ class Piece < ActiveRecord::Base
     update_attributes(in_game: in_game)
   end
 
+  def any_move?
+    8.times do |r|
+      8.times do |c|
+        return true if unoccupied_space?(r, c) && valid_move?(r, c)
+      end
+    end
+    false
+  end
+
   protected
 
   def white?

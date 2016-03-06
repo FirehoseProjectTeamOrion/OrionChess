@@ -16,6 +16,25 @@ class Game < ActiveRecord::Base
     end
   end
 
+  def stalemate?
+    both_king_not_in_check? && available_move?
+  end
+
+  def both_king_not_in_check?
+    white_king = pieces.find_by(type: 'King', color: 'white')
+    black_king = pieces.find_by(type: 'King', color: 'black')
+    return true unless white_king.in_check? && black_king.in_check?
+    false
+  end
+
+  def available_move?
+    all_piece = pieces.find_by(in_game: true)
+    all_piece.each do |piece|
+      return true if piece.any_move?
+    end
+    false
+  end
+
   def check?
     white_king = pieces.find_by(type: 'King', color: 'white')
     black_king = pieces.find_by(type: 'King', color: 'black')
