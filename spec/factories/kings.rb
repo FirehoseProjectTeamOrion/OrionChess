@@ -3,7 +3,7 @@ FactoryGirl.define do
     row 0
     column 4
     in_game true
-    association :player
+    association :user
     association :game
   end
 end

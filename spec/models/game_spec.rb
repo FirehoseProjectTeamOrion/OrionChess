@@ -49,4 +49,18 @@ RSpec.describe Game, type: :model do
       expect(game.check?).to eq(false)
     end
   end
+
+  describe '#forfeit' do
+    let(:game) { FactoryGirl.create(:game) }
+
+    it 'should set the other player as the winner' do
+      game.forfeit(game.white_player)
+      expect(game.winning_player).to eq(game.black_player)
+    end
+
+    it 'should end the game' do
+      game.forfeit(game.white_player)
+      expect(game.over).to eq(true)
+    end
+  end
 end

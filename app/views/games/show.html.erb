@@ -36,5 +36,9 @@
   <% end %>
 </table>
 
+<div class="game-links">
+<%= link_to "Forfeit", forfeit_path(@game, user_id: current_user), method: :put, class: 'btn btn-danger' %>
+
 <%= link_to 'Edit', edit_game_path(@game) %> |
 <%= link_to 'Back', games_path %>
+</div>
