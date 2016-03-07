@@ -150,7 +150,6 @@ RSpec.describe Piece, type: :model do
   end
   
   describe '#any_move?' do
-    
     before :each do
       @game = FactoryGirl.create(:game)
       @piece_white = FactoryGirl.create(:king, type: 'King', row: 7, column: 3, color: 'white', in_game: true, game_id: @game.id)
@@ -158,7 +157,7 @@ RSpec.describe Piece, type: :model do
     end
     
     it 'has any move' do
-      pawn_black = FactoryGirl.create(:black_pawn, row: 6, column: 3, color: 'black', game_id: @game.id)
+      FactoryGirl.create(:black_pawn, row: 6, column: 3, color: 'black', game_id: @game.id)
       pawn_white = FactoryGirl.create(:white_pawn, row: 1, column: 2, color: 'white', game_id: @game.id)
       
       expect(pawn_white.any_move?).to eq(true)
@@ -166,7 +165,7 @@ RSpec.describe Piece, type: :model do
     
     it 'has no possible move' do
       pawn_black = FactoryGirl.create(:black_pawn, row: 6, column: 3, color: 'black', game_id: @game.id)
-      pawn_white = FactoryGirl.create(:white_pawn, row: 1, column: 3, color: 'white', game_id: @game.id)
+      FactoryGirl.create(:white_pawn, row: 1, column: 3, color: 'white', game_id: @game.id)
       
       expect(pawn_black.any_move?).to eq(false)
     end
