@@ -1,4 +1,5 @@
 OrionChess::Application.routes.draw do
+  get 'welcome/about'
   devise_for :users
   resources :games
   resources :pieces, only: [:update]

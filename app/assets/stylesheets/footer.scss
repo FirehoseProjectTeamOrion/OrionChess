@@ -1,0 +1,36 @@
+$footer-height: 120px;
+
+html, body {
+	height: 100%;
+}
+
+#wrap {
+	min-height: 100%;
+	height: auto;
+		
+}
+
+#footer {
+	height:$footer-height;
+	background-color: rgba(0,0,0,0.8);
+	line-height: 24px;
+	text-align: center;
+	padding-top: 24px;
+}
+
+#footer a {
+	color: #F7F7F7;
+	font-family: "Ubuntu", sans-serif;
+	text-transform: uppercase;
+}
+
+#footer a:hover {
+  color: white;
+  text-decoration: none;
+  text-shadow: 0 0 2px rgba(255,255,255,1),
+  0 0 5px rgba(255,255,255,1), 
+  0 0 10px rgba(255,255,255,1), 
+  0 0 20px #A19B88, 0 0 30px #A19B88, 
+  0 0 40px #A19B88,
+  0 0 50px #A19B88;
+}
