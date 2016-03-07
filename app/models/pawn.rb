@@ -17,10 +17,16 @@ class Pawn < Piece
     elsif move == FORWARD_TWO
       return can_move_two?(destination_row, destination_column)
     elsif CAPTURE_MOVES.include?(move)
-      return capturable?(destination_row, destination_column)
+      return can_capture?(destination_row, destination_column)
     end
 
     false
+  end
+
+  protected
+
+  def previously_moved_two_spaces?
+    (row - previous_row).abs == 2
   end
 
   private
@@ -31,6 +37,15 @@ class Pawn < Piece
 
   def first_move?
     created_at == updated_at
+  end
+
+  def en_passant?(destination_column)
+    opponent_pawn = game.pieces.find_by(type: 'Pawn', color: opposite_color, row: row, column: destination_column)
+    opponent_pawn.present? && opponent_pawn.previously_moved_two_spaces? && opponent_pawn.last_to_move
+  end
+
+  def can_capture?(destination_row, destination_column)
+    capturable?(destination_row, destination_column) || en_passant?(destination_column)
   end
 
   def can_move_two?(destination_row, destination_column)
