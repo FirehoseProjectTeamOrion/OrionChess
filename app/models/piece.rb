@@ -69,13 +69,13 @@ class Piece < ActiveRecord::Base
     update_attributes(previous_row: row, previous_column: column, row: destination_row, column: destination_column, last_to_move: true)
   end
 
-  private
+  def unoccupied_space?(destination_row, destination_column)
+    !occupied_space?(destination_row, destination_column)
+  end
 
-  NONE = 0
-  UP = 1
-  DOWN = -1
-  RIGHT = 1
-  LEFT = -1
+  def unobstructed?(destination_row, destination_column)
+    !obstructed?(destination_row, destination_column)
+  end
 
   def moving_horizontally?(destination_row)
     row == destination_row
@@ -89,16 +89,24 @@ class Piece < ActiveRecord::Base
     (row - destination_row).abs == (column - destination_column).abs
   end
 
+  private
+
+  NONE = 0
+  UP = -1
+  DOWN = 1
+  RIGHT = 1
+  LEFT = -1
+
   def moving_up_and_to_the_right?(destination_row, destination_column)
-    row < destination_row && column < destination_column
+    row > destination_row && column < destination_column
   end
 
   def moving_up_and_to_the_left?(destination_row, destination_column)
-    row < destination_row && column > destination_column
+    row > destination_row && column > destination_column
   end
 
   def moving_down_and_to_the_right?(destination_row, destination_column)
-    row > destination_row && column < destination_column
+    row < destination_row && column < destination_column
   end
 
   def horizontal_obstructed?(destination_column)
@@ -108,19 +116,19 @@ class Piece < ActiveRecord::Base
   end
 
   def vertical_obstructed?(destination_row)
-    return check_path(UP, NONE, destination_row - row) if row < destination_row
+    return check_path(UP, NONE, row - destination_row) if row > destination_row
 
-    check_path(DOWN, NONE, row - destination_row)
+    check_path(DOWN, NONE, destination_row - row)
   end
 
   def diagonal_obstructed?(destination_row, destination_column)
-    return check_path(UP, RIGHT, destination_row - row) if moving_up_and_to_the_right?(destination_row, destination_column)
+    return check_path(UP, RIGHT, row - destination_row) if moving_up_and_to_the_right?(destination_row, destination_column)
 
-    return check_path(UP, LEFT, destination_row - row) if moving_up_and_to_the_left?(destination_row, destination_column)
+    return check_path(UP, LEFT, row - destination_row) if moving_up_and_to_the_left?(destination_row, destination_column)
 
-    return check_path(DOWN, RIGHT, row - destination_row) if moving_down_and_to_the_right?(destination_row, destination_column)
+    return check_path(DOWN, RIGHT, destination_row - row) if moving_down_and_to_the_right?(destination_row, destination_column)
 
-    check_path(DOWN, LEFT, row - destination_row)
+    check_path(DOWN, LEFT, destination_row - row)
   end
 
   def check_path(row_direction, col_direction, distance)

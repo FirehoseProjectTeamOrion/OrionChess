@@ -28,5 +28,10 @@ RSpec.describe Bishop, type: :model do
       FactoryGirl.create(:piece, row: 1, column: 3, color: 'white', game: @game)
       expect(@white_bishop.valid_move?(1, 3)).to eq(false)
     end
+
+    it 'returns false when trying to capture a piece while path is obstructed' do
+      FactoryGirl.create(:piece, row: 1, column: 3, color: 'white', game: @game)
+      expect(@white_bishop.valid_move?(4, 6)).to eq(false)
+    end
   end
 end
