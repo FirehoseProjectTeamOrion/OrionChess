@@ -21,8 +21,11 @@ class Game < ActiveRecord::Base
   end
 
   def both_king_not_in_check?
+    binding.pry
     white_king = pieces.find_by(type: 'King', color: 'white')
     black_king = pieces.find_by(type: 'King', color: 'black')
+    binding.pry
+
     return true unless white_king.in_check? && black_king.in_check?
     false
   end
