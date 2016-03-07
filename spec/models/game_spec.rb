@@ -55,7 +55,12 @@ RSpec.describe Game, type: :model do
 
     it 'should set the other player as the winner' do
       game.forfeit(game.white_player)
-      expect(game.winning_player).not_to eq(game.black_player)
+      expect(game.winning_player).to eq(game.black_player)
+    end
+
+    it 'should end the game' do
+      game.forfeit(game.white_player)
+      expect(game.over).to eq(true)
     end
   end
 end

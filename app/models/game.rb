@@ -25,10 +25,10 @@ class Game < ActiveRecord::Base
   end
 
   def forfeit(forfeiting_user)
-    update_attributes(winning_player_id: other_player(forfeiting_user))
+    update_attributes(winning_player_id: other_player(forfeiting_user), over: true)
   end
 
   def other_player(player)
-    player == white_player ? white_player : black_player
+    player == white_player ? black_player.id : white_player.id
   end
 end
