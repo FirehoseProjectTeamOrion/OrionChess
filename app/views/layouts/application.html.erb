@@ -19,39 +19,45 @@
   <p class="alert alert-danger"><%= alert %></p>
 <% end %>
 
-<!-- navbar begin -->
-<nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <%= link_to 'OrionChess', root_path, "class" => 'navbar-brand' %>
-    </div>
-
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <li><%= link_to 'Join the game', games_path %></li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <% if user_signed_in? %>
-          <li><%= link_to 'sign out', destroy_user_session_path, :method => :delete, class: "signout"%></li>'
-        <% else %>
-          <li><%= link_to 'Sign in', '#signin', "data-toggle" => "modal", :class => "signin"%></li>
-          <li><%= link_to 'Sign up', '#signup', "data-toggle" => "modal", :class => "signup"%></li>
-        <% end %>
-      </ul>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
-</nav>
-<!-- navbar end -->
-
+<div id="wrap">
+  <!-- navbar begin -->
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <%= link_to 'OrionChess', root_path, "class" => 'navbar-brand' %>
+      </div>
+  
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          <li><%= link_to 'Join the game', games_path %></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <% if user_signed_in? %>
+            <li><%= link_to 'sign out', destroy_user_session_path, :method => :delete, class: "signout"%></li>'
+          <% else %>
+            <li><%= link_to 'Sign in', '#signin', "data-toggle" => "modal", :class => "signin"%></li>
+            <li><%= link_to 'Sign up', '#signup', "data-toggle" => "modal", :class => "signup"%></li>
+          <% end %>
+        </ul>
+      </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+  </nav>
+  <!-- navbar end -->
 <%= yield %>
+</div>
+
+<div id="footer">
+  <p><%= link_to 'About the Team', welcome_about_path %></p>
+  <p><%= link_to 'View our code on Github', 'https://github.com/FirehoseProjectTeamOrion/OrionChess' %></p>
+</div>
 
 </body>
 </html>
