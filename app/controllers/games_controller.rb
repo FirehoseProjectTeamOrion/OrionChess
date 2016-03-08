@@ -70,6 +70,12 @@ class GamesController < ApplicationController
     redirect_to game_path(current_game), alert: 'Forfeit'
   end
 
+  def promote_pawn
+    promoted_pawn = current_game.pieces.find(pawn_param)
+    current_game.promote_pawn(promoted_pawn)
+    render nothing: true, status: :ok
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
@@ -84,6 +90,10 @@ class GamesController < ApplicationController
 
   def user_param
     params.require(:user_id)
+  end
+
+  def pawn_param
+    params.require(:pawn_id)
   end
 
   def current_game

@@ -63,4 +63,51 @@ RSpec.describe Game, type: :model do
       expect(game.over).to eq(true)
     end
   end
+
+  describe '#promote_pawn' do
+    before do
+      allow_any_instance_of(Game).to receive(:populate_board!).and_return true
+    end
+
+    let(:game) { FactoryGirl.create(:game) }
+    let(:pawn) { FactoryGirl.create(:white_pawn, type: 'Pawn', row: 0, game: game) }
+
+    it 'removes the pawn' do
+      game.promote_pawn(pawn, 'Queen')
+
+      pawn = game.pieces.find_by(type: 'Pawn')
+
+      expect(pawn.in_game).to eq(false)
+    end
+
+    it 'adds a new queen when promoting to queen' do
+      game.promote_pawn(pawn, 'Queen')
+
+      expect(game.pieces.find_by(type: 'Queen').exists).to eq(true)
+    end
+
+    it 'adds a new knight when promoting to knight' do
+      game.promote_pawn(pawn, 'Knight')
+
+      expect(game.pieces.find_by(type: 'Knight').exists).to eq(true)
+    end
+
+    it 'adds a new rook when promoting to rook' do
+      game.promote_pawn(pawn, 'Rook')
+
+      expect(game.pieces.find_by(type: 'Rook').exists).to eq(true)
+    end
+
+    it 'adds a new bishop when promoting to bishop' do
+      game.promote_pawn(pawn, 'Bishop')
+
+      expect(game.pieces.find_by(type: 'Bishop').exists).to eq(true)
+    end
+
+    it 'only adds one piece' do
+      game.promote_pawn(pawn, 'Queen')
+
+      expect(game.pieces.size).to eq(2)
+    end
+  end
 end
