@@ -63,4 +63,15 @@ RSpec.describe Game, type: :model do
       expect(game.over).to eq(true)
     end
   end
+
+  describe '#pass_turn' do
+    let(:game) { FactoryGirl.create(:game) }
+
+    it 'ends the current_player\'s turn and passes the turn the the other player' do
+      game.active_player = game.white_player
+
+      game.pass_turn(game.white_player)
+      expect(game.active_player).to eq(game.black_player)
+    end
+  end
 end
