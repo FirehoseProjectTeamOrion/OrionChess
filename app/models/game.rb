@@ -3,6 +3,7 @@ class Game < ActiveRecord::Base
   belongs_to  :white_player, class_name: 'User'
   belongs_to  :black_player, class_name: 'User'
   belongs_to  :winning_player, class_name: 'User'
+  belongs_to  :active_player, class_name: 'User'
 
   after_create :populate_board!
 
@@ -30,5 +31,9 @@ class Game < ActiveRecord::Base
 
   def other_player(player)
     player == white_player ? black_player.id : white_player.id
+  end
+
+  def pass_turn(player)
+    update_attributes(active_player_id: other_player(player))
   end
 end

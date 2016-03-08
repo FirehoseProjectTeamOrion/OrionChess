@@ -3,9 +3,12 @@ class PiecesController < ApplicationController
     row = pieces_params[:row].to_i
     column = pieces_params[:column].to_i
 
-    render(nothing: true, status: :ok) && return if current_piece.move_to!(row, column)
-
-    render nothing: true, status: :bad_request
+    if current_piece.move_to!(row, column)
+      current_piece.game.pass_turn(current_piece.game.active_player)
+      render(nothing: true, status: :ok)
+    else
+      render nothing: true, status: :bad_request
+    end
   end
 
   private
