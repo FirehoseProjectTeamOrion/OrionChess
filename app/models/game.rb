@@ -25,16 +25,6 @@ class Game < ActiveRecord::Base
     white_king.in_check? || black_king.in_check?
   end
   
-  def stalemate?
-    king_not_in_check? && any_legal_move?
-  end
-  
-  def king_not_in_check?
-    king = pieces.find_by(type: 'King', color: active_player.color)
-    return true unless king.in_check?
-    false
-  end
-  
   def forfeit(forfeiting_user)
     update_attributes(winning_player_id: other_player(forfeiting_user), over: true)
   end
@@ -45,5 +35,29 @@ class Game < ActiveRecord::Base
   
   def pass_turn(player)
     update_attributes(active_player_id: other_player(player))
+  end
+  
+  def stalemate?
+    king_not_in_check? && available_move?
+  end
+  
+  def king_not_in_check?
+    king = pieces.find_by(type: 'King', color: current_color)
+    return true unless king.in_check?
+    false
+  end
+  
+  def available_move?
+    all_piece = pieces.where(in_game: true)
+    all_piece.each do |piece|
+      return true if piece.any_move?
+    end
+    false
+  end
+  
+  
+  def current_color
+    return 'white' if active_player == white_player
+    return 'black'
   end
 end

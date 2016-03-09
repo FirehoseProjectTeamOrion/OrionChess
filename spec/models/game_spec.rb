@@ -117,7 +117,7 @@ RSpec.describe Game, type: :model do
       game.pieces << black_king
       game.pieces << FactoryGirl.create(:black_pawn, type: 'Pawn', row: 6, column: 3)
       game.pieces << FactoryGirl.create(:white_pawn, type: 'Pawn', row: 1, column: 3)
-      game.active_player = white_player
+      # game.active_player = white_player
       expect(game.king_not_in_check?).to eq(true)
     end
     
@@ -126,7 +126,7 @@ RSpec.describe Game, type: :model do
       game.pieces << black_king
       game.pieces << FactoryGirl.create(:black_pawn, type: 'Pawn', row: 6, column: 2)
       game.pieces << FactoryGirl.create(:white_pawn, type: 'Pawn', row: 1, column: 2)
-      game.active_player = black_player
+      # game.active_player = black_player
       
       expect(game.king_not_in_check?).to eq(false)
     end
