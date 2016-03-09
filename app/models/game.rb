@@ -26,7 +26,13 @@ class Game < ActiveRecord::Base
   end
   
   def stalemate?
-    
+    king_not_in_check? && any_legal_move?
+  end
+  
+  def king_not_in_check?
+    king = pieces.find_by(type: 'King', color: active_player.color)
+    return true unless king.in_check?
+    false
   end
   
   def forfeit(forfeiting_user)
