@@ -3,9 +3,17 @@ class PiecesController < ApplicationController
     row = pieces_params[:row].to_i
     column = pieces_params[:column].to_i
 
-    render(nothing: true, status: :ok) && return if current_piece.move_to!(row, column)
-
-    render nothing: true, status: :bad_request
+    if current_piece.move_to!(row, column)
+      respond_to do |format|
+        format.html { render nothing: true, status: :ok }
+        format.json { render nothing: true, json: { piece: current_piece, piece_type: current_piece.type }, status: :ok }
+      end
+    else
+      respond_to do |format|
+        format.html { render nothing: true, status: :bad_request }
+        format.json { render nothing: true, status: :bad_request }
+      end
+    end
   end
 
   private

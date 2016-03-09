@@ -31,8 +31,4 @@ class Game < ActiveRecord::Base
   def other_player(player)
     player == white_player ? black_player.id : white_player.id
   end
-
-  def promote_pawn(pawn, promted_type)
-
-  end
 end

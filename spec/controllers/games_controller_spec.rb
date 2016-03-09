@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe GamesController, type: :controller do
-
   describe '#forfeit' do
     let!(:game) { FactoryGirl.create(:game) }
 
@@ -18,10 +17,10 @@ RSpec.describe GamesController, type: :controller do
     end
 
     let!(:game) { FactoryGirl.create(:game) }
-    let!(:pawn) { FactoryGirl.create(:black_pawn, type: 'Pawn', row: 7, game: game)}
+    let!(:pawn) { FactoryGirl.create(:black_pawn, type: 'Pawn', row: 7, game: game) }
 
     it 'should return ok' do
-      put :promote_pawn, id: game.id, pawn_id: pawn.id
+      put :promote_pawn, id: game.id, pawn_id: pawn.id, promotion_type: 'Queen'
 
       expect(response).to have_http_status(:ok)
     end

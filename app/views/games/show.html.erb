@@ -1,5 +1,14 @@
 <script>
   $(function() {
+    var pawnId;
+    var $droppedSpace;
+    function is_in_back_row(piece) {
+      if (piece.color == 'black'){
+        return piece.row == 7
+      }else {
+        return piece.row == 0
+      }
+    }
     $('.piece').draggable();
     $('td').droppable({
       drop: function(ev, ui) {
@@ -7,13 +16,38 @@
         $.ajax({
           type: 'PUT',
           url: ui.draggable.data('update-url'),
+          dataType: 'json',
+          context: $(this),
           data: {piece: {row: $(this).parent().index(), column: $(this).index()}}
         }).done(function( data ) {
           $(ui.draggable).detach().css({top: 0, left: 0}).appendTo(drop_space_element);
+          var piece = data.piece
+          var type = data.piece_type
+          if (type === 'Pawn' && is_in_back_row(piece)){
+            pawnId = piece.id;
+            $droppedSpace = $(drop_space_element);
+            $(this).modal('show');
+          }
         }).fail(function() {
           ui.draggable.animate({top: '0px', left: '0px'}, 'slow');
         });
       }
+    });
+
+    $('#promote-form').submit(function(event) {
+      var piece_type = $('input[name=promotion_type]:checked', '#promote-form').val()
+      $.ajax({
+        type: 'PUT',
+        url: $(this).attr('action'),
+        dataType: 'json',
+        data: {promotion_type: piece_type, pawn_id: pawnId}
+      }).done(function( data ) {
+        $droppedSpace.html('<span class="piece ui-draggable ui-draggable-handle" data-update-url="/pieces/341" style="position: relative;">'+ data.chess_font_character + '</span>');
+        $('#promote-form').modal('hide');
+      }).fail(function() {
+
+      });
+      event.preventDefault();
     });
   })
 </script>
@@ -41,4 +75,32 @@
 
 <%= link_to 'Edit', edit_game_path(@game) %> |
 <%= link_to 'Back', games_path %>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="pawn-promotion" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+          <h4 class="modal-title" id="myModalLabel">Pawn Promotion</h4>
+        </div>
+      <div class="modal-body">
+        <%= form_tag promote_pawn_path(@game), method: 'put', id: 'promote-form' do %>
+          <div class="form-inputs">
+            <%= radio_button_tag(:promotion_type, 'Queen', true) %>
+            <%= label_tag(:promotion_type_queen, 'Queen') %>
+            <%= radio_button_tag(:promotion_type, 'Knight') %>
+            <%= label_tag(:promotion_type_knight, 'Knight') %>
+            <%= radio_button_tag(:promotion_type, 'Rook') %>
+            <%= label_tag(:promotion_type_rook, 'Rook') %>
+            <%= radio_button_tag(:promotion_type, 'Bishop') %>
+            <%= label_tag(:promotion_type_bishop, 'Bishop') %>
+          </div>
+          <div class="form-actions center-text">
+            <button type="submit" class="btn btn-primary">Promote</button>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
 </div>
