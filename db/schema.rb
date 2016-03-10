@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160308010715) do
+ActiveRecord::Schema.define(version: 20160310205335) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 20160308010715) do
     t.integer  "black_player_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "game_over"
     t.integer  "winning_player_id"
     t.boolean  "over"
     t.integer  "active_player_id"
@@ -44,6 +45,7 @@ ActiveRecord::Schema.define(version: 20160308010715) do
     t.integer  "previous_column"
     t.boolean  "last_to_move",    default: false
     t.integer  "user_id"
+    t.boolean  "moved"
   end
 
   add_index "pieces", ["game_id"], name: "index_pieces_on_game_id", using: :btree
@@ -65,6 +67,8 @@ ActiveRecord::Schema.define(version: 20160308010715) do
     t.string   "name"
     t.integer  "wins"
     t.integer  "losses"
+    t.string   "provider"
+    t.string   "uid"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
