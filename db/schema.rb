@@ -45,7 +45,7 @@ ActiveRecord::Schema.define(version: 20160310205335) do
     t.integer  "previous_column"
     t.boolean  "last_to_move",    default: false
     t.integer  "user_id"
-    t.boolean  "moved"
+    t.boolean  "moved",           default: false
   end
 
   add_index "pieces", ["game_id"], name: "index_pieces_on_game_id", using: :btree
