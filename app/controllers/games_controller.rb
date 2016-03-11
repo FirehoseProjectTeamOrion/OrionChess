@@ -75,7 +75,7 @@ class GamesController < ApplicationController
     promoted_piece = pawn_to_promote.promote_pawn(promotion_param)
     respond_to do |format|
       format.html { render nothing: true, status: :ok }
-      format.json { render nothing: true, json: { chess_font_character: promoted_piece.chess_font_character }, status: :ok }
+      format.json { render nothing: true, json: { id: promoted_piece.id, chess_font_character: promoted_piece.chess_font_character }, status: :ok }
     end
   end
 

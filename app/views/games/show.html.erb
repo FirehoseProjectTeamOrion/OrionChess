@@ -4,15 +4,15 @@
     var $droppedSpace;
     function is_in_back_row(piece) {
       if (piece.color == 'black'){
-        return piece.row == 7
+        return piece.row == 7;
       }else {
-        return piece.row == 0
+        return piece.row == 0;
       }
     }
     $('.piece').draggable();
     $('td').droppable({
       drop: function(ev, ui) {
-        var drop_space_element = this
+        var drop_space_element = this;
         $.ajax({
           type: 'PUT',
           url: ui.draggable.data('update-url'),
@@ -20,8 +20,8 @@
           data: {piece: {row: $(this).parent().index(), column: $(this).index()}}
         }).done(function( data ) {
           $(ui.draggable).detach().css({top: 0, left: 0}).appendTo(drop_space_element);
-          var piece = data.piece
-          var type = data.piece_type
+          var piece = data.piece;
+          var type = data.piece_type;
           if (type === 'Pawn' && is_in_back_row(piece)){
             pawnId = piece.id;
             $droppedSpace = $(drop_space_element);
@@ -34,19 +34,20 @@
     });
 
     $('#promote-form').submit(function(event) {
-      var piece_type = $('input[name=promotion_type]:checked', '#promote-form').val()
+      event.preventDefault();
+      var piece_type = $('input[name=promotion_type]:checked', '#promote-form').val();
       $.ajax({
         type: 'PUT',
         url: $(this).attr('action'),
         dataType: 'json',
         data: {promotion_type: piece_type, pawn_id: pawnId}
       }).done(function( data ) {
-        $droppedSpace.html('<span class="piece ui-draggable ui-draggable-handle" data-update-url="/pieces/341" style="position: relative;">'+ data.chess_font_character + '</span>');
-        $('#promote-form').modal('hide');
+        $droppedSpace.html('<span class="piece" data-update-url="/pieces/'+ data.id + '" style="position: relative;">'+ data.chess_font_character + '</span>');
+        $droppedSpace.children().draggable();
+        $('#pawn-promotion').modal('hide');
       }).fail(function() {
 
       });
-      event.preventDefault();
     });
   })
 </script>

@@ -163,11 +163,5 @@ RSpec.describe Pawn, type: :model do
 
       expect(game.pieces.exists?(type: 'Bishop')).to eq(true)
     end
-
-    it 'only adds one piece' do
-      pawn.promote_pawn('Queen')
-
-      expect(game.pieces.size).to eq(2)
-    end
   end
 end
