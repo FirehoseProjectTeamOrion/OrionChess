@@ -149,4 +149,41 @@ RSpec.describe Piece, type: :model do
     end
   end
   
+  describe '#not_moved?' do
+    before :each do
+      @white_rook = FactoryGirl.create(:white_rook, moved: false, game: @game)
+      @black_rook = FactoryGirl.create(:black_rook, moved: true, game: @game)
+    end
+    
+    it 'have not moved' do
+      expect(@white_rook.not_moved?).to eq(true)
+    end
+    
+    it 'have moved' do
+      expect(@black_rook.not_moved?).to eq(false)
+    end
+  end
+  
+  describe '#not_obstructed?' do
+    before :each do
+      @game = FactoryGirl.create(:game)
+      @white_king = FactoryGirl.create(:king, color: 'white', moved: false, game: @game)
+      @white_rook1 = FactoryGirl.create(:white_rook, moved: false, game: @game)
+      @white_rook2 = FactoryGirl.create(:white_rook, moved: false, row: 0, column: 7, game: @game)
+      @white_knight = FactoryGirl.create(:knight, color: 'white', game: @game)
+      @black_king = FactoryGirl.create(:king, color: 'black', moved: false, row: 7, column: 4, game: @game)
+      @black_rook1 = FactoryGirl.create(:black_rook, moved: true, row: 7, column: 0, game: @game)
+      @black_rook2 = FactoryGirl.create(:black_rook, moved: false, row: 7, column: 7, game: @game)
+    end
+    
+    it 'is not obstructed' do
+      expect(@white_king.not_obstructed?(0,7)).to eq(true)
+    end
+    
+    it 'is obstructed' do
+      expect(@white_king.not_obstructed?(0,0)).to eq(false)
+      
+    end
+  end
+  
 end
