@@ -39,7 +39,7 @@ feature 'Moving pieces', js: true do
     black_pawn.drag_to(destination)
     wait_for_ajax
 
-    expect(page).to have_content('Pawn Promotion')
+    expect(page).to have_content('Promote pawn to:')
   end
 
   scenario 'After submitting pawn promotion modal, should now show new piece type and no pawn' do
@@ -49,8 +49,9 @@ feature 'Moving pieces', js: true do
     destination = page.find('tr:nth-child(8) td:nth-child(5)')
     black_pawn.drag_to(destination)
     wait_for_ajax
-    choose('promotion_type_Queen')
-    click_button('Promote')
+    within('#pawn-promotion') do
+      find('.promotion', text: 'w').click
+    end
     wait_for_ajax
 
     expect(page).to have_css('tr:nth-child(8) td:nth-child(5) span', text: 'w')

@@ -33,12 +33,11 @@
       }
     });
 
-    $('#promote-form').submit(function(event) {
-      event.preventDefault();
-      var piece_type = $('input[name=promotion_type]:checked', '#promote-form').val();
+    $('.promotion').on('click', function() {
+      var piece_type = $(this).data('piece-type');
       $.ajax({
         type: 'PUT',
-        url: $(this).attr('action'),
+        url: '<%= promote_pawn_path(@game) %>',
         dataType: 'json',
         data: {promotion_type: piece_type, pawn_id: pawnId}
       }).done(function( data ) {
@@ -82,23 +81,19 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-          <h4 class="modal-title" id="myModalLabel">Pawn Promotion</h4>
+          <h4 class="modal-title" id="myModalLabel">Promote pawn to:</h4>
         </div>
-      <div class="modal-body">
-        <%= form_tag promote_pawn_path(@game), method: 'put', id: 'promote-form' do %>
-          <div class="form-inputs">
-            <%= radio_button_tag(:promotion_type, 'Queen', true) %>
-            <%= label_tag(:promotion_type_queen, 'Queen') %>
-            <%= radio_button_tag(:promotion_type, 'Knight') %>
-            <%= label_tag(:promotion_type_knight, 'Knight') %>
-            <%= radio_button_tag(:promotion_type, 'Rook') %>
-            <%= label_tag(:promotion_type_rook, 'Rook') %>
-            <%= radio_button_tag(:promotion_type, 'Bishop') %>
-            <%= label_tag(:promotion_type_bishop, 'Bishop') %>
-          </div>
-          <div class="form-actions center-text">
-            <button type="submit" class="btn btn-primary">Promote</button>
-          </div>
+      <div class="pawn-promotion-modal-body">
+        <% if current_user == @game.white_player %>
+          <span class="promotion" data-piece-type='Queen'>q</span>
+          <span class="promotion" data-piece-type='Knight'>k</span>
+          <span class="promotion" data-piece-type='Rook'>r</span>
+          <span class="promotion" data-piece-type='Bishop'>b</span>
+        <% else %>
+          <span class="promotion" data-piece-type='Queen'>w</span>
+          <span class="promotion" data-piece-type='Knight'>l</span>
+          <span class="promotion" data-piece-type='Rook'>t</span>
+          <span class="promotion" data-piece-type='Bishop'>v</span>
         <% end %>
       </div>
     </div>

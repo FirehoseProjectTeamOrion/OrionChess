@@ -4,6 +4,7 @@ class PiecesController < ApplicationController
     column = pieces_params[:column].to_i
 
     if current_piece.move_to!(row, column)
+      current_piece.game.pass_turn(current_piece.game.active_player)
       respond_to do |format|
         format.html { render nothing: true, status: :ok }
         format.json { render nothing: true, json: { piece: current_piece, piece_type: current_piece.type }, status: :ok }
