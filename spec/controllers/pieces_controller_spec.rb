@@ -34,5 +34,14 @@ RSpec.describe PiecesController, type: :controller do
 
       expect(response).to have_http_status(:bad_request)
     end
+
+    it 'passes the turn for a valid move' do
+      game.active_player = game.black_player
+      put :update, id: black_pawn.id, piece: { row: 3, column: 4 }
+
+      game.reload
+
+      expect(game.active_player).to eq(game.white_player)
+    end
   end
 end

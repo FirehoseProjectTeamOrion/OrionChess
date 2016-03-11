@@ -54,11 +54,11 @@ test:
   password: password
   host: localhost
 
-production:
-  adapter: postgresql
-  encoding: unicode
-  database: OrionChess_production
-  pool: 5
-  username: postgres
-  password: password
-  host: localhost
+# production:
+#   adapter: postgresql
+#   encoding: unicode
+#   database: OrionChess_production
+#   pool: 5
+#   username: postgres
+#   password: password
+#   host: localhost
