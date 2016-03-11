@@ -66,8 +66,13 @@ table#chessboard {
   font-size: 45px;
   margin: 10px;
 
+  .promotion {
+    border: 3px solid transparent;
+    border-radius: 3px;
+  }
+
   .promotion:hover {
     cursor: pointer;
-    color: #505050;
+    border: 3px solid #A19B88;
   }
 }
