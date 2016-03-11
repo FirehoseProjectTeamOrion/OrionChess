@@ -39,6 +39,14 @@ class Piece < ActiveRecord::Base
     Piece.where(game_id: game.id, row: destination_row, column: destination_column, in_game: true, color: opposite_color).exists?
   end
 
+  def not_moved?
+    return true unless moved
+  end
+
+  def not_obstructed?(destination_row, destination_column)
+    return true unless obstructed?(destination_row, destination_column)
+  end
+
   protected
 
   def white?
@@ -96,6 +104,10 @@ class Piece < ActiveRecord::Base
   DOWN = 1
   RIGHT = 1
   LEFT = -1
+  QUEENSIDE = 0
+  KINGSIDE = 7
+  WHITESIDE = 0
+  BLACKSIDE = 7
 
   def moving_up_and_to_the_right?(destination_row, destination_column)
     row > destination_row && column < destination_column

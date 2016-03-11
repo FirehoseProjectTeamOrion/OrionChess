@@ -14,7 +14,7 @@ class King < Piece
     return true if kings_direction.include?(direction)
     false
   end
-  
+
   def chess_font_character
     if white?
       'k'
@@ -22,23 +22,36 @@ class King < Piece
       'l'
     end
   end
-  
+
   def in_check?
     opponent_pieces = game.pieces.where(color: opposite_color)
-    
+
     opponent_pieces.each do |opponent_piece|
       return true if opponent_piece.valid_move?(row, column)
     end
-    
+
     false
   end
-  
-  def can_castle?
-    
+
+  def can_castle?(rook_row, rook_column)
+    rook = Piece.where(color: color, row: rook_row, column: rook_column)
+    return true if not_moved? && not_obstructed?(rook_row, rook_column) && rook.not_moved?
   end
-  
-  def castle!
-    
+
+  def castle!(rook_row, rook_column)
+    if can_castle?(rook_row, rook_column)
+      rook = Piece.where(color: color, row: rook_row, column: rook_row)
+      if rook.kingside?
+        update_attributes(row: rook_row, column: 6, moved: true)
+        rook.update_attributes(row: rook_row, column: 5, moved: true)
+        return true
+      end
+      if rook.queenside?
+        update_attributes(row: rook_row, column: 2, moved: true)
+        rook.update_attributes(row: rook_row, column: 3, moved: true)
+        return true
+      end
+    end
+    false
   end
-  
 end

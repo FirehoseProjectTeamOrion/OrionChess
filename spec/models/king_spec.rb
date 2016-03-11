@@ -14,12 +14,20 @@ RSpec.describe King, type: :model do
   end
   
   describe '#can_castle?' do
+    before :each do
+      @game = FactoryGirl.create(:game)
+      @white_king = FactoryGirl.create(:king, color: 'white', game: @game)
+      @white_rook = FactoryGirl.create(:white_rook, game: @game)
+      @white_rook_kingside = FactoryGirl.create(:white_rook, row: )
+      @white_knight = FactoryGirl.create(:knight, color: 'white', game: @game)
+    end
+    
     it 'should return true if it can castle' do
-      expect(king.can_castle!).to eq(true)
+      expect(king.can_castle!( 0,0)).to eq(true)
     end
     
     if 'should return false if unable to castle' do
-      expect(king.can_castle!).to eq(false)
+      expect(king.can_castle!(0,7)).to eq(false)
     end
   end
   

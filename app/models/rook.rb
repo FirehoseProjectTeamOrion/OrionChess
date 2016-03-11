@@ -13,4 +13,14 @@ class Rook < Piece
       't'
     end
   end
+
+  def queenside?
+    return true if (row == 0 && column == 0) || (row == 7 && column == 0)
+    false
+  end
+
+  def kingside?
+    return true if (row == 0 && column == 7) || (row == 7 && column == 7)
+    false
+  end
 end
