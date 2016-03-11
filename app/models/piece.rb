@@ -39,6 +39,16 @@ class Piece < ActiveRecord::Base
     Piece.where(game_id: game.id, row: destination_row, column: destination_column, in_game: true, color: opposite_color).exists?
   end
 
+  def not_moved?
+    return true unless moved
+    false
+  end
+
+  def not_obstructed?(destination_row, destination_column)
+    return true unless obstructed?(destination_row, destination_column)
+    false
+  end
+
   protected
 
   def white?

@@ -38,4 +38,36 @@ RSpec.describe Rook, type: :model do
       expect(@white_rook.valid_move?(0, 7)).to eq(false)
     end
   end
+
+  describe '#kingside?' do
+    before :each do
+      @game = FactoryGirl.create(:game)
+      @white_rook1 = FactoryGirl.create(:white_rook, game: @game)
+      @white_rook2 = FactoryGirl.create(:white_rook, row: 0, column: 7, game: @game)
+    end
+
+    it 'return true if rook is king side' do
+      expect(@white_rook2.kingside?).to eq(true)
+    end
+
+    it 'return false if rook is not king side' do
+      expect(@white_rook1.kingside?).to eq(false)
+    end
+  end
+
+  describe '#queenside?' do
+    before :each do
+      @game = FactoryGirl.create(:game)
+      @white_rook1 = FactoryGirl.create(:white_rook, game: @game)
+      @white_rook2 = FactoryGirl.create(:white_rook, row: 0, column: 7, game: @game)
+    end
+
+    it 'return true if rook is queenside' do
+      expect(@white_rook1.queenside?).to eq(true)
+    end
+
+    it 'return false if rook is not queenside' do
+      expect(@white_rook2.queenside?).to eq(false)
+    end
+  end
 end

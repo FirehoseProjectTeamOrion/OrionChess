@@ -32,4 +32,29 @@ class King < Piece
 
     false
   end
+
+  def can_castle?(rook_row, rook_column)
+    rook = Piece.where(color: color, row: rook_row, column: rook_column)
+    return false unless rook.not_moved?
+    return false unless not_obstructed?(rook_row, rook_column)
+    return true if not_moved?
+    false
+  end
+
+  def castle!(rook_row, rook_column)
+    if can_castle?(rook_row, rook_column)
+      rook = Piece.where(color: color, row: rook_row, column: rook_row)
+      if rook.kingside?
+        update_attributes(row: rook_row, column: 6, moved: true)
+        rook.update_attributes(row: rook_row, column: 5, moved: true)
+        return true
+      end
+      if rook.queenside?
+        update_attributes(row: rook_row, column: 2, moved: true)
+        rook.update_attributes(row: rook_row, column: 3, moved: true)
+        return true
+      end
+    end
+    false
+  end
 end
