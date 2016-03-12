@@ -31,6 +31,18 @@ feature 'Moving pieces', js: true do
     expect(game.pieces.first.row).to eq(1)
   end
 
+  scenario 'Dragging a piece(black_pawn) to capture a piece should remove the captured piece' do
+    game.pieces << FactoryGirl.create(:black_pawn, type: 'Pawn')
+    game.pieces << FactoryGirl.create(:white_pawn, type: 'Pawn', row: 2, column: 3)
+    visit game_path(game)
+    black_pawn = page.find('.ui-draggable', text: 'o')
+    destination = page.find('tr:nth-child(3) td:nth-child(4)')
+    black_pawn.drag_to(destination)
+    wait_for_ajax
+
+    expect(page).not_to have_css('tr:nth-child(3) td:nth-child(4) span', text: 'p')
+  end
+
   scenario 'Dragging pawn to opponent\'s back row to bring up pawn promotion modal' do
     game.pieces << FactoryGirl.create(:black_pawn, type: 'Pawn', row: 6)
     visit game_path(game)

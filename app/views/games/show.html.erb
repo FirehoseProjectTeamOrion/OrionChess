@@ -19,7 +19,11 @@
           dataType: 'json',
           data: {piece: {row: $(this).parent().index(), column: $(this).index()}}
         }).done(function( data ) {
+          if ($(drop_space_element).has('span.piece').length)
+            $(drop_space_element).children('span.piece').remove();
+
           $(ui.draggable).detach().css({top: 0, left: 0}).appendTo(drop_space_element);
+
           var piece = data.piece;
           var type = data.piece_type;
           if (type === 'Pawn' && is_in_back_row(piece)){
