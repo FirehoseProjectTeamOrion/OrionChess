@@ -70,6 +70,15 @@ class GamesController < ApplicationController
     redirect_to game_path(current_game), alert: 'Forfeit'
   end
 
+  def promote_pawn
+    pawn_to_promote = current_game.pieces.find(pawn_param)
+    promoted_piece = pawn_to_promote.promote_pawn(promotion_param)
+    respond_to do |format|
+      format.html { render nothing: true, status: :ok }
+      format.json { render nothing: true, json: { id: promoted_piece.id, chess_font_character: promoted_piece.chess_font_character }, status: :ok }
+    end
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
@@ -84,6 +93,14 @@ class GamesController < ApplicationController
 
   def user_param
     params.require(:user_id)
+  end
+
+  def pawn_param
+    params.require(:pawn_id)
+  end
+
+  def promotion_param
+    params.require(:promotion_type)
   end
 
   def current_game

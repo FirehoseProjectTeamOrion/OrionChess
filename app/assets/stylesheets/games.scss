@@ -56,3 +56,23 @@ table#chessboard {
     margin-right: 10px;
   }
 }
+
+#pawn-promotion .modal-content {
+  display: inline-block;
+}
+
+.pawn-promotion-modal-body {
+  font-family: 'chess_casesregular';
+  font-size: 45px;
+  margin: 10px;
+
+  .promotion {
+    border: 3px solid transparent;
+    border-radius: 3px;
+  }
+
+  .promotion:hover {
+    cursor: pointer;
+    border: 3px solid #A19B88;
+  }
+}
