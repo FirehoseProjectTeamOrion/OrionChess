@@ -38,7 +38,7 @@ class Game < ActiveRecord::Base
   end
   
   def stalemate?
-    king_not_in_check? && !available_move?
+    king_not_in_check? && no_legal_move?
   end
   
   def king_not_in_check?
@@ -47,12 +47,12 @@ class Game < ActiveRecord::Base
     false
   end
   
-  def available_move?
-    active_player_pieces = pieces.where(in_game: true)
-    active_player_pieces.each do |piece|
-      return true if piece.any_move?
+  def no_legal_move?
+    @active_player_pieces = pieces.where(color: current_color, in_game: true)
+    @active_player_pieces.each do |piece|
+      return false if piece.any_move?
     end
-    false
+    true
   end
   
   def current_color
