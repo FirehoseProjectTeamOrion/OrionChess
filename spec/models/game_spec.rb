@@ -19,8 +19,8 @@ RSpec.describe Game, type: :model do
     end
 
     let(:game) { FactoryGirl.create(:game) }
-    let(:white_king) { FactoryGirl.create(:king, type: 'King', color: 'white', row: 7, column: 3) }
-    let(:black_king) { FactoryGirl.create(:king, type: 'King', color: 'black', row: 0, column: 3) }
+    let(:white_king) { FactoryGirl.create(:king, type: 'King', color: 'white', row: 7, column: 3, game: game) }
+    let(:black_king) { FactoryGirl.create(:king, type: 'King', color: 'black', row: 0, column: 3, game: game) }
 
     it 'returns true if white player is in check' do
       game.pieces << white_king
@@ -41,6 +41,7 @@ RSpec.describe Game, type: :model do
     it 'returns false if neither player is in check' do
       game.pieces << white_king
       game.pieces << black_king
+
       game.pieces << FactoryGirl.create(:black_pawn, type: 'Pawn', row: 6, column: 3)
       game.pieces << FactoryGirl.create(:queen, type: 'Queen', color: 'black', row: 5, column: 2)
       game.pieces << FactoryGirl.create(:knight, type: 'Knight', color: 'white', row: 1, column: 4)
@@ -72,6 +73,77 @@ RSpec.describe Game, type: :model do
 
       game.pass_turn(game.white_player)
       expect(game.active_player).to eq(game.black_player)
+    end
+  end
+
+  describe '#stalemate?' do
+    before do
+      allow_any_instance_of(Game).to receive(:populate_board!).and_return true
+    end
+
+    # let(:game) { FactoryGirl.create(:game) }
+    # let(:white_king) { FactoryGirl.create(:king, type: 'King', color: 'white', row: 7, column: 3) }
+    # let(:black_king) { FactoryGirl.create(:king, type: 'King', color: 'black', row: 0, column: 3) }
+
+    it 'should return true if active player is in stalemate' do
+      game = FactoryGirl.create(:game)
+      FactoryGirl.create(:king, type: 'King', color: 'white', row: 7, column: 3, game: game)
+      FactoryGirl.create(:king, type: 'King', color: 'black', row: 0, column: 3, game: game)
+      FactoryGirl.create(:black_pawn, type: 'Pawn', row: 6, column: 3, game: game)
+      # FactoryGirl.create(:black_pawn, type: 'Pawn', row: 5, column: 3, game: game)
+      # FactoryGirl.create(:black_pawn, type: 'Pawn', row: 5, column: 4, game: game)
+      # FactoryGirl.create(:white_pawn, type: 'Pawn', row: 2, column: 4, game: game)
+      # FactoryGirl.create(:white_pawn, type: 'Pawn', row: 2, column: 3, game: game)
+      FactoryGirl.create(:white_pawn, type: 'Pawn', row: 1, column: 3, game: game)
+
+      expect(game.stalemate?).to eq(true)
+    end
+
+    it 'should return false if active player is not in stalemate?' do
+      # game.pieces << white_king
+      # game.pieces << black_king
+      # game.pieces << FactoryGirl.create(:black_pawn, type: 'Pawn', row: 6, column: 3)
+      # game.pieces << FactoryGirl.create(:white_pawn, type: 'Pawn', row: 1, column: 2)
+      game = FactoryGirl.create(:game)
+      FactoryGirl.create(:king, type: 'King', color: 'white', row: 7, column: 3, game: game)
+      FactoryGirl.create(:king, type: 'King', color: 'black', row: 0, column: 3, game: game)
+      FactoryGirl.create(:black_pawn, type: 'Pawn', row: 6, column: 3, game: game)
+      # FactoryGirl.create(:black_pawn, type: 'Pawn', row: 5, column: 3, game: game)
+      # FactoryGirl.create(:black_pawn, type: 'Pawn', row: 5, column: 4, game: game)
+      # FactoryGirl.create(:white_pawn, type: 'Pawn', row: 2, column: 4, game: game)
+      # FactoryGirl.create(:white_pawn, type: 'Pawn', row: 2, column: 3, game: game)
+      FactoryGirl.create(:white_pawn, type: 'Pawn', row: 1, column: 2, game: game)
+
+      expect(game.stalemate?).to eq(false)
+    end
+  end
+
+  describe '#king_not_in_check?' do
+    before do
+      allow_any_instance_of(Game).to receive(:populate_board!).and_return true
+    end
+
+    let(:game) { FactoryGirl.create(:game) }
+    let(:white_king) { FactoryGirl.create(:king, type: 'King', color: 'white', row: 7, column: 3) }
+    let(:black_king) { FactoryGirl.create(:king, type: 'King', color: 'black', row: 0, column: 3) }
+
+    it 'should return true if active player is not in check' do
+      game.pieces << white_king
+      game.pieces << black_king
+      game.pieces << FactoryGirl.create(:black_pawn, type: 'Pawn', row: 6, column: 3)
+      game.pieces << FactoryGirl.create(:white_pawn, type: 'Pawn', row: 1, column: 3)
+      # game.active_player = white_player
+      expect(game.king_not_in_check?).to eq(true)
+    end
+
+    it 'should return false if active player is in check' do
+      game.pieces << white_king
+      game.pieces << black_king
+      game.pieces << FactoryGirl.create(:black_pawn, type: 'Pawn', row: 6, column: 2)
+      game.pieces << FactoryGirl.create(:white_pawn, type: 'Pawn', row: 1, column: 2)
+      # game.active_player = black_player
+
+      expect(game.king_not_in_check?).to eq(false)
     end
   end
 end
