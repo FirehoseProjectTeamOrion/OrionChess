@@ -18,4 +18,4 @@ deploy:
     repo: FirehoseProjectTeamOrion/OrionChess
   addons:
     code_climate:
-      repo_token: dcd2fc5a5f1f68ad3b7683cfa6e0bf642a1d6ecee536282cbe79d079540a02de
+      repo_token: efb4dc95e583941451138af5860b4b1ab25be67179142420e58ef29c9dddec34
