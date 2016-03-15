@@ -18,23 +18,38 @@
   })
 </script>
 
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Name:</strong>
-</p>
-
-<table id="chessboard">
-  <% (0..7).each do |row| %>
-  <tr>
-      <% (0..7).each do |col| %>
-      <td>
-        <%= draw_piece(@game, row, col) %>
-      </td>
-    <% end %>
-  </tr>
-  <% end %>
-</table>
+<div class="container">
+  <p id="notice"><%= notice %></p>
+  <div class="row text-center">
+    <div class="col-md-3">
+      <% if @game.black_player %>
+        <p><%= @game.black_player.email %></p>
+      <% else %>
+        <p>Black Power</p>
+      <% end %>
+    </div>
+    <div class="col-md-6">
+      <table id="chessboard">
+        <% (0..7).each do |row| %>
+        <tr>
+            <% (0..7).each do |col| %>
+            <td>
+              <%= draw_piece(@game, row, col) %>
+            </td>
+          <% end %>
+        </tr>
+        <% end %>
+      </table>
+    </div>
+    <div class="col-md-3">
+      <% if @game.white_player %>
+        <p><%= @game.white_player.email %></p>
+      <% else %>
+        <p>White Supremacy</p>
+      <% end %>
+    </div>
+  </div>
+</div>
 
 <div class="game-links">
 <%= link_to "Forfeit", forfeit_path(@game, user_id: current_user), method: :put, class: 'btn btn-danger' %>

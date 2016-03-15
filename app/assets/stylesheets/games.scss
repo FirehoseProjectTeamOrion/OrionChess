@@ -64,11 +64,11 @@ table#chessboard {
 }
 
 .available-game {
-  background-color: #808080;
+  background: rgba(0,0,0,0.2);
   margin-bottom: 10px;
   border-radius: 5px;
   height: 100px;
-  color: white;
+  color: #F7F7F7;
 
   .top {
     border-bottom: 1px solid white;
