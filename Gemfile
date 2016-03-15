@@ -43,6 +43,7 @@ group :development, :test do
   gem 'pry-rails'
   gem 'byebug'
   gem 'codeclimate-test-reporter', require: nil
+  gem 'rack_session_access'
 end
 
 gem 'bootstrap-sass', '~> 3.3.5.1'
