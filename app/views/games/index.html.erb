@@ -1,4 +1,32 @@
-<<h1>Listing games</h1>
+<script>
+  $(function() {
+    var playerColor
+    $('#new-game .piece-color').on('click', function() {
+      $('#new-game span.selected').removeClass('selected');
+      $(this).addClass('selected');
+
+      if ($(this).val() === 'k') {
+        playerColor = 'white';
+      } else {
+        playerColor = 'black';
+      }
+    });
+
+    $('#create-game').on('click', function(event) {
+      event.preventDefault();
+      $.ajax({
+        type: 'PUT',
+        url: ui.draggable.data('update-url'),
+        dataType: 'json',
+        data: {game: {row: $(this).parent().index(), column: $(this).index()}}
+      }).done(function() {
+
+      });
+    });
+  });
+</script>
+
+<h1>Listing games</h1>
 
 <table>
   <thead>
@@ -28,4 +56,27 @@
 
 <br>
 
-<%= link_to 'New Game', new_game_path %>
+<%= link_to 'New Game', '#new_game', data: { toggle: 'modal', target: '#new-game' } %>
+
+<!-- Modal -->
+<div class="modal fade" id="new-game" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title text-center" id="myModalLabel">New Game</h4>
+          <br />
+        </div>
+      <div class="modal-body">
+        <h5 class="text-center">Choose Your Color:</h5>
+        <div class="text-center">
+          <span class="piece-color">k</span>
+          <span class="piece-color">l</span>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <%= link_to "Create Game", games_path( game: { black_player_id: current_user.id }), method: :post, class: "btn btn-primary", id: "create-game" %>
+      </div>
+    </div>
+  </div>
+</div>
