@@ -23,6 +23,12 @@ class Pawn < Piece
     false
   end
 
+  def promote_pawn(promted_type)
+    new_piece = Piece.create(type: promted_type, game: game, color: color, row: row, column: column)
+    remove_piece
+    new_piece
+  end
+
   protected
 
   def previously_moved_two_spaces?

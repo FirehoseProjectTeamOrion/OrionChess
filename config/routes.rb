@@ -5,6 +5,7 @@ OrionChess::Application.routes.draw do
   resources :pieces, only: [:update]
   put 'games/:id/forfeit', to: 'games#forfeit', as: 'forfeit'
   resources :users, only: [:show]
+  put 'games/:id/promote_pawn', to: 'games#promote_pawn', as: 'promote_pawn'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

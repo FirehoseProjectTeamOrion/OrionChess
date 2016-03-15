@@ -5,9 +5,15 @@ class PiecesController < ApplicationController
 
     if current_piece.move_to!(row, column)
       current_piece.game.pass_turn(current_piece.game.active_player)
-      render(nothing: true, status: :ok)
+      respond_to do |format|
+        format.html { render nothing: true, status: :ok }
+        format.json { render nothing: true, json: { piece: current_piece, piece_type: current_piece.type }, status: :ok }
+      end
     else
-      render nothing: true, status: :bad_request
+      respond_to do |format|
+        format.html { render nothing: true, status: :bad_request }
+        format.json { render nothing: true, status: :bad_request }
+      end
     end
   end
 
