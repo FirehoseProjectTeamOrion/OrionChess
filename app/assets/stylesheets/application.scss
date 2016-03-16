@@ -14,3 +14,6 @@
  */
 @import "bootstrap-sprockets";
 @import "bootstrap";
+@-ms-viewport {
+  width: device-width; 
+}
