@@ -1,0 +1,23 @@
+// Place all the styles related to the welcome controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+// .left-well {
+//   background: url("chess_board.png") no-repeat;
+//   background-size: contain;
+//   background-repeat: no-repeat;
+//   width: 100%;
+//   height: 0;
+//   padding-top: 66.64%;
+// }
+
+.left-well img, .right-well img {
+  max-width: 100%;
+  max-height: 100%;
+  margin: auto;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.left-well p, .right-well p {
+  color: #F7F7F7;
+}

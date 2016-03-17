@@ -29,37 +29,46 @@
   });
 </script>
 
-<h1>Listing games</h1>
+<div class="container">
+  <h1 id="available-games-header" class="col-xs-6 col-xs-offset-3">Available Games</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
 
-  <tbody>
-    <% @games.each do |game| %>
-      if game.available? do
-        <tr>
-          <!--<td><#%= game.name %></td>-->
-          <td><%= link_to 'Join', game_path(game, :game=>{:black_player_id => current_user.id}), :method => :update %></td>
-          <td><%= link_to 'Show', game %></td>
-          <td><%= link_to 'Edit', edit_game_path(game) %></td>
-          <td><%= link_to 'Destroy', game, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        </tr>
-
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Game', '#new_game', data: { toggle: 'modal', target: '#new-game' } %>
+  <% @games.each do |game| %>
+      <div class="available-game col-xs-6 col-xs-offset-3">
+        <div class="top">
+          <span><%= "Game #{game.id}" %></span>
+          <div class="options">
+            <%= link_to 'Join', game_path(game, :game=>{:black_player_id => current_user.id}), :method => :update %>
+            <%= link_to 'Show', game %>
+            <%= link_to game, method: :delete, data: { confirm: 'Are you sure?' }, class: 'delete glyphicon glyphicon-trash' do %>
+            <% end %>
+          </div>
+        </div>
+        <div class="players">
+          <div class="white-player">
+            <span class="white-piece">k</span>
+            <% if game.white_player.nil? %>
+              <span>: Open</span>
+            <% else %>
+              <span>: <%= game.white_player.email %></span>
+            <% end %>
+          </div>
+          <div class="black-player">
+            <span class="black-piece">l</span>
+            <% if game.black_player.nil? %>
+              <span>: Open</span>
+            <% else %>
+              <span>: <%= game.black_player.email %></span>
+            <% end %>
+          </div>
+        </div>
+      </div>
+  <% end %>
+  <div class="col-xs-6 col-xs-offset-3 text-center">
+    <br />
+    <%= link_to 'New Game', '#new_game', data: { toggle: 'modal', target: '#new-game' }, class: 'btn btn-primary' %>
+  </div>
+</div>
 
 <!-- Modal -->
 <div class="modal fade" id="new-game" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">

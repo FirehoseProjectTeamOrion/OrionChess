@@ -1,13 +1,17 @@
 require 'spec_helper'
 
 feature 'Moving pieces', js: true do
+  given(:user) { FactoryGirl.create(:user) }
+
   background do
     allow_any_instance_of(Game).to receive(:populate_board!).and_return true
+    logged_as user
   end
 
-  given(:game) { FactoryGirl.create(:game) }
+  given(:game) { FactoryGirl.create(:game, black_player: user) }
 
   scenario 'Dragging a piece(black_pawn) to a valid location' do
+    page.set_rack_session(user_id: game.black_player.id)
     game.pieces << FactoryGirl.create(:black_pawn, type: 'Pawn')
     visit game_path(game)
     black_pawn = page.find('.ui-draggable', text: 'o')
