@@ -38,7 +38,7 @@
         <div class="top">
           <span><%= "Game #{game.id}" %></span>
           <div class="options">
-            <%= link_to 'Join', game_path(game, :game=>{:black_player_id => current_user.id}), :method => :update %>
+            <%= join_link(game) %>
             <%= link_to 'Show', game %>
             <%= link_to game, method: :delete, data: { confirm: 'Are you sure?' }, class: 'delete glyphicon glyphicon-trash' do %>
             <% end %>

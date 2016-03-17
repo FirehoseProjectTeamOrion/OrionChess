@@ -92,5 +92,6 @@ RSpec.configure do |config|
   config.include RSpecHtmlMatchers
   config.include WaitForAjax, type: :feature
   config.include Devise::TestHelpers, type: :view
+  config.include Devise::TestHelpers, type: :controller
   config.include FeatureHelpers, type: :feature
 end

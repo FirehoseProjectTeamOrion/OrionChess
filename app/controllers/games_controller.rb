@@ -23,9 +23,7 @@ class GamesController < ApplicationController
   # POST /games
   # POST /games.json
   def create
-    color = color_param
-
-    @game = color == 'white' ? Game.new(white_player_id: user_param) : Game.new(black_player_id: user_param)
+    @game = color_param == 'white' ? Game.new(white_player_id: user_param) : Game.new(black_player_id: user_param)
 
     respond_to do |format|
       if @game.save
@@ -41,18 +39,8 @@ class GamesController < ApplicationController
   # PATCH/PUT /games/1
   # PATCH/PUT /games/1.json
   def update
-    @game = Game.find(params[:id])
-    current_game.update_attributes(game_params)
-    redirect_to games_path
-    # respond_to do |format|
-    #   if @game.update(game_params)
-    #     format.html { redirect_to @game, notice: 'Game was successfully updated.' }
-    #     format.json { head :no_content }
-    #   else
-    #     format.html { render action: 'edit' }
-    #     format.json { render json: @game.errors, status: :unprocessable_entity }
-    #   end
-    # end
+    color_param == 'white' ? current_game.update_attributes(white_player_id: user_param) : current_game.update_attributes(black_player_id: user_param)
+    redirect_to game_path(current_game)
   end
 
   # DELETE /games/1
@@ -88,10 +76,6 @@ class GamesController < ApplicationController
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
-  def game_params
-    params.require(:game).permit(:black_player_id)
-  end
-
   def user_param
     params.require(:user_id)
   end
