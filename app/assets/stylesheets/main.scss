@@ -17,9 +17,9 @@
 .navbar a.navbar-brand:hover {
   color: white;
   text-shadow: 0 0 5px rgba(255,255,255,1),
-  0 0 10px rgba(255,255,255,1), 
-  0 0 20px rgba(255,255,255,1), 
-  0 0 30px #A19B88, 0 0 40px #A19B88, 
+  0 0 10px rgba(255,255,255,1),
+  0 0 20px rgba(255,255,255,1),
+  0 0 30px #A19B88, 0 0 40px #A19B88,
   0 0 60px #A19B88,
   0 0 80px #A19B88;
 }
@@ -35,9 +35,9 @@
 .navbar-default .navbar-nav > li > a:hover {
   color: white;
   text-shadow: 0 0 5px rgba(255,255,255,1),
-  0 0 10px rgba(255,255,255,1), 
-  0 0 20px rgba(255,255,255,1), 
-  0 0 30px #A19B88, 0 0 40px #A19B88, 
+  0 0 10px rgba(255,255,255,1),
+  0 0 20px rgba(255,255,255,1),
+  0 0 30px #A19B88, 0 0 40px #A19B88,
   0 0 60px #A19B88,
   0 0 80px #A19B88;
 }
@@ -45,18 +45,18 @@
 .navbar-default .navbar-nav > li > a:active {
   color: white;
   text-shadow: 0 0 5px rgba(255,255,255,1),
-  0 0 10px rgba(255,255,255,1), 
-  0 0 20px rgba(255,255,255,1), 
-  0 0 30px #A19B88, 0 0 40px #A19B88, 
+  0 0 10px rgba(255,255,255,1),
+  0 0 20px rgba(255,255,255,1),
+  0 0 30px #A19B88, 0 0 40px #A19B88,
   0 0 60px #A19B88,
   0 0 80px #A19B88;
 }
 
-.navbar-fixed-top { 
+.navbar-fixed-top {
   background-color: rgba(0,0,0,0);
   transition: background-color 1s ease 0s;
 }
-.navbar-fixed-top.opaque { 
+.navbar-fixed-top.opaque {
   background-color: rgba(0,0,0,0.8);
   transition: background-color 1s ease 0s;
 }
@@ -79,11 +79,11 @@ a.signup {
 }
 
 .splash {
-  background: 
+  background:
   linear-gradient(
-      rgba(0, 0, 0, 0.45), 
+      rgba(0, 0, 0, 0.45),
       rgba(0, 0, 0, 0.45)),
-      url("bg.jpg") no-repeat center center fixed; 
+      url("bg.jpg") no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;

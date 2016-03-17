@@ -1,11 +1,13 @@
 <script>
   $(function() {
-    var playerColor
+    var playerColor;
     $('#new-game .piece-color').on('click', function() {
       $('#new-game span.selected').removeClass('selected');
       $(this).addClass('selected');
 
-      if ($(this).val() === 'k') {
+      $('#create-game').prop('disabled', false);
+
+      if ($(this).text() === 'k') {
         playerColor = 'white';
       } else {
         playerColor = 'black';
@@ -15,12 +17,13 @@
     $('#create-game').on('click', function(event) {
       event.preventDefault();
       $.ajax({
-        type: 'PUT',
-        url: ui.draggable.data('update-url'),
+        type: 'POST',
+        url: '<%= games_path %>',
         dataType: 'json',
-        data: {game: {row: $(this).parent().index(), column: $(this).index()}}
-      }).done(function() {
-
+        data: { color: playerColor, user_id: $(this).data("user-id") }
+      }).done(function(data) {
+        $('#new-game').modal('hide');
+        window.location.href = data.redirect;
       });
     });
   });
@@ -75,7 +78,7 @@
         </div>
       </div>
       <div class="modal-footer">
-        <%= link_to "Create Game", games_path( game: { black_player_id: current_user.id }), method: :post, class: "btn btn-primary", id: "create-game" %>
+        <button class="btn btn-primary" id="create-game" disabled='disabled' data-user-id='<%= current_user.id %>'>Create Game</button>
       </div>
     </div>
   </div>

@@ -25,4 +25,25 @@ RSpec.describe GamesController, type: :controller do
       expect(response).to have_http_status(:ok)
     end
   end
+
+  describe '#create' do
+    let!(:user) { FactoryGirl.create(:user) }
+    it 'should create a game' do
+      post :create, color: 'white', user_id: user
+
+      expect(Game.exists?).to eq(true)
+    end
+
+    it 'should make assign the current user to be the black when user selects black as their color' do
+      post :create, color: 'black', user_id: user
+
+      expect(Game.first.black_player.id).to eq(user.id)
+    end
+
+    it 'should make assign the current user to be the white when user selects black as their color' do
+      post :create, color: 'white', user_id: user
+
+      expect(Game.first.white_player.id).to eq(user.id)
+    end
+  end
 end

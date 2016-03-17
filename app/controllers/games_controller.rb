@@ -24,12 +24,14 @@ class GamesController < ApplicationController
   # POST /games
   # POST /games.json
   def create
-    @game = Game.new(game_params)
+    color = color_param
+
+    @game = color == 'white' ? Game.new(white_player_id: user_param) : Game.new(black_player_id: user_param)
 
     respond_to do |format|
       if @game.save
         format.html { redirect_to @game, notice: 'Game was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @game }
+        format.json { render json: { redirect: game_path(@game) } }
       else
         format.html { render action: 'new' }
         format.json { render json: @game.errors, status: :unprocessable_entity }
@@ -88,11 +90,15 @@ class GamesController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def game_params
-    params.require(:game).permit(:black_player_id, :white_player_id)
+    params.require(:game).permit(:black_player_id)
   end
 
   def user_param
     params.require(:user_id)
+  end
+
+  def color_param
+    params.require(:color)
   end
 
   def pawn_param
