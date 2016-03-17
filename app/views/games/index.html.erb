@@ -1,7 +1,38 @@
+<script>
+  $(function() {
+    var playerColor;
+    $('#new-game .piece-color').on('click', function() {
+      $('#new-game span.selected').removeClass('selected');
+      $(this).addClass('selected');
+
+      $('#create-game').prop('disabled', false);
+
+      if ($(this).text() === 'k') {
+        playerColor = 'white';
+      } else {
+        playerColor = 'black';
+      }
+    });
+
+    $('#create-game').on('click', function(event) {
+      event.preventDefault();
+      $.ajax({
+        type: 'POST',
+        url: '<%= games_path %>',
+        dataType: 'json',
+        data: { color: playerColor, user_id: $(this).data("user-id") }
+      }).done(function(data) {
+        $('#new-game').modal('hide');
+        window.location.href = data.redirect;
+      });
+    });
+  });
+</script>
+
 <div class="container">
   <h1 id="available-games-header" class="col-xs-6 col-xs-offset-3">Available Games</h1>
-  
-  
+
+
   <% @games.each do |game| %>
       <div class="available-game col-xs-6 col-xs-offset-3">
         <div class="top">
@@ -35,6 +66,29 @@
   <% end %>
   <div class="col-xs-6 col-xs-offset-3 text-center">
     <br />
-    <%= link_to 'New Game', new_game_path, class: 'btn btn-primary' %>
+    <%= link_to 'New Game', '#new_game', data: { toggle: 'modal', target: '#new-game' }, class: 'btn btn-primary' %>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="new-game" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title text-center" id="myModalLabel">New Game</h4>
+          <br />
+        </div>
+      <div class="modal-body">
+        <h5 class="text-center">Choose Your Color:</h5>
+        <div class="text-center">
+          <span class="piece-color">k</span>
+          <span class="piece-color">l</span>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary" id="create-game" disabled='disabled' data-user-id='<%= current_user.id %>'>Create Game</button>
+      </div>
+    </div>
   </div>
 </div>

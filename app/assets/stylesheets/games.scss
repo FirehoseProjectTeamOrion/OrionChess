@@ -127,3 +127,27 @@ table#chessboard {
     border: 3px solid #A19B88;
   }
 }
+
+#new-game {
+  .modal-dialog {
+    width: 300px;
+  }
+  .piece-color {
+    font-family: 'chess_casesregular';
+    font-size: 45px;
+    margin-left: 10px;
+    margin-right: 10px;
+    border: 3px solid transparent;
+    border-radius: 3px;
+  }
+
+  .piece-color:hover {
+    cursor: pointer;
+  }
+  .selected {
+    border: 3px solid #A19B88;
+  }
+  .modal-footer {
+    text-align: center;
+  }
+}
