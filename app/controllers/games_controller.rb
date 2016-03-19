@@ -3,7 +3,8 @@ class GamesController < ApplicationController
   # GET /games
   # GET /games.json
   def index
-    @games = Game.available
+    @available_games = Game.available(current_user)
+    @users_games = Game.users_games(current_user)
   end
 
   # GET /games/1

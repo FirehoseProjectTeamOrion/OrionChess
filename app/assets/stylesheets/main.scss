@@ -128,3 +128,39 @@ h1, h2, h3, h4, h5, h6, .navbar-default {
 .team p {
   text-align: left;
 }
+
+.alert-error {
+    background-color: #f2dede;
+    border-color: #eed3d7;
+    color: #b94a48;
+    text-align: left;
+ }
+
+.alert-alert {
+    background-color: #f2dede;
+    border-color: #eed3d7;
+    color: #b94a48;
+    text-align: left;
+ }
+
+.alert-success {
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+    color: #468847;
+    text-align: left;
+    position: absolute;
+    top: 50px;
+    width: 100%;
+    z-index: 1;
+ }
+
+.alert-notice {
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+    color: #468847;
+    text-align: left;
+    position: absolute;
+    top: 50px;
+    width: 100%;
+    z-index: 1;
+ }

@@ -10,6 +10,10 @@ module GamesHelper
   def join_link(game)
     color = game.black_player.nil? ? 'black' : 'white'
 
-    link_to 'Join', game_path(game, color: color, user_id: current_user.id), method: :update
+    if game.users_game?(current_user)
+      link_to 'Resume', game_path(game)
+    else
+      link_to 'Join', game_path(game, color: color, user_id: current_user.id), method: :patch
+    end
   end
 end

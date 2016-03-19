@@ -1,0 +1,28 @@
+<div class="game col-xs-6 col-xs-offset-3">
+  <div class="top">
+    <span><%= "Game #{game.id}" %></span>
+    <div class="options">
+      <%= join_link(game) %>
+      <%= link_to game, method: :delete, data: { confirm: 'Are you sure?' }, class: 'delete glyphicon glyphicon-trash' do %>
+      <% end %>
+    </div>
+  </div>
+  <div class="players">
+    <div class="white-player">
+      <span class="white-piece">k</span>
+      <% if game.white_player.nil? %>
+        <span>: Open</span>
+      <% else %>
+        <span>: <%= game.white_player.email %></span>
+      <% end %>
+    </div>
+    <div class="black-player">
+      <span class="black-piece">l</span>
+      <% if game.black_player.nil? %>
+        <span>: Open</span>
+      <% else %>
+        <span>: <%= game.black_player.email %></span>
+      <% end %>
+    </div>
+  </div>
+</div>

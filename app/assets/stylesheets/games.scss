@@ -57,17 +57,22 @@ table#chessboard {
   }
 }
 
-#available-games-header {
-  color: white;
-  border-bottom: 1px solid white;
-  margin-bottom: 10px;
+#available-games, #users-games {
+  h3 {
+    color: white;
+    border-bottom: 1px solid white;
+    margin-bottom: 10px;
+  }
+  h5 {
+    color: white;
+    margin-bottom: 10px;
+  }
 }
 
-.available-game {
+.game {
   background: rgba(0,0,0,0.2);
   margin-bottom: 10px;
   border-radius: 5px;
-  height: 100px;
   color: #F7F7F7;
 
   .top {
