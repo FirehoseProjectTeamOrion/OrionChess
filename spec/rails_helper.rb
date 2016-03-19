@@ -1,3 +1,5 @@
+require 'codeclimate-test-reporter'
+CodeClimate::TestReporter.start
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../../config/environment', __FILE__)
@@ -8,10 +10,10 @@ require 'rspec/rails'
 require 'capybara/rspec'
 require 'capybara/poltergeist'
 require 'support/wait_for_ajax'
-require 'codeclimate-test-reporter'
+require 'rack_session_access/capybara'
+require 'support/feature_helpers'
 
 Capybara.javascript_driver = :poltergeist
-CodeClimate::TestReporter.start
 
 # Add additional requires below this line. Rails is not loaded until this point!
 
@@ -90,4 +92,5 @@ RSpec.configure do |config|
   config.include RSpecHtmlMatchers
   config.include WaitForAjax, type: :feature
   config.include Devise::TestHelpers, type: :view
+  config.include FeatureHelpers, type: :feature
 end

@@ -1,10 +1,9 @@
 class GamesController < ApplicationController
-  before_action :set_game, only: [:show, :edit, :update, :destroy]
-
+  before_action :set_game, :authenticate_user!, only: [:show, :edit, :update, :destroy]
   # GET /games
   # GET /games.json
   def index
-    @games = Game.all
+    @games = Game.available
   end
 
   # GET /games/1
@@ -24,12 +23,14 @@ class GamesController < ApplicationController
   # POST /games
   # POST /games.json
   def create
-    @game = Game.new(game_params)
+    color = color_param
+
+    @game = color == 'white' ? Game.new(white_player_id: user_param) : Game.new(black_player_id: user_param)
 
     respond_to do |format|
       if @game.save
         format.html { redirect_to @game, notice: 'Game was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @game }
+        format.json { render json: { redirect: game_path(@game) } }
       else
         format.html { render action: 'new' }
         format.json { render json: @game.errors, status: :unprocessable_entity }
@@ -93,6 +94,10 @@ class GamesController < ApplicationController
 
   def user_param
     params.require(:user_id)
+  end
+
+  def color_param
+    params.require(:color)
   end
 
   def pawn_param

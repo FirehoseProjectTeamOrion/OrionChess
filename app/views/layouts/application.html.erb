@@ -6,16 +6,10 @@
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
   <script>
-    // $(function ()
-    //   { $("#myModal").modal({show:false });
-    $(window).scroll(function() {
-      if($(this).scrollTop() > 70) {
-        $('.navbar-fixed-top').addClass('opaque');
-      }
-      else {
-        $('.navbar-fixed-top').removeClass('opaque');
-      }
+    $(function () {
+      $('.navbar-fixed-top').addClass('opaque');
     });
+    //   { $("#myModal").modal({show:false });
   </script>
 </head>
 <body>
@@ -31,7 +25,7 @@
 <div id="wrap">
   <!-- navbar begin -->
   <nav class="navbar navbar-default navbar-fixed-top navbar-text-center">
-    <div class="container-fluid"
+    <div class="container-fluid">
       <!-- Brand and toggle get grouped for better mobile display -->
       <div class="navbar-header">
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -50,6 +44,7 @@
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <% if user_signed_in? %>
+            <li><%= link_to 'My Profile', user_path(current_user) %></li>
             <li><%= link_to 'sign out', destroy_user_session_path, :method => :delete, class: "signout"%></li>'
           <% else %>
             <li><%= link_to 'Sign in', '#signin', "data-toggle" => "modal", :class => "signin"%></li>
@@ -62,14 +57,7 @@
   <!-- navbar end -->
 <%= yield %>
   <br />
-  <div class="col-xs-10 col-xs-offset-1 text-center">
-    <div class="col-sm-6">
-      <p>ADD A SCREENSHOT HERE</p>
-    </div>
-    <div class="col-sm-6">
-      <p>ADD A DESCRIPTION HERE</p>
-    </div>
-  </div>
+
 </div>
 
 

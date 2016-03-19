@@ -1,7 +1,38 @@
+<script>
+  $(window).scroll(function() {
+  if($(this).scrollTop() > 70) {
+    $('.navbar-fixed-top').addClass('opaque');
+  }
+  else {
+    $('.navbar-fixed-top').removeClass('opaque');
+  }
+  });
+</script>
 <div class="container-fluid splash">
     <h2>OrionChess</h2>
     <br />
     <%= link_to 'Find a Game', games_path, :class => 'btn btn-default' %>
     <br />
     <div id="bottom"><p>A simple chess game built with Ruby on Rails</p></div>
+</div>
+
+<br />
+<div class="container">
+  <div class="row">
+    <div class="left-well col-md-5 col-md-offset-1">
+      <%= image_tag("chess_board.png") %>
+    </div>
+    <div class="right-well col-md-5">
+      <p>ADD A DESCRIPTION HERE</p>
+    </div>
+  </div>
+  <br />
+  <div class="row">
+    <div class="left-well col-md-5 col-md-offset-1">
+      <%= image_tag("sample_code.png") %>
+    </div>
+    <div class="right-well col-md-5">
+      <p>blah blah blah</p>
+    </div>
+  </div>
 </div>
