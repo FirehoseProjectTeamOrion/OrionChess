@@ -9,6 +9,9 @@ class Piece < ActiveRecord::Base
   scope :queens, -> { where(type: 'Queen') }
   scope :kings, -> { where(type: 'King') }
 
+  scope :white_captured, ->(game) { where(game: game, in_game: false, color: 'black') }
+  scope :black_captured, ->(game) { where(game: game, in_game: false, color: 'white') }
+
   def self.types
     %w(Pawn Knight Bishop Rook Queen King)
   end

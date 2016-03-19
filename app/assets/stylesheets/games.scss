@@ -97,15 +97,16 @@ table#chessboard {
       float: left;
       margin-right: 10px;
     }
-    .white-piece, .black-piece {
-      font-family: 'chess_casesregular';
-      font-size: 30px;
-      vertical-align: sub;
-    }
-    .black-piece {
-      color: black;
-    }
   }
+}
+
+.white-piece, .black-piece {
+  font-family: 'chess_casesregular';
+  font-size: 30px;
+  vertical-align: sub;
+}
+.black-piece {
+  color: black;
 }
 
 #pawn-promotion .modal-content {
@@ -150,4 +151,16 @@ table#chessboard {
   .modal-footer {
     text-align: center;
   }
+}
+
+
+.player-name {
+  color: #F7F7F7;
+  border-bottom: 1px solid #F7F7F7;
+}
+
+.captured-pieces {
+  font-family: 'chess_casesregular';
+  font-size: 45px;
+  word-wrap: break-word;
 }
