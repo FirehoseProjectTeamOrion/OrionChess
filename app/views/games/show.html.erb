@@ -56,7 +56,7 @@
   <div class="row text-center">
     <div class="col-md-3">
       <% if @game.black_player %>
-        <p><%= @game.black_player.email %></p>
+        <p><%= @game.black_player.username.nil? ? @game.black_player.email : @game.black_player.username %></p>
       <% else %>
         <p>Black Power</p>
       <% end %>
@@ -76,7 +76,7 @@
     </div>
     <div class="col-md-3">
       <% if @game.white_player %>
-        <p><%= @game.white_player.email %></p>
+        <p><%= @game.white_player.username.nil? ? @game.white_player.email : @game.white_player.username %></p>
       <% else %>
         <p>White Supremacy</p>
       <% end %>

@@ -1,7 +1,13 @@
 <div class="container">
   <h1 id="available-games-header" class="col-xs-6 col-xs-offset-3">
-    <%= @user.email %>
+    <% if @user.username.nil? %>
+      <%= @user.email %>
+    <% else %>
+      <%= @user.username %>
+    <% end %>
   </h1>
+  <%= link_to edit_user_registration_path, class: "edit glyphicon glyphicon-pencil" do %>
+  <% end %>
   <div class="stat-box col-xs-6 col-xs-offset-3">
     <p>Member Since: <%= @user.created_at.strftime("%B %d, %Y") %></p>
     <p>Wins: <%= @user.wins %></p>
