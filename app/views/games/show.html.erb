@@ -9,7 +9,10 @@
         return piece.row == 0;
       }
     }
-    $('.piece').draggable();
+    $('.piece').draggable({
+      revert: 'invalid',
+      containment: '#chessboard'
+    });
     $('td').droppable({
       drop: function(ev, ui) {
         var drop_space_element = this;
