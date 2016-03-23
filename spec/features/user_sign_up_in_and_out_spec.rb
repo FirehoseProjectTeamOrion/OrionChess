@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 feature 'User Sign up and Sign in' do
-
   background do
     @user = FactoryGirl.create(:user)
   end
