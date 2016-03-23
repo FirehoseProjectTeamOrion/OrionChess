@@ -13,7 +13,7 @@
       <% if game.white_player.nil? %>
         <span>: Open</span>
       <% else %>
-        <span>: <%= game.white_player.email %></span>
+        <span>: <%= game.white_player.username.nil? ? game.white_player.email : game.white_player.username %></span>
       <% end %>
     </div>
     <div class="black-player">
@@ -21,7 +21,7 @@
       <% if game.black_player.nil? %>
         <span>: Open</span>
       <% else %>
-        <span>: <%= game.black_player.email %></span>
+        <span>: <%= game.black_player.username.nil? ? game.black_player.email : game.black_player.username %></span>
       <% end %>
     </div>
   </div>
