@@ -9,6 +9,8 @@ class GamesController < ApplicationController
   # GET /games/1
   # GET /games/1.json
   def show
+    @white_captured = Piece.white_captured(@game)
+    @black_captured = Piece.black_captured(@game)
   end
 
   # GET /games/new

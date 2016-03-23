@@ -1,8 +1,15 @@
 require 'rails_helper'
 
 RSpec.describe 'games/show.html.erb', type: :view do
+  let!(:game) { FactoryGirl.create(:game) }
+
+  before do
+    assign(:game, game)
+    assign(:black_captured, Piece.black_captured(game))
+    assign(:white_captured, Piece.white_captured(game))
+  end
+
   it 'has 8 white pawns(p) on the board' do
-    assign(:game, FactoryGirl.create(:game))
     render
 
     expect(rendered).to have_tag('table#chessboard') do
@@ -15,7 +22,6 @@ RSpec.describe 'games/show.html.erb', type: :view do
   end
 
   it 'has 8 black pawns(o) on the board' do
-    assign(:game, FactoryGirl.create(:game))
     render
 
     expect(rendered).to have_tag('table#chessboard') do
@@ -28,7 +34,6 @@ RSpec.describe 'games/show.html.erb', type: :view do
   end
 
   it 'has 2 white knights(n) on the board' do
-    assign(:game, FactoryGirl.create(:game))
     render
 
     expect(rendered).to have_tag('table#chessboard') do
@@ -41,7 +46,6 @@ RSpec.describe 'games/show.html.erb', type: :view do
   end
 
   it 'has 2 black knights(m) on the board' do
-    assign(:game, FactoryGirl.create(:game))
     render
 
     expect(rendered).to have_tag('table#chessboard') do
@@ -54,7 +58,6 @@ RSpec.describe 'games/show.html.erb', type: :view do
   end
 
   it 'has 2 white bishops(b) on the board' do
-    assign(:game, FactoryGirl.create(:game))
     render
 
     expect(rendered).to have_tag('table#chessboard') do
@@ -67,7 +70,6 @@ RSpec.describe 'games/show.html.erb', type: :view do
   end
 
   it 'has 2 black bishops(v) on the board' do
-    assign(:game, FactoryGirl.create(:game))
     render
 
     expect(rendered).to have_tag('table#chessboard') do
@@ -80,7 +82,6 @@ RSpec.describe 'games/show.html.erb', type: :view do
   end
 
   it 'has 2 white rooks(r) on the board' do
-    assign(:game, FactoryGirl.create(:game))
     render
 
     expect(rendered).to have_tag('table#chessboard') do
@@ -93,7 +94,6 @@ RSpec.describe 'games/show.html.erb', type: :view do
   end
 
   it 'has 2 black rooks(t) on the board' do
-    assign(:game, FactoryGirl.create(:game))
     render
 
     expect(rendered).to have_tag('table#chessboard') do
@@ -106,7 +106,6 @@ RSpec.describe 'games/show.html.erb', type: :view do
   end
 
   it 'has 1 white queen(q) on the board' do
-    assign(:game, FactoryGirl.create(:game))
     render
 
     expect(rendered).to have_tag('table#chessboard') do
@@ -119,7 +118,6 @@ RSpec.describe 'games/show.html.erb', type: :view do
   end
 
   it 'has 1 black queen(w) on the board' do
-    assign(:game, FactoryGirl.create(:game))
     render
 
     expect(rendered).to have_tag('table#chessboard') do
@@ -132,7 +130,6 @@ RSpec.describe 'games/show.html.erb', type: :view do
   end
 
   it 'has 1 white king(k) on the board' do
-    assign(:game, FactoryGirl.create(:game))
     render
 
     expect(rendered).to have_tag('table#chessboard') do
@@ -145,7 +142,6 @@ RSpec.describe 'games/show.html.erb', type: :view do
   end
 
   it 'has 1 black king(l) on the board' do
-    assign(:game, FactoryGirl.create(:game))
     render
 
     expect(rendered).to have_tag('table#chessboard') do
@@ -158,7 +154,6 @@ RSpec.describe 'games/show.html.erb', type: :view do
   end
 
   it 'has draggable pieces' do
-    assign(:game, FactoryGirl.create(:game))
     render
 
     expect(rendered).to have_tag('table#chessboard') do
@@ -171,7 +166,6 @@ RSpec.describe 'games/show.html.erb', type: :view do
   end
 
   it 'has droppable spaces' do
-    assign(:game, FactoryGirl.create(:game))
     render
 
     expect(rendered).to have_tag('table#chessboard') do

@@ -2,6 +2,8 @@
   $(function() {
     var pawnId;
     var $droppedSpace;
+    var $blackPlayerCapturedPieces = $('#black-player-info .captured-pieces');
+    var $whitePlayerCapturedPieces = $('#white-player-info .captured-pieces');
     function is_in_back_row(piece) {
       if (piece.color == 'black'){
         return piece.row == 7;
@@ -22,7 +24,15 @@
           dataType: 'json',
           data: {piece: {row: $(this).parent().index(), column: $(this).index()}}
         }).done(function( data ) {
+          if ($(drop_space_element).has('span.piece').length){
+            var $capturedPieces = data.piece.color == 'white' ? $whitePlayerCapturedPieces : $blackPlayerCapturedPieces;
+            $capturedPieces.append($(drop_space_element).children('span.piece').text());
+            $(drop_space_element).children('span.piece').remove();
+          }
+
+
           $(ui.draggable).detach().css({top: 0, left: 0}).appendTo(drop_space_element);
+
           var piece = data.piece;
           var type = data.piece_type;
           if (type === 'Pawn' && is_in_back_row(piece)){
@@ -57,12 +67,17 @@
 <div class="container">
   <p id="notice"><%= notice %></p>
   <div class="row text-center">
-    <div class="col-md-3">
-      <% if @game.black_player %>
-        <p><%= @game.black_player.username.nil? ? @game.black_player.email : @game.black_player.username %></p>
-      <% else %>
-        <p>Black Power</p>
-      <% end %>
+    <div id="black-player-info" class="col-md-3">
+      <div class="player-name">
+        <% if @game.black_player %>
+          <h3><%= @game.black_player.username.nil? ? @game.black_player.email : @game.black_player.username %></h3>
+        <% else %>
+          <h3>Black Player</h3>
+        <% end %>
+      </div>
+      <div class="captured-pieces col-xs-10 col-xs-offset-1">
+        <%= @black_captured.map { |piece| piece.chess_font_character }.join %>
+      </div>
     </div>
     <div class="col-md-6">
       <table id="chessboard">
@@ -77,12 +92,17 @@
         <% end %>
       </table>
     </div>
-    <div class="col-md-3">
-      <% if @game.white_player %>
-        <p><%= @game.white_player.username.nil? ? @game.white_player.email : @game.white_player.username %></p>
-      <% else %>
-        <p>White Supremacy</p>
-      <% end %>
+    <div id="white-player-info" class="col-md-3">
+      <div class="player-name">
+        <% if @game.white_player %>
+          <h3><%= @game.white_player.username.nil? ? @game.white_player.email : @game.white_player.username %></h3>
+        <% else %>
+          <h3>White Player</h3>
+        <% end %>
+      </div>
+      <div class="captured-pieces col-xs-10 col-xs-offset-1">
+        <%= @white_captured.map { |piece| piece.chess_font_character }.join %>
+      </div>
     </div>
   </div>
 </div>
