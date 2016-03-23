@@ -15,12 +15,6 @@
 <body>
 <%= render "welcome/signup_modal" %>
 <%= render "welcome/signin_modal" %>
-<% if notice.present? %>
-  <p class="alert alert-info"><%= notice %></p>
-<% end %>
-<% if alert.present? %>
-  <p class="alert alert-danger"><%= alert %></p>
-<% end %>
 
 <div id="wrap">
   <!-- navbar begin -->
@@ -55,6 +49,8 @@
     </div><!-- /.container-fluid -->
   </nav>
   <!-- navbar end -->
+
+<%= render 'layouts/messages' %>
 <%= yield %>
   <br />
 

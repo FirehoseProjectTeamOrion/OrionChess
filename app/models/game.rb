@@ -5,7 +5,8 @@ class Game < ActiveRecord::Base
   belongs_to  :winning_player, class_name: 'User'
   belongs_to  :active_player, class_name: 'User'
 
-  scope :available, -> { where('white_player_id IS NULL OR black_player_id IS NULL') }
+  scope :available, ->(current_user) { where('(white_player_id IS NULL OR black_player_id IS NULL) AND (white_player_id != ? OR black_player_id != ?)', current_user, current_user) }
+  scope :users_games, ->(current_user) { where('white_player_id = ? OR black_player_id = ?', current_user.id, current_user.id) }
 
   after_create :populate_board!
 
@@ -37,5 +38,9 @@ class Game < ActiveRecord::Base
 
   def pass_turn(player)
     update_attributes(active_player_id: other_player(player))
+  end
+
+  def users_game?(user)
+    white_player == user || black_player == user
   end
 end

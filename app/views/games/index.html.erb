@@ -30,40 +30,29 @@
 </script>
 
 <div class="container">
-  <h1 id="available-games-header" class="col-xs-6 col-xs-offset-3">Available Games</h1>
 
+  <div id="available-games">
+    <h3 class="col-xs-6 col-xs-offset-3">Available Games</h3>
+    <% if @available_games.empty? %>
+      <h5 class="col-xs-6 col-xs-offset-3">There are currently no available_games.</h5>
+    <% else %>
+      <% @available_games.each do |game| %>
+        <%= render partial: 'game', locals: {game: game} %>
+      <% end %>
+    <% end %>
+  </div>
 
-  <% @games.each do |game| %>
-      <div class="available-game col-xs-6 col-xs-offset-3">
-        <div class="top">
-          <span><%= "Game #{game.id}" %></span>
-          <div class="options">
-            <%= link_to 'Join', game_path(game, :game=>{:black_player_id => current_user.id}), :method => :update %>
-            <%= link_to 'Show', game %>
-            <%= link_to game, method: :delete, data: { confirm: 'Are you sure?' }, class: 'delete glyphicon glyphicon-trash' do %>
-            <% end %>
-          </div>
-        </div>
-        <div class="players">
-          <div class="white-player">
-            <span class="white-piece">k</span>
-            <% if game.white_player.nil? %>
-              <span>: Open</span>
-            <% else %>
-              <span>: <%= game.white_player.username.nil? ? game.white_player.email : game.white_player.username %></span>
-            <% end %>
-          </div>
-          <div class="black-player">
-            <span class="black-piece">l</span>
-            <% if game.black_player.nil? %>
-              <span>: Open</span>
-            <% else %>
-              <span>: <%= game.black_player.username.nil? ? game.black_player.email : game.black_player.username %></span>
-            <% end %>
-          </div>
-        </div>
-      </div>
-  <% end %>
+  <div id="users-games">
+    <h3 class="col-xs-6 col-xs-offset-3">Your Games</h3>
+    <% if @users_games.nil? %>
+      <h5 class="col-xs-6 col-xs-offset-3">You currently don't have any games.</h5>
+    <% else %>
+      <% @users_games.each do |game| %>
+        <%= render partial: 'game', locals: {game: game} %>
+      <% end %>
+    <% end %>
+  </div>
+
   <div class="col-xs-6 col-xs-offset-3 text-center">
     <br />
     <%= link_to 'New Game', '#new_game', data: { toggle: 'modal', target: '#new-game' }, class: 'btn btn-primary' %>

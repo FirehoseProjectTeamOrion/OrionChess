@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe GamesController, type: :controller do
+  let!(:user) { FactoryGirl.create(:user) }
+
   describe '#forfeit' do
     let!(:game) { FactoryGirl.create(:game) }
 
@@ -27,7 +29,6 @@ RSpec.describe GamesController, type: :controller do
   end
 
   describe '#create' do
-    let!(:user) { FactoryGirl.create(:user) }
     it 'should create a game' do
       post :create, color: 'white', user_id: user
 
@@ -44,6 +45,36 @@ RSpec.describe GamesController, type: :controller do
       post :create, color: 'white', user_id: user
 
       expect(Game.first.white_player.id).to eq(user.id)
+    end
+  end
+
+  describe '#update' do
+    before do
+      sign_in user
+    end
+
+    let!(:game) { FactoryGirl.create(:game) }
+
+    it 'should update the black_player_id when black player is joining' do
+      patch :update, id: game, color: 'black', user_id: user.id
+
+      game.reload
+
+      expect(game.black_player.id).to eq(user.id)
+    end
+
+    it 'should update the white_player_id when white player is joining' do
+      patch :update, id: game, color: 'white', user_id: user.id
+
+      game.reload
+
+      expect(game.white_player.id).to eq(user.id)
+    end
+
+    it 'should rediect to the game show page' do
+      patch :update, id: game, color: 'white', user_id: user.id
+
+      expect(response).to redirect_to(game_path(game))
     end
   end
 end
