@@ -70,9 +70,9 @@
     <div id="black-player-info" class="col-md-3">
       <div class="player-name">
         <% if @game.black_player %>
-          <h3><%= @game.black_player.email %></h3>
+          <h3><%= @game.black_player.username.nil? ? @game.black_player.email : @game.black_player.username %></h3>
         <% else %>
-          <h3>Black Power</h3>
+          <h3>Black Player</h3>
         <% end %>
       </div>
       <div class="captured-pieces col-xs-10 col-xs-offset-1">
@@ -95,9 +95,9 @@
     <div id="white-player-info" class="col-md-3">
       <div class="player-name">
         <% if @game.white_player %>
-          <h3><%= @game.white_player.email %></h3>
+          <h3><%= @game.white_player.username.nil? ? @game.white_player.email : @game.white_player.username %></h3>
         <% else %>
-          <h3>White Supremacy</h3>
+          <h3>White Player</h3>
         <% end %>
       </div>
       <div class="captured-pieces col-xs-10 col-xs-offset-1">
