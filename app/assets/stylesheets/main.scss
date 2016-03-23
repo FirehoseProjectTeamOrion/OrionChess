@@ -135,6 +135,10 @@ h1, h2, h3, h4, h5, h6, .navbar-default {
     border-color: #eed3d7;
     color: #b94a48;
     text-align: left;
+    position: absolute;
+    top: 50px;
+    width: 100%;
+    z-index: 1;
  }
 
 .alert-alert {
@@ -142,6 +146,10 @@ h1, h2, h3, h4, h5, h6, .navbar-default {
     border-color: #eed3d7;
     color: #b94a48;
     text-align: left;
+    position: absolute;
+    top: 50px;
+    width: 100%;
+    z-index: 1;
  }
 
 .alert-success {
