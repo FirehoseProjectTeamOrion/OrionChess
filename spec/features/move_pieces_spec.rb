@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 feature 'Moving pieces', js: true do
   given(:user) { FactoryGirl.create(:user) }
